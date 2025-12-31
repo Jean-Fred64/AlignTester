@@ -126,8 +126,13 @@ def create_spec_file(platform_name, frontend_dist=None):
         for item in frontend_dist.rglob("*"):
             if item.is_file():
                 rel_path = item.relative_to(frontend_dist)
-                target_dir = f"frontend/dist/{rel_path.parent}" if rel_path.parent != Path('.') else "frontend/dist"
-                frontend_files.append((str(item), target_dir))
+                # PyInstaller place les fichiers datas dans _internal/ au même niveau que l'exécutable
+                # On doit donc utiliser le chemin relatif depuis frontend/dist
+                if rel_path.parent == Path('.'):
+                    target_dir = "frontend/dist"
+                else:
+                    target_dir = f"frontend/dist/{rel_path.parent}"
+                frontend_files.append((str(item.resolve()), target_dir))
         datas.extend(frontend_files)
         print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
     
