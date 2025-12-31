@@ -26,6 +26,7 @@ venv/
 env/
 ENV/
 .venv
+venv_standalone/
 
 # IDE
 .vscode/
@@ -58,6 +59,9 @@ yarn-error.log*
 # Fichiers de build frontend
 dist-frontend/
 build-frontend/
+
+# Builds standalone
+build_standalone/
 
 # Fichiers de développement dans AlignTester
 AlignTester/tests/*.tmp
