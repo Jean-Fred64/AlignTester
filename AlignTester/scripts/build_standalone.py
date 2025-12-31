@@ -172,7 +172,14 @@ def create_spec_file(platform_name, frontend_dist=None):
         for src, dst in valid_datas[:3]:
             print(f"[*]   - {Path(src).name} -> {dst}")
     
-    datas_str = repr(valid_datas)
+    # Construire la liste datas en format Python avec des raw strings pour Windows
+    datas_lines = []
+    for src, dst in valid_datas:
+        # Utiliser raw string pour éviter les problèmes d'échappement sur Windows
+        src_escaped = repr(str(src))
+        dst_escaped = repr(dst)
+        datas_lines.append(f"    ({src_escaped}, {dst_escaped}),")
+    datas_str = "[\n" + "\n".join(datas_lines) + "\n]"
     
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
