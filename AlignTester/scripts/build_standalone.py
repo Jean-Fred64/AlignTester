@@ -157,7 +157,22 @@ def create_spec_file(platform_name, frontend_dist=None):
     
     # Utiliser collect_all pour inclure automatiquement tous les modules
     # Convertir datas en format Python pour le spec file
-    datas_str = repr(datas)
+    # Vérifier que les fichiers existent avant de les inclure
+    valid_datas = []
+    for src, dst in datas:
+        src_path = Path(src)
+        if src_path.exists():
+            valid_datas.append((src, dst))
+        else:
+            print(f"[WARN] Fichier non trouve, ignore: {src}")
+    
+    print(f"[*] {len(valid_datas)} fichiers datas valides sur {len(datas)}")
+    if valid_datas:
+        print(f"[*] Exemples de fichiers datas:")
+        for src, dst in valid_datas[:3]:
+            print(f"[*]   - {Path(src).name} -> {dst}")
+    
+    datas_str = repr(valid_datas)
     
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
