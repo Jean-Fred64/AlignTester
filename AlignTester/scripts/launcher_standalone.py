@@ -178,29 +178,35 @@ def start_server(port=8000):
                 except Exception as e:
                     print(f"[*]   Erreur lors de la lecture: {e}")
             
-            # PyInstaller place les datas dans _internal/ au même niveau que l'exécutable
-            # Les fichiers sont placés selon le chemin de destination spécifié dans datas
+            # En mode onedir (COLLECT), PyInstaller place les datas dans le même dossier que l'exécutable
+            # En mode onefile, les datas sont dans _internal
             search_paths = [
-                _internal / "frontend" / "dist",  # Chemin attendu selon notre config
+                exe_dir / "frontend" / "dist",  # Mode onedir - datas dans le même dossier que l'exe
+                exe_dir / "frontend",
+                _internal / "frontend" / "dist",  # Mode onefile - datas dans _internal
                 _internal / "frontend",
                 _internal / "dist",  # Peut-être que PyInstaller a mis dist directement
-                exe_dir / "frontend" / "dist",
-                exe_dir / "frontend",
                 BASE_DIR / "frontend" / "dist",
                 BASE_DIR / "frontend",
             ]
             
-            # Chercher récursivement dans _internal pour trouver index.html
-            if _internal.exists():
-                print(f"[*] Recherche recursive de index.html dans _internal...")
-                for html_file in _internal.rglob("index.html"):
-                    html_dir = html_file.parent
-                    print(f"[*]   Trouve index.html dans: {html_dir}")
-                    if (html_dir / "assets").exists() or any(html_dir.glob("*.js")) or any(html_dir.glob("*.css")):
-                        frontend_to_use = html_dir
-                        FRONTEND_DIR = html_dir
-                        print(f"[OK] Frontend trouve recursivement: {html_dir}")
-                        break
+            # Chercher récursivement dans exe_dir et _internal pour trouver index.html
+            for search_root in [exe_dir, _internal]:
+                if search_root.exists():
+                    print(f"[*] Recherche recursive de index.html dans {search_root}...")
+                    try:
+                        for html_file in search_root.rglob("index.html"):
+                            html_dir = html_file.parent
+                            print(f"[*]   Trouve index.html dans: {html_dir}")
+                            if (html_dir / "assets").exists() or any(html_dir.glob("*.js")) or any(html_dir.glob("*.css")):
+                                frontend_to_use = html_dir
+                                FRONTEND_DIR = html_dir
+                                print(f"[OK] Frontend trouve recursivement: {html_dir}")
+                                break
+                        if frontend_to_use and frontend_to_use.exists():
+                            break
+                    except Exception as e:
+                        print(f"[*]   Erreur lors de la recherche recursive: {e}")
             
             print(f"[*] Recherche du frontend dans {len(search_paths)} emplacements...")
             for search_path in search_paths:
