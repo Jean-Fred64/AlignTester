@@ -254,12 +254,16 @@ def build_with_pyinstaller(spec_path, platform_name):
 
 def create_readme_standalone(platform_name, dist_path):
     """Crée un README pour la version standalone"""
+    # Déterminer l'extension de l'exécutable
+    exe_ext = ".exe" if platform_name == "windows" else ""
+    exe_name = f"aligntester{exe_ext}"
+    
     readme_content = f"""# AlignTester - Version Standalone ({platform_name.title()})
 
 ## Installation
 
 1. Extrayez tous les fichiers de ce dossier dans un répertoire de votre choix
-2. Double-cliquez sur `aligntester{"".exe if platform_name == "windows" else ""}` pour lancer l'application
+2. Double-cliquez sur `{exe_name}` pour lancer l'application
 3. Le navigateur s'ouvrira automatiquement sur http://127.0.0.1:8000
 
 ## Utilisation
