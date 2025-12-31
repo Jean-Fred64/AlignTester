@@ -138,13 +138,22 @@ def create_spec_file(platform_name, frontend_dist=None):
         print(f"[OK] Backend ajoute: {BACKEND_DIR}")
     
     # Créer le contenu du spec file
+    # Convertir le chemin en string et utiliser des slashes normaux pour compatibilité
+    launcher_path_resolved = LAUNCHER_PATH.resolve()
+    launcher_path_str = str(launcher_path_resolved).replace('\\', '/')
+    
+    # Vérifier que le fichier existe
+    if not launcher_path_resolved.exists():
+        print(f"[ERROR] Fichier launcher non trouve: {launcher_path_resolved}")
+        return None
+    
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
 
 block_cipher = None
 
 a = Analysis(
-    ['{LAUNCHER_PATH}'],
+    [r'{launcher_path_str}'],
     pathex=[],
     binaries=[],
     datas={datas},
