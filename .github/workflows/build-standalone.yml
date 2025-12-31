@@ -64,13 +64,38 @@ jobs:
       - name: Create archive
         shell: bash
         run: |
-          cd build_standalone/dist/${{ steps.platform.outputs.name }}/aligntester
+          PLATFORM=${{ steps.platform.outputs.name }}
+          ARCHIVE_NAME="aligntester-standalone-${PLATFORM}-x64.zip"
+          ARCHIVE_PATH="build_standalone/dist/${PLATFORM}/${ARCHIVE_NAME}"
+          BUILD_DIR="build_standalone/dist/${PLATFORM}/aligntester"
+          
+          echo "Creating archive: ${ARCHIVE_NAME}"
+          echo "From directory: ${BUILD_DIR}"
+          echo "To path: ${ARCHIVE_PATH}"
+          
+          # Vérifier que le dossier existe
+          if [ ! -d "${BUILD_DIR}" ]; then
+            echo "Error: Build directory not found: ${BUILD_DIR}"
+            exit 1
+          fi
+          
+          cd "${BUILD_DIR}"
+          
           if [ "$RUNNER_OS" == "Windows" ]; then
             # Utiliser PowerShell pour Windows
-            pwsh -Command "Compress-Archive -Path * -DestinationPath ../../aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip -Force"
+            pwsh -Command "Compress-Archive -Path * -DestinationPath ../${ARCHIVE_NAME} -Force"
           else
-            zip -r ../../aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip .
+            zip -r "../${ARCHIVE_NAME}" .
           fi
+          
+          # Vérifier que l'archive a été créée
+          if [ ! -f "../${ARCHIVE_NAME}" ]; then
+            echo "Error: Archive not created: ../${ARCHIVE_NAME}"
+            exit 1
+          fi
+          
+          echo "Archive created successfully: ${ARCHIVE_PATH}"
+          ls -lh "../${ARCHIVE_NAME}"
       
       - name: Upload artifact
         uses: actions/upload-artifact@v4
