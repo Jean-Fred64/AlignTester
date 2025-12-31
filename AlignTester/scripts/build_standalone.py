@@ -151,12 +151,18 @@ def create_spec_file(platform_name, frontend_dist=None):
         return None
     
     # Utiliser collect_all pour inclure automatiquement tous les modules
+    # Convertir datas en format Python pour le spec file
+    datas_str = repr(datas)
+    
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
 
 from PyInstaller.utils.hooks import collect_all, collect_submodules
 
 block_cipher = None
+
+# Données à inclure (frontend, backend)
+datas = {datas_str}
 
 # Collecter tous les modules de FastAPI, Starlette, Uvicorn, etc.
 datas_fastapi, binaries_fastapi, hiddenimports_fastapi = collect_all('fastapi')
@@ -166,7 +172,6 @@ datas_pydantic, binaries_pydantic, hiddenimports_pydantic = collect_all('pydanti
 datas_websockets, binaries_websockets, hiddenimports_websockets = collect_all('websockets')
 
 # Combiner toutes les données
-# datas est déjà une liste de tuples (source, target)
 all_datas = datas + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
 all_binaries = binaries_fastapi + binaries_starlette + binaries_uvicorn + binaries_pydantic + binaries_websockets
 all_hiddenimports = hiddenimports_fastapi + hiddenimports_starlette + hiddenimports_uvicorn + hiddenimports_pydantic + hiddenimports_websockets
