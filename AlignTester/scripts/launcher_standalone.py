@@ -151,14 +151,26 @@ def start_server(port=8000):
         # Importer l'application FastAPI
         from main import app
         
+        # Chercher le frontend si pas trouvé
+        frontend_to_use = FRONTEND_DIR
+        if not frontend_to_use or not frontend_to_use.exists():
+            # Essayer de trouver le frontend dans _internal
+            _internal = Path(sys.executable).parent / "_internal"
+            if _internal.exists():
+                frontend_internal = _internal / "frontend" / "dist"
+                if frontend_internal.exists():
+                    frontend_to_use = frontend_internal
+                    FRONTEND_DIR = frontend_internal  # Mettre à jour la variable globale
+                    print(f"[OK] Frontend trouve dans _internal: {frontend_internal}")
+        
         # Servir le frontend si disponible
-        if FRONTEND_DIR and FRONTEND_DIR.exists() and any(FRONTEND_DIR.iterdir()):
+        if frontend_to_use and frontend_to_use.exists() and any(frontend_to_use.iterdir()):
             from fastapi.staticfiles import StaticFiles
             # Servir les fichiers statiques
-            app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="static")
-            print(f"[OK] Frontend trouve dans: {FRONTEND_DIR}")
+            app.mount("/", StaticFiles(directory=str(frontend_to_use), html=True), name="static")
+            print(f"[OK] Frontend servi depuis: {frontend_to_use}")
         else:
-            frontend_msg = str(FRONTEND_DIR) if FRONTEND_DIR else "None"
+            frontend_msg = str(frontend_to_use) if frontend_to_use else "None"
             print(f"[WARN] Frontend non trouve dans: {frontend_msg}")
             print("   L'application fonctionnera en mode API uniquement")
             print(f"   Vous pouvez acceder a l'API sur http://127.0.0.1:{port}/api")
