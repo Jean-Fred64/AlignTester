@@ -12,6 +12,15 @@ import threading
 import time
 import signal
 
+# Configurer l'encodage UTF-8 pour Windows
+if sys.platform == 'win32':
+    import io
+    # Forcer UTF-8 pour stdout et stderr
+    if sys.stdout.encoding != 'utf-8':
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    if sys.stderr.encoding != 'utf-8':
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 # Déterminer le chemin de base selon le mode d'exécution
 if getattr(sys, 'frozen', False):
     # Mode standalone (PyInstaller)
@@ -42,7 +51,7 @@ shutdown_event = threading.Event()
 
 def signal_handler(signum, frame):
     """Gestionnaire de signaux pour arrêt propre"""
-    print("\n🛑 Arrêt de l'application...")
+    print("\n[*] Arret de l'application...")
     shutdown_event.set()
     sys.exit(0)
 
@@ -78,14 +87,14 @@ def start_server(port=8000):
             from fastapi.staticfiles import StaticFiles
             # Servir les fichiers statiques
             app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="static")
-            print(f"📁 Frontend trouvé dans: {FRONTEND_DIR}")
+            print(f"[OK] Frontend trouve dans: {FRONTEND_DIR}")
         else:
-            print(f"⚠️  Frontend non trouvé dans: {FRONTEND_DIR}")
+            print(f"[WARN] Frontend non trouve dans: {FRONTEND_DIR}")
             print("   L'application fonctionnera en mode API uniquement")
-            print("   Vous pouvez accéder à l'API sur http://127.0.0.1:{port}/api")
+            print("   Vous pouvez acceder a l'API sur http://127.0.0.1:{port}/api")
         
         # Démarrer le serveur
-        print(f"🚀 Démarrage du serveur sur http://127.0.0.1:{port}")
+        print(f"[*] Demarrage du serveur sur http://127.0.0.1:{port}")
         uvicorn.run(
             app,
             host="127.0.0.1",
@@ -94,7 +103,7 @@ def start_server(port=8000):
             access_log=True
         )
     except Exception as e:
-        print(f"❌ Erreur lors du démarrage du serveur: {e}")
+        print(f"[ERROR] Erreur lors du demarrage du serveur: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
@@ -104,31 +113,31 @@ def open_browser(port=8000, delay=2):
     time.sleep(delay)
     if not shutdown_event.is_set():
         url = f"http://127.0.0.1:{port}"
-        print(f"🌐 Ouverture du navigateur: {url}")
+        print(f"[*] Ouverture du navigateur: {url}")
         try:
             webbrowser.open(url)
         except Exception as e:
-            print(f"⚠️  Impossible d'ouvrir le navigateur automatiquement: {e}")
+            print(f"[WARN] Impossible d'ouvrir le navigateur automatiquement: {e}")
             print(f"   Veuillez ouvrir manuellement: {url}")
 
 def main():
     """Fonction principale"""
     print("=" * 60)
-    print("🎯 AlignTester - Version Standalone")
+    print("[*] AlignTester - Version Standalone")
     print("=" * 60)
-    print(f"📂 Répertoire de base: {BASE_DIR}")
-    print(f"📁 Frontend: {FRONTEND_DIR} ({'✓' if FRONTEND_DIR.exists() else '✗'})")
-    print(f"📁 Backend: {BACKEND_DIR} ({'✓' if BACKEND_DIR.exists() else '✗'})")
+    print(f"[*] Repertoire de base: {BASE_DIR}")
+    print(f"[*] Frontend: {FRONTEND_DIR} ({'OK' if FRONTEND_DIR.exists() else 'MANQUANT'})")
+    print(f"[*] Backend: {BACKEND_DIR} ({'OK' if BACKEND_DIR.exists() else 'MANQUANT'})")
     print("=" * 60)
     
     # Trouver un port libre
     port = find_free_port(8000)
     if port is None:
-        print("❌ Aucun port libre trouvé (8000-8099)")
+        print("[ERROR] Aucun port libre trouve (8000-8099)")
         sys.exit(1)
     
     if port != 8000:
-        print(f"⚠️  Le port 8000 est occupé, utilisation du port {port}")
+        print(f"[WARN] Le port 8000 est occupe, utilisation du port {port}")
     
     # Ouvrir le navigateur dans un thread séparé
     browser_thread = threading.Thread(target=open_browser, args=(port,), daemon=True)
@@ -138,9 +147,9 @@ def main():
     try:
         start_server(port)
     except KeyboardInterrupt:
-        print("\n🛑 Arrêt demandé par l'utilisateur")
+        print("\n[*] Arret demande par l'utilisateur")
     except Exception as e:
-        print(f"\n❌ Erreur fatale: {e}")
+        print(f"\n[ERROR] Erreur fatale: {e}")
         import traceback
         traceback.print_exc()
         sys.exit(1)
