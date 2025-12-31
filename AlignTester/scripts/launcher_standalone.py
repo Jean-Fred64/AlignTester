@@ -178,14 +178,29 @@ def start_server(port=8000):
                 except Exception as e:
                     print(f"[*]   Erreur lors de la lecture: {e}")
             
+            # PyInstaller place les datas dans _internal/ au même niveau que l'exécutable
+            # Les fichiers sont placés selon le chemin de destination spécifié dans datas
             search_paths = [
-                _internal / "frontend" / "dist",
+                _internal / "frontend" / "dist",  # Chemin attendu selon notre config
                 _internal / "frontend",
+                _internal / "dist",  # Peut-être que PyInstaller a mis dist directement
                 exe_dir / "frontend" / "dist",
                 exe_dir / "frontend",
                 BASE_DIR / "frontend" / "dist",
                 BASE_DIR / "frontend",
             ]
+            
+            # Chercher récursivement dans _internal pour trouver index.html
+            if _internal.exists():
+                print(f"[*] Recherche recursive de index.html dans _internal...")
+                for html_file in _internal.rglob("index.html"):
+                    html_dir = html_file.parent
+                    print(f"[*]   Trouve index.html dans: {html_dir}")
+                    if (html_dir / "assets").exists() or any(html_dir.glob("*.js")) or any(html_dir.glob("*.css")):
+                        frontend_to_use = html_dir
+                        FRONTEND_DIR = html_dir
+                        print(f"[OK] Frontend trouve recursivement: {html_dir}")
+                        break
             
             print(f"[*] Recherche du frontend dans {len(search_paths)} emplacements...")
             for search_path in search_paths:
