@@ -1,0 +1,95 @@
+# Fichiers temporaires et de développement
+*.pyc
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Environnements virtuels
+venv/
+env/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs
+*.log
+logs/
+
+# Fichiers de test temporaires
+test_*.tmp
+*.tmp
+*.bak
+
+# Fichiers de configuration locale
+.env
+.env.local
+config.local.py
+
+# Node modules (si frontend)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Fichiers de build frontend
+dist-frontend/
+build-frontend/
+
+# Fichiers de développement dans AlignTester
+AlignTester/tests/*.tmp
+AlignTester/tests/__pycache__/
+AlignTester/*.log
+
+# Fichiers de paramètres utilisateur
+AlignTester/data/
+*.settings.json
+
+# Fichiers de données de test
+*.testdata
+test_data/
+
+# Fichiers temporaires Python
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+
+# Structure du projet - Protection
+# Note: release/ peut être versionné ou ignoré selon préférence
+# Décommentez la ligne suivante si vous ne voulez pas versionner release/
+# release/
+
+# Fichiers de développement qui ne doivent jamais être dans release/
+AlignTester/**/*.tmp
+AlignTester/**/*.bak
+AlignTester/**/*.log
+AlignTester/**/__pycache__/
+AlignTester/**/.pytest_cache/
+AlignTester/**/node_modules/
+AlignTester/**/.env
+AlignTester/**/.env.local
+

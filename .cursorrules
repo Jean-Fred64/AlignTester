@@ -1,0 +1,74 @@
+# Règles de Structure du Projet AlignTester
+
+## Structure obligatoire
+
+Ce projet suit une structure stricte pour séparer le développement de la version finale :
+
+```
+Aligntester/
+├── AlignTester/          # 🛠️  DÉVELOPPEMENT UNIQUEMENT
+│   ├── src/              # Code source (backend + frontend)
+│   ├── tests/            # Scripts de tests
+│   ├── docs/             # Documentation de développement
+│   └── scripts/          # Scripts utilitaires
+│
+└── release/              # 📦 VERSION FINALE (GitHub)
+    └── (fichiers finaux uniquement)
+```
+
+## Règles strictes
+
+### 1. Fichiers de développement
+- ✅ TOUS les fichiers de développement doivent être dans `AlignTester/`
+- ✅ Les fichiers temporaires, tests, brouillons vont dans `AlignTester/`
+- ❌ NE JAMAIS créer de fichiers de développement à la racine du projet
+- ❌ NE JAMAIS créer de fichiers de développement dans `release/`
+
+### 2. Fichiers de release
+- ✅ `release/` contient UNIQUEMENT les fichiers finaux nécessaires
+- ✅ Utiliser `AlignTester/scripts/prepare_release.py` pour préparer la release
+- ❌ NE JAMAIS modifier directement les fichiers dans `release/` pendant le développement
+- ❌ NE JAMAIS commiter des fichiers temporaires dans `release/`
+
+### 3. Organisation du code
+- **Backend** : `AlignTester/src/backend/` ou `AlignTester/src/api/`
+- **Frontend** : `AlignTester/src/frontend/` ou `AlignTester/src/web/`
+- **Tests** : `AlignTester/tests/`
+- **Documentation dev** : `AlignTester/docs/`
+- **Documentation utilisateur** : `release/docs/` (copiée depuis `AlignTester/docs/` si nécessaire)
+
+### 4. Fichiers temporaires
+- ✅ Utiliser `.gitignore` pour exclure automatiquement les fichiers temporaires
+- ✅ Les fichiers `.tmp`, `.bak`, `.log` doivent être ignorés
+- ❌ NE JAMAIS commiter de fichiers temporaires
+
+### 5. Workflow de développement
+1. Développer dans `AlignTester/`
+2. Tester dans `AlignTester/tests/`
+3. Préparer la release avec `python AlignTester/scripts/prepare_release.py`
+4. Vérifier `release/` avant de commiter
+5. Commiter uniquement les fichiers nécessaires
+
+### 6. Commits Git
+- ✅ Commiter les changements dans `AlignTester/` normalement
+- ✅ Commiter `release/` uniquement après avoir exécuté `prepare_release.py`
+- ❌ NE JAMAIS commiter de fichiers temporaires ou de cache
+
+## Instructions pour l'IA
+
+Quand tu crées ou modifies des fichiers :
+- Si c'est du code source → `AlignTester/src/`
+- Si c'est un test → `AlignTester/tests/`
+- Si c'est de la doc de dev → `AlignTester/docs/`
+- Si c'est un script utilitaire → `AlignTester/scripts/`
+- Si c'est un fichier final pour l'utilisateur → d'abord dans `AlignTester/`, puis copié vers `release/` via le script
+
+NE JAMAIS créer de fichiers à la racine sauf :
+- Fichiers de configuration du projet (`.gitignore`, `README.md` principal, etc.)
+- Documentation générale (`STRUCTURE_PROJET.md`, etc.)
+
+## Maintenance
+
+Cette structure doit être maintenue pendant TOUTE la phase de développement.
+Si tu vois un fichier au mauvais endroit, déplace-le dans le bon dossier.
+

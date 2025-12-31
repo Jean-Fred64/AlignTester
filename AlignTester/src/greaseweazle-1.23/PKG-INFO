@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: greaseweazle
+Version: 1.23
+Requires-Python: >=3.8
+License-File: COPYING
+Requires-Dist: crcmod
+Requires-Dist: bitarray>=3
+Requires-Dist: pyserial
+Requires-Dist: requests
+Dynamic: license-file
+Dynamic: requires-dist
+Dynamic: requires-python

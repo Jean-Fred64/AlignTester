@@ -1,0 +1,341 @@
+"""
+Script pour créer la version standalone d'AlignTester
+Utilise PyInstaller pour créer des exécutables pour Windows, Linux et macOS
+"""
+
+import os
+import shutil
+import subprocess
+import sys
+import platform
+from pathlib import Path
+
+# Chemins
+PROJECT_ROOT = Path(__file__).parent.parent.parent
+ALIGNTESTER_DIR = PROJECT_ROOT / "AlignTester"
+BUILD_DIR = PROJECT_ROOT / "build_standalone"
+DIST_DIR = BUILD_DIR / "dist"
+
+# Chemins des sources
+SRC_DIR = ALIGNTESTER_DIR / "src"
+BACKEND_DIR = SRC_DIR / "backend"
+FRONTEND_DIR = SRC_DIR / "frontend"
+LAUNCHER_PATH = Path(__file__).parent / "launcher_standalone.py"
+
+def print_step(message):
+    """Affiche un message de progression"""
+    print(f"\n{'='*60}")
+    print(f"📦 {message}")
+    print(f"{'='*60}")
+
+def check_dependencies():
+    """Vérifie que les dépendances nécessaires sont installées"""
+    print_step("Vérification des dépendances")
+    
+    # Vérifier PyInstaller
+    try:
+        import PyInstaller
+        print(f"✓ PyInstaller installé (version {PyInstaller.__version__})")
+    except ImportError:
+        print("❌ PyInstaller n'est pas installé")
+        print("   Installez-le avec: pip install pyinstaller")
+        return False
+    
+    # Vérifier Node.js pour le build frontend
+    try:
+        result = subprocess.run(["node", "--version"], capture_output=True, text=True)
+        if result.returncode == 0:
+            print(f"✓ Node.js installé ({result.stdout.strip()})")
+        else:
+            print("⚠️  Node.js non trouvé - le build frontend sera ignoré")
+    except FileNotFoundError:
+        print("⚠️  Node.js non trouvé - le build frontend sera ignoré")
+    
+    return True
+
+def build_frontend():
+    """Build le frontend React en fichiers statiques"""
+    print_step("Build du frontend")
+    
+    if not FRONTEND_DIR.exists():
+        print("⚠️  Dossier frontend non trouvé, skip du build frontend")
+        return None
+    
+    # Vérifier si node_modules existe
+    node_modules = FRONTEND_DIR / "node_modules"
+    if not node_modules.exists():
+        print("📦 Installation des dépendances npm...")
+        os.chdir(FRONTEND_DIR)
+        subprocess.run(["npm", "install"], check=False)
+    
+    # Build du frontend
+    print("🔨 Build du frontend avec Vite...")
+    os.chdir(FRONTEND_DIR)
+    
+    try:
+        result = subprocess.run(["npm", "run", "build"], check=True, capture_output=True, text=True)
+        print("✓ Build frontend réussi")
+        
+        dist_frontend = FRONTEND_DIR / "dist"
+        if dist_frontend.exists():
+            print(f"✓ Frontend buildé dans: {dist_frontend}")
+            return dist_frontend
+        else:
+            print("⚠️  Dossier dist non trouvé après le build")
+            return None
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Erreur lors du build frontend:")
+        print(e.stdout)
+        print(e.stderr)
+        return None
+    except FileNotFoundError:
+        print("⚠️  npm non trouvé, skip du build frontend")
+        return None
+
+def create_spec_file(platform_name, frontend_dist=None):
+    """Crée le fichier .spec pour PyInstaller"""
+    print_step(f"Création du fichier .spec pour {platform_name}")
+    
+    # Déterminer les extensions selon la plateforme
+    if platform_name == "windows":
+        exe_name = "aligntester.exe"
+        console = True  # True pour voir les logs, False pour masquer
+    else:
+        exe_name = "aligntester"
+        console = True
+    
+    # Collecter les données à inclure
+    datas = []
+    
+    # Frontend - inclure le dossier dist complet
+    if frontend_dist and frontend_dist.exists():
+        # Inclure tous les fichiers du frontend dist récursivement
+        frontend_files = []
+        for item in frontend_dist.rglob("*"):
+            if item.is_file():
+                rel_path = item.relative_to(frontend_dist)
+                target_dir = f"frontend/dist/{rel_path.parent}" if rel_path.parent != Path('.') else "frontend/dist"
+                frontend_files.append((str(item), target_dir))
+        datas.extend(frontend_files)
+        print(f"✓ Frontend ajouté: {frontend_dist} ({len(frontend_files)} fichiers)")
+    
+    # Backend - inclure tous les fichiers Python
+    if BACKEND_DIR.exists():
+        # Inclure tous les fichiers Python du backend
+        for py_file in BACKEND_DIR.rglob("*.py"):
+            rel_path = py_file.relative_to(BACKEND_DIR)
+            target_dir = f"backend/{rel_path.parent}" if rel_path.parent != Path('.') else "backend"
+            datas.append((str(py_file), target_dir))
+        print(f"✓ Backend ajouté: {BACKEND_DIR}")
+    
+    # Créer le contenu du spec file
+    spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
+# Fichier généré automatiquement pour {platform_name}
+
+block_cipher = None
+
+a = Analysis(
+    ['{LAUNCHER_PATH}'],
+    pathex=[],
+    binaries=[],
+    datas={datas},
+    hiddenimports=[
+        'uvicorn',
+        'fastapi',
+        'websockets',
+        'pydantic',
+        'pydantic_settings',
+        'pyserial',
+        'multipart',
+    ],
+    hookspath=[],
+    hooksconfig={{}},
+    runtime_hooks=[],
+    excludes=[],
+    win_no_prefer_redirects=False,
+    win_private_assemblies=False,
+    cipher=block_cipher,
+    noarchive=False,
+)
+
+pyz = PYZ(a.pure, a.zipped_data, cipher=block_cipher)
+
+exe = EXE(
+    pyz,
+    a.scripts,
+    [],
+    exclude_binaries=True,
+    name='{exe_name.replace(".exe", "")}',
+    debug=False,
+    bootloader_ignore_signals=False,
+    strip=False,
+    upx=True,
+    console={str(console)},
+    disable_windowed_traceback=False,
+    argv_emulation=False,
+    target_arch=None,
+    codesign_identity=None,
+    entitlements_file=None,
+)
+
+coll = COLLECT(
+    exe,
+    a.binaries,
+    a.zipfiles,
+    a.datas,
+    strip=False,
+    upx=True,
+    upx_exclude=[],
+    name='aligntester',
+)
+'''
+    
+    spec_path = BUILD_DIR / f"aligntester_{platform_name}.spec"
+    spec_path.parent.mkdir(parents=True, exist_ok=True)
+    spec_path.write_text(spec_content)
+    print(f"✓ Fichier .spec créé: {spec_path}")
+    
+    return spec_path
+
+def build_with_pyinstaller(spec_path, platform_name):
+    """Utilise PyInstaller pour créer l'exécutable"""
+    print_step(f"Build avec PyInstaller pour {platform_name}")
+    
+    dist_platform = DIST_DIR / platform_name
+    work_platform = BUILD_DIR / "work" / platform_name
+    
+    # Nettoyer les anciens builds
+    if dist_platform.exists():
+        print(f"🧹 Nettoyage de l'ancien build: {dist_platform}")
+        shutil.rmtree(dist_platform)
+    if work_platform.exists():
+        shutil.rmtree(work_platform)
+    
+    # Exécuter PyInstaller
+    cmd = [
+        sys.executable, "-m", "PyInstaller",
+        str(spec_path),
+        "--clean",
+        "--distpath", str(dist_platform),
+        "--workpath", str(work_platform),
+    ]
+    
+    print(f"🔨 Exécution: {' '.join(cmd)}")
+    try:
+        result = subprocess.run(cmd, check=True, capture_output=True, text=True)
+        print("✓ Build PyInstaller réussi")
+        return dist_platform / "aligntester"
+    except subprocess.CalledProcessError as e:
+        print(f"❌ Erreur lors du build PyInstaller:")
+        print(e.stdout)
+        print(e.stderr)
+        return None
+
+def create_readme_standalone(platform_name, dist_path):
+    """Crée un README pour la version standalone"""
+    readme_content = f"""# AlignTester - Version Standalone ({platform_name.title()})
+
+## Installation
+
+1. Extrayez tous les fichiers de ce dossier dans un répertoire de votre choix
+2. Double-cliquez sur `aligntester{"".exe if platform_name == "windows" else ""}` pour lancer l'application
+3. Le navigateur s'ouvrira automatiquement sur http://127.0.0.1:8000
+
+## Utilisation
+
+- L'application démarre automatiquement un serveur web local
+- Le navigateur s'ouvre automatiquement (si ce n'est pas le cas, ouvrez http://127.0.0.1:8000)
+- Connectez votre Greaseweazle et suivez les instructions à l'écran
+
+## Arrêt de l'application
+
+- Fermez la fenêtre de terminal/console pour arrêter l'application
+- Ou utilisez Ctrl+C dans le terminal
+
+## Dépannage
+
+### Le port 8000 est déjà utilisé
+L'application utilisera automatiquement un autre port (8001, 8002, etc.)
+Regardez le message dans la console pour connaître le port utilisé.
+
+### Le navigateur ne s'ouvre pas automatiquement
+Ouvrez manuellement votre navigateur et allez sur http://127.0.0.1:8000
+(ou le port indiqué dans la console)
+
+### Problèmes avec Greaseweazle
+- Vérifiez que votre Greaseweazle est bien connecté
+- Vérifiez les permissions USB (Linux/macOS peuvent nécessiter des droits sudo)
+- Consultez la documentation Greaseweazle pour votre système
+
+## Support
+
+Pour plus d'informations, consultez:
+- GitHub: https://github.com/votre-repo/aligntester
+- Documentation: Voir les fichiers dans le dossier docs/
+
+Version: 0.1.0
+Plateforme: {platform_name.title()}
+"""
+    
+    readme_path = dist_path / "README_STANDALONE.txt"
+    readme_path.write_text(readme_content)
+    print(f"✓ README créé: {readme_path}")
+
+def main():
+    """Fonction principale"""
+    print("=" * 60)
+    print("🚀 Build de la version standalone d'AlignTester")
+    print("=" * 60)
+    print(f"📂 Répertoire du projet: {PROJECT_ROOT}")
+    print(f"🖥️  Plateforme actuelle: {platform.system()} ({platform.machine()})")
+    print("=" * 60)
+    
+    # Vérifier les dépendances
+    if not check_dependencies():
+        sys.exit(1)
+    
+    # Créer les dossiers de build
+    BUILD_DIR.mkdir(parents=True, exist_ok=True)
+    DIST_DIR.mkdir(parents=True, exist_ok=True)
+    
+    # Build frontend
+    frontend_dist = build_frontend()
+    
+    # Déterminer la plateforme
+    current_platform = platform.system().lower()
+    if current_platform == "windows":
+        platform_name = "windows"
+    elif current_platform == "linux":
+        platform_name = "linux"
+    elif current_platform == "darwin":
+        platform_name = "macos"
+    else:
+        print(f"⚠️  Plateforme non reconnue: {current_platform}")
+        print("   Utilisation de 'linux' par défaut")
+        platform_name = "linux"
+    
+    # Créer le fichier .spec
+    spec_path = create_spec_file(platform_name, frontend_dist)
+    
+    # Build avec PyInstaller
+    dist_path = build_with_pyinstaller(spec_path, platform_name)
+    
+    if dist_path and dist_path.exists():
+        # Créer le README
+        create_readme_standalone(platform_name, dist_path)
+        
+        print("\n" + "=" * 60)
+        print("✅ Build terminé avec succès!")
+        print("=" * 60)
+        print(f"📁 Exécutable disponible dans: {dist_path}")
+        print(f"\n📦 Pour distribuer:")
+        print(f"   1. Compressez le dossier: {dist_path}")
+        print(f"   2. Nommez-le: aligntester-standalone-{platform_name}.zip")
+        print(f"   3. Distribuez-le aux utilisateurs")
+        print("=" * 60)
+    else:
+        print("\n❌ Le build a échoué")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

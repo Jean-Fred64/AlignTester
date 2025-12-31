@@ -1,0 +1,85 @@
+name: Build Standalone
+
+on:
+  workflow_dispatch:
+  push:
+    tags:
+      - 'v*'
+  release:
+    types: [created]
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    
+    runs-on: ${{ matrix.os }}
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          cache: 'npm'
+          cache-dependency-path: AlignTester/src/frontend/package-lock.json
+      
+      - name: Install Python dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r AlignTester/requirements.txt
+      
+      - name: Install frontend dependencies
+        working-directory: AlignTester/src/frontend
+        run: npm ci
+      
+      - name: Build frontend
+        working-directory: AlignTester/src/frontend
+        run: npm run build
+      
+      - name: Build standalone
+        run: |
+          python AlignTester/scripts/build_standalone.py
+      
+      - name: Determine platform name
+        id: platform
+        run: |
+          if [ "$RUNNER_OS" == "Linux" ]; then
+            echo "name=linux" >> $GITHUB_OUTPUT
+          elif [ "$RUNNER_OS" == "Windows" ]; then
+            echo "name=windows" >> $GITHUB_OUTPUT
+          elif [ "$RUNNER_OS" == "macOS" ]; then
+            echo "name=macos" >> $GITHUB_OUTPUT
+          fi
+      
+      - name: Create archive
+        run: |
+          cd build_standalone/dist/${{ steps.platform.outputs.name }}/aligntester
+          if [ "$RUNNER_OS" == "Windows" ]; then
+            Compress-Archive -Path * -DestinationPath ../../aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip
+          else
+            zip -r ../../aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip .
+          fi
+      
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aligntester-standalone-${{ steps.platform.outputs.name }}-x64
+          path: build_standalone/dist/${{ steps.platform.outputs.name }}/aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip
+          retention-days: 30
+      
+      - name: Upload to release (if tag)
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v1
+        with:
+          files: build_standalone/dist/${{ steps.platform.outputs.name }}/aligntester-standalone-${{ steps.platform.outputs.name }}-x64.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

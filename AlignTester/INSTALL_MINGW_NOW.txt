@@ -1,0 +1,22 @@
+╔══════════════════════════════════════════════════════════════╗
+║  Installation de MinGW-w64 requise pour la compilation      ║
+╚══════════════════════════════════════════════════════════════╝
+
+Pour compiler la version Windows avec Nuitka, vous devez installer MinGW-w64.
+
+📦 Installation (copiez-collez cette commande) :
+
+    sudo apt update && sudo apt install -y mingw-w64
+
+✅ Vérification après installation :
+
+    x86_64-w64-mingw32-gcc --version
+
+🚀 Une fois installé, lancez la compilation :
+
+    cd /home/jean-fred/Aligntester/AlignTester
+    ./scripts/build_windows_nuitka.sh
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+État actuel de l'environnement :

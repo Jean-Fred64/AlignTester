@@ -1,0 +1,679 @@
+KryoFlux DiskTool Console, v3.00_Win64, uiv.1, Apr 15 2018, 23:44:54
+(c) 2009-2018 KryoFlux Products & Services Ltd.
+Developed by The Software Preservation Society, www.softpres.org
+Licensed for private, non-commercial use only.
+
+00.0    : frev: 93493, drift: 0.175 us, tfer: 448302 B/s, rpm: 300.027
+00.0    : band: 2.000 us, 2.998 us, 4.003 us
+00.0    : base: 0.999 us [99.939%], band: 2.000 us, 2.998 us, 4.003 us
+00.0    : MFM: OK*, trk: 000, sec: 18, *H +1
+00.1    : frev: 91240, drift: 0.175 us, tfer: 438305 B/s, rpm: 300.027
+00.1    : band: 2.000 us, 2.998 us, 4.000 us
+00.1    : base: 0.999 us [99.974%], band: 2.000 us, 2.998 us, 4.000 us
+00.1    : MFM: OK*, trk: 000, sec: 18, *H +4
+01.0    : frev: 75949, drift: 0.208 us, tfer: 364692 B/s, rpm: 300.027
+01.0    : band: 2.001 us, 2.999 us, 4.008 us
+01.0    : base: 1.000 us [99.881%], band: 2.001 us, 2.999 us, 4.008 us
+01.0    : MFM: OK*, trk: 001, sec: 18, *H +3
+01.1    : frev: 75931, drift: 0.183 us, tfer: 363644 B/s, rpm: 300.027
+01.1    : band: 2.000 us, 3.000 us, 3.978 us
+01.1    : base: 1.000 us [99.753%], band: 2.000 us, 3.000 us, 3.978 us
+01.1    : MFM: OK*, trk: 001, sec: 18, *H +1
+02.0    : frev: 75934, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+02.0    : band: 1.999 us, 2.999 us, 4.003 us
+02.0    : base: 1.000 us [99.946%], band: 1.999 us, 2.999 us, 4.003 us
+02.0    : MFM: OK*, trk: 002, sec: 18, *H +1
+02.1    : frev: 75917, drift: 0.150 us, tfer: 363644 B/s, rpm: 300.027
+02.1    : band: 2.001 us, 2.998 us, 3.988 us
+02.1    : base: 0.999 us [99.836%], band: 2.001 us, 2.998 us, 3.988 us
+02.1    : MFM: OK, trk: 002, sec: 18
+03.0    : frev: 75956, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+03.0    : band: 1.999 us, 2.999 us, 4.004 us
+03.0    : base: 1.000 us [99.935%], band: 1.999 us, 2.999 us, 4.004 us
+03.0    : MFM: OK, trk: 003, sec: 18
+03.1    : frev: 75937, drift: 0.125 us, tfer: 364266 B/s, rpm: 300.027
+03.1    : band: 1.998 us, 3.001 us, 3.996 us
+03.1    : base: 1.000 us [99.929%], band: 1.998 us, 3.001 us, 3.996 us
+03.1    : MFM: OK, trk: 003, sec: 18
+04.0    : frev: 75937, drift: 0.150 us, tfer: 363618 B/s, rpm: 300.027
+04.0    : band: 1.999 us, 2.999 us, 3.989 us
+04.0    : base: 1.000 us [99.857%], band: 1.999 us, 2.999 us, 3.989 us
+04.0    : MFM: OK, trk: 004, sec: 18
+04.1    : frev: 75918, drift: 0.183 us, tfer: 364266 B/s, rpm: 300.027
+04.1    : band: 2.001 us, 2.998 us, 3.999 us
+04.1    : base: 0.999 us [99.960%], band: 2.001 us, 2.998 us, 3.999 us
+04.1    : MFM: OK, trk: 004, sec: 18
+05.0    : frev: 75936, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+05.0    : band: 2.000 us, 2.999 us, 3.997 us
+05.0    : base: 1.000 us [99.956%], band: 2.000 us, 2.999 us, 3.997 us
+05.0    : MFM: OK, trk: 005, sec: 18
+05.1    : frev: 75917, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+05.1    : band: 2.001 us, 2.998 us, 4.010 us
+05.1    : base: 0.999 us [99.864%], band: 2.001 us, 2.998 us, 4.010 us
+05.1    : MFM: OK, trk: 005, sec: 18
+06.0    : frev: 75933, drift: 0.142 us, tfer: 363282 B/s, rpm: 300.027
+06.0    : band: 1.999 us, 2.999 us, 4.006 us
+06.0    : base: 1.000 us [99.911%], band: 1.999 us, 2.999 us, 4.006 us
+06.0    : MFM: OK, trk: 006, sec: 18
+06.1    : frev: 75915, drift: 0.158 us, tfer: 363644 B/s, rpm: 300.027
+06.1    : band: 1.998 us, 2.998 us, 4.000 us
+06.1    : base: 0.999 us [99.959%], band: 1.998 us, 2.998 us, 4.000 us
+06.1    : MFM: OK, trk: 006, sec: 18
+07.0    : frev: 75954, drift: 0.158 us, tfer: 363282 B/s, rpm: 300.027
+07.0    : band: 2.001 us, 2.999 us, 4.003 us
+07.0    : base: 1.000 us [99.947%], band: 2.001 us, 2.999 us, 4.003 us
+07.0    : MFM: OK, trk: 007, sec: 18
+07.1    : frev: 75936, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+07.1    : band: 2.001 us, 2.999 us, 3.973 us
+07.1    : base: 1.000 us [99.673%], band: 2.001 us, 2.999 us, 3.973 us
+07.1    : MFM: OK, trk: 007, sec: 18
+08.0    : frev: 75939, drift: 0.142 us, tfer: 362947 B/s, rpm: 300.027
+08.0    : band: 2.000 us, 2.999 us, 3.996 us
+08.0    : base: 1.000 us [99.943%], band: 2.000 us, 2.999 us, 3.996 us
+08.0    : MFM: OK, trk: 008, sec: 18
+08.1    : frev: 75921, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+08.1    : band: 1.998 us, 2.999 us, 4.058 us
+08.1    : base: 1.000 us [99.318%], band: 1.998 us, 2.999 us, 4.058 us
+08.1    : MFM: OK, trk: 008, sec: 18
+09.0    : frev: 75936, drift: 0.133 us, tfer: 363618 B/s, rpm: 300.027
+09.0    : band: 2.000 us, 2.999 us, 3.999 us?
+09.0    : base: 1.000 us [99.977%], band: 2.000 us, 2.999 us, 3.999 us?
+09.0    : MFM: OK, trk: 009, sec: 18
+09.1    : frev: 75918, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+09.1    : band: 2.001 us, 2.999 us, 4.017 us
+09.1    : base: 1.000 us [99.788%], band: 2.001 us, 2.999 us, 4.017 us
+09.1    : MFM: OK, trk: 009, sec: 18
+10.0    : frev: 75916, drift: 0.150 us, tfer: 362947 B/s, rpm: 300.027
+10.0    : band: 2.000 us, 2.999 us, 3.999 us?
+10.0    : base: 1.000 us [99.982%], band: 2.000 us, 2.999 us, 3.999 us?
+10.0    : MFM: OK, trk: 010, sec: 18
+10.1    : frev: 75899, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+10.1    : band: 1.998 us, 2.998 us, 3.999 us?
+10.1    : base: 0.999 us [99.953%], band: 1.998 us, 2.998 us, 3.999 us?
+10.1    : MFM: OK, trk: 010, sec: 18
+11.0    : frev: 75935, drift: 0.142 us, tfer: 363618 B/s, rpm: 300.027
+11.0    : band: 1.998 us, 2.999 us, 3.999 us?
+11.0    : base: 1.000 us [99.954%], band: 1.998 us, 2.999 us, 3.999 us?
+11.0    : MFM: OK, trk: 011, sec: 18
+11.1    : frev: 75918, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+11.1    : band: 2.001 us, 2.999 us, 4.020 us
+11.1    : base: 1.000 us [99.747%], band: 2.001 us, 2.999 us, 4.020 us
+11.1    : MFM: OK, trk: 011, sec: 18
+12.0    : frev: 75934, drift: 0.183 us, tfer: 362947 B/s, rpm: 300.027
+12.0    : band: 1.998 us, 2.998 us, 3.994 us
+12.0    : base: 0.999 us [99.897%], band: 1.998 us, 2.998 us, 3.994 us
+12.0    : MFM: OK, trk: 012, sec: 18
+12.1    : frev: 75917, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+12.1    : band: 1.998 us, 3.000 us, 4.004 us
+12.1    : base: 1.000 us [99.933%], band: 1.998 us, 3.000 us, 4.004 us
+12.1    : MFM: OK, trk: 012, sec: 18
+13.0    : frev: 75932, drift: 0.150 us, tfer: 362947 B/s, rpm: 300.027
+13.0    : band: 2.001 us, 2.999 us, 4.002 us
+13.0    : base: 1.000 us [99.961%], band: 2.001 us, 2.999 us, 4.002 us
+13.0    : MFM: OK, trk: 013, sec: 18
+13.1    : frev: 75914, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+13.1    : band: 2.001 us, 2.998 us, 3.996 us
+13.1    : base: 0.999 us [99.923%], band: 2.001 us, 2.998 us, 3.996 us
+13.1    : MFM: OK, trk: 013, sec: 18
+14.0    : frev: 75935, drift: 0.175 us, tfer: 363618 B/s, rpm: 300.027
+14.0    : band: 2.000 us, 3.000 us, 4.003 us
+14.0    : base: 1.000 us [99.958%], band: 2.000 us, 3.000 us, 4.003 us
+14.0    : MFM: OK, trk: 014, sec: 18
+14.1    : frev: 75916, drift: 0.117 us, tfer: 363644 B/s, rpm: 300.027
+14.1    : band: 2.001 us, 3.000 us, 3.996 us
+14.1    : base: 1.000 us [99.936%], band: 2.001 us, 3.000 us, 3.996 us
+14.1    : MFM: OK, trk: 014, sec: 18
+15.0    : frev: 75954, drift: 0.150 us, tfer: 363282 B/s, rpm: 300.027
+15.0    : band: 2.001 us, 2.999 us, 3.996 us
+15.0    : base: 1.000 us [99.933%], band: 2.001 us, 2.999 us, 3.996 us
+15.0    : MFM: OK, trk: 015, sec: 18
+15.1    : frev: 75935, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+15.1    : band: 2.001 us, 2.998 us, 4.019 us
+15.1    : base: 0.999 us [99.760%], band: 2.001 us, 2.998 us, 4.019 us
+15.1    : MFM: OK, trk: 015, sec: 18
+16.0    : frev: 75935, drift: 0.133 us, tfer: 363282 B/s, rpm: 300.027
+16.0    : band: 2.000 us, 2.999 us, 3.996 us
+16.0    : base: 1.000 us [99.946%], band: 2.000 us, 2.999 us, 3.996 us
+16.0    : MFM: OK, trk: 016, sec: 18
+16.1    : frev: 75916, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+16.1    : band: 2.001 us, 2.998 us, 4.037 us
+16.1    : base: 0.999 us [99.555%], band: 2.001 us, 2.998 us, 4.037 us
+16.1    : MFM: OK, trk: 016, sec: 18
+17.0    : frev: 75938, drift: 0.150 us, tfer: 363618 B/s, rpm: 300.027
+17.0    : band: 2.000 us, 2.999 us, 4.037 us
+17.0    : base: 1.000 us [99.570%], band: 2.000 us, 2.999 us, 4.037 us
+17.0    : MFM: OK, trk: 017, sec: 18
+17.1    : frev: 75920, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+17.1    : band: 2.001 us, 2.999 us, 3.996 us
+17.1    : base: 1.000 us [99.926%], band: 2.001 us, 2.999 us, 3.996 us
+17.1    : MFM: OK, trk: 017, sec: 18
+18.0    : frev: 75919, drift: 0.133 us, tfer: 363618 B/s, rpm: 300.027
+18.0    : band: 2.000 us, 2.999 us, 3.999 us
+18.0    : base: 1.000 us [99.972%], band: 2.000 us, 2.999 us, 3.999 us
+18.0    : MFM: OK, trk: 018, sec: 18
+18.1    : frev: 75901, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+18.1    : band: 1.998 us, 2.999 us, 4.004 us
+18.1    : base: 1.000 us [99.920%], band: 1.998 us, 2.999 us, 4.004 us
+18.1    : MFM: OK, trk: 018, sec: 18
+19.0    : frev: 75936, drift: 0.166 us, tfer: 363618 B/s, rpm: 300.027
+19.0    : band: 1.999 us, 2.999 us, 3.996 us
+19.0    : base: 1.000 us [99.936%], band: 1.999 us, 2.999 us, 3.996 us
+19.0    : MFM: OK, trk: 019, sec: 18
+19.1    : frev: 75918, drift: 0.191 us, tfer: 364266 B/s, rpm: 300.027
+19.1    : band: 2.001 us, 2.998 us, 3.999 us?
+19.1    : base: 0.999 us [99.958%], band: 2.001 us, 2.998 us, 3.999 us?
+19.1    : MFM: OK, trk: 019, sec: 18
+20.0    : frev: 75914, drift: 0.142 us, tfer: 363618 B/s, rpm: 300.027
+20.0    : band: 1.999 us, 2.999 us, 4.017 us
+20.0    : base: 1.000 us [99.799%], band: 1.999 us, 2.999 us, 4.017 us
+20.0    : MFM: OK, trk: 020, sec: 18
+20.1    : frev: 75897, drift: 0.125 us, tfer: 364266 B/s, rpm: 300.027
+20.1    : band: 1.998 us, 2.999 us, 3.978 us
+20.1    : base: 1.000 us [99.725%], band: 1.998 us, 2.999 us, 3.978 us
+20.1    : MFM: OK, trk: 020, sec: 18
+21.0    : frev: 75917, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+21.0    : band: 1.999 us, 2.999 us, 3.999 us?
+21.0    : base: 1.000 us [99.968%], band: 1.999 us, 2.999 us, 3.999 us?
+21.0    : MFM: OK, trk: 021, sec: 18
+21.1    : frev: 75900, drift: 0.183 us, tfer: 364266 B/s, rpm: 300.027
+21.1    : band: 1.998 us, 2.999 us, 4.001 us
+21.1    : base: 1.000 us [99.958%], band: 1.998 us, 2.999 us, 4.001 us
+21.1    : MFM: OK, trk: 021, sec: 18
+22.0    : frev: 75916, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+22.0    : band: 1.999 us, 2.999 us, 3.998 us
+22.0    : base: 1.000 us [99.959%], band: 1.999 us, 2.999 us, 3.998 us
+22.0    : MFM: OK, trk: 022, sec: 18
+22.1    : frev: 75899, drift: 0.175 us, tfer: 364266 B/s, rpm: 300.027
+22.1    : band: 1.998 us, 3.000 us, 3.989 us
+22.1    : base: 1.000 us [99.854%], band: 1.998 us, 3.000 us, 3.989 us
+22.1    : MFM: OK, trk: 022, sec: 18
+23.0    : frev: 75932, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+23.0    : band: 1.999 us, 2.999 us, 4.001 us
+23.0    : base: 1.000 us [99.968%], band: 1.999 us, 2.999 us, 4.001 us
+23.0    : MFM: OK*, trk: 023, sec: 18, *H +1
+23.1    : frev: 75914, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+23.1    : band: 1.998 us, 2.998 us, 3.996 us
+23.1    : base: 0.999 us [99.915%], band: 1.998 us, 2.998 us, 3.996 us
+23.1    : MFM: OK*, trk: 023, sec: 18, *H
+24.0    : frev: 75935, drift: 0.108 us, tfer: 362947 B/s, rpm: 300.027
+24.0    : band: 1.999 us, 2.999 us, 3.999 us
+24.0    : base: 1.000 us [99.962%], band: 1.999 us, 2.999 us, 3.999 us
+24.0    : MFM: OK, trk: 024, sec: 18
+24.1    : frev: 75919, drift: 0.133 us, tfer: 364266 B/s, rpm: 300.027
+24.1    : band: 2.001 us, 3.000 us, 4.003 us
+24.1    : base: 1.000 us [99.950%], band: 2.001 us, 3.000 us, 4.003 us
+24.1    : MFM: OK, trk: 024, sec: 18
+25.0    : frev: 75934, drift: 0.175 us, tfer: 363282 B/s, rpm: 300.027
+25.0    : band: 1.999 us, 3.000 us, 4.025 us
+25.0    : base: 1.000 us [99.706%], band: 1.999 us, 3.000 us, 4.025 us
+25.0    : MFM: OK*, trk: 025, sec: 18, *H +1
+25.1    : frev: 75914, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+25.1    : band: 1.998 us, 2.998 us, 4.010 us
+25.1    : base: 0.999 us [99.855%], band: 1.998 us, 2.998 us, 4.010 us
+25.1    : MFM: OK*, trk: 025, sec: 18, *H
+26.0    : frev: 75919, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+26.0    : band: 1.998 us, 2.999 us, 4.021 us
+26.0    : base: 1.000 us [99.737%], band: 1.998 us, 2.999 us, 4.021 us
+26.0    : MFM: OK, trk: 026, sec: 18
+26.1    : frev: 75903, drift: 0.150 us, tfer: 363955 B/s, rpm: 300.027
+26.1    : band: 2.001 us, 2.998 us, 4.014 us
+26.1    : base: 0.999 us [99.812%], band: 2.001 us, 2.998 us, 4.014 us
+26.1    : MFM: OK, trk: 026, sec: 18
+27.0    : frev: 75934, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+27.0    : band: 1.998 us, 2.999 us, 4.013 us
+27.0    : base: 1.000 us [99.824%], band: 1.998 us, 2.999 us, 4.013 us
+27.0    : MFM: OK, trk: 027, sec: 18
+27.1    : frev: 75913, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+27.1    : band: 2.001 us, 2.999 us, 4.022 us
+27.1    : base: 1.000 us [99.729%], band: 2.001 us, 2.999 us, 4.022 us
+27.1    : MFM: OK*, trk: 027, sec: 18, *H +1
+28.0    : frev: 75935, drift: 0.183 us, tfer: 363618 B/s, rpm: 300.027
+28.0    : band: 1.998 us, 2.998 us, 3.996 us
+28.0    : base: 0.999 us [99.919%], band: 1.998 us, 2.998 us, 3.996 us
+28.0    : MFM: OK, trk: 028, sec: 18
+28.1    : frev: 75920, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+28.1    : band: 1.998 us, 2.998 us, 3.986 us
+28.1    : base: 0.999 us [99.804%], band: 1.998 us, 2.998 us, 3.986 us
+28.1    : MFM: OK, trk: 028, sec: 18
+29.0    : frev: 75936, drift: 0.183 us, tfer: 362947 B/s, rpm: 300.027
+29.0    : band: 1.998 us, 2.999 us, 3.996 us
+29.0    : base: 1.000 us [99.920%], band: 1.998 us, 2.999 us, 3.996 us
+29.0    : MFM: OK, trk: 029, sec: 18
+29.1    : frev: 75901, drift: 0.150 us, tfer: 363955 B/s, rpm: 300.027
+29.1    : band: 2.001 us, 2.999 us, 3.996 us
+29.1    : base: 1.000 us [99.930%], band: 2.001 us, 2.999 us, 3.996 us
+29.1    : MFM: OK*, trk: 029, sec: 18, *H +2
+30.0    : frev: 75937, drift: 0.175 us, tfer: 363618 B/s, rpm: 300.027
+30.0    : band: 1.998 us, 3.000 us, 4.003 us
+30.0    : base: 1.000 us [99.945%], band: 1.998 us, 3.000 us, 4.003 us
+30.0    : MFM: OK, trk: 030, sec: 18
+30.1    : frev: 75937, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+30.1    : band: 1.998 us, 2.999 us, 4.010 us
+30.1    : base: 1.000 us [99.848%], band: 1.998 us, 2.999 us, 4.010 us
+30.1    : MFM: OK, trk: 030, sec: 18
+31.0    : frev: 75951, drift: 0.133 us, tfer: 363618 B/s, rpm: 300.027
+31.0    : band: 2.001 us, 3.000 us, 3.998 us
+31.0    : base: 1.000 us [99.961%], band: 2.001 us, 3.000 us, 3.998 us
+31.0    : MFM: OK, trk: 031, sec: 18
+31.1    : frev: 75916, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+31.1    : band: 2.000 us, 2.999 us, 3.999 us
+31.1    : base: 1.000 us [99.973%], band: 2.000 us, 2.999 us, 3.999 us
+31.1    : MFM: OK*, trk: 031, sec: 18, *H +1
+32.0    : frev: 75932, drift: 0.191 us, tfer: 363282 B/s, rpm: 300.027
+32.0    : band: 2.001 us, 2.999 us, 4.001 us
+32.0    : base: 1.000 us [99.965%], band: 2.001 us, 2.999 us, 4.001 us
+32.0    : MFM: OK, trk: 032, sec: 18
+32.1    : frev: 75933, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+32.1    : band: 1.998 us, 2.999 us, 3.996 us
+32.1    : base: 1.000 us [99.917%], band: 1.998 us, 2.999 us, 3.996 us
+32.1    : MFM: OK, trk: 032, sec: 18
+33.0    : frev: 75933, drift: 0.150 us, tfer: 363618 B/s, rpm: 300.027
+33.0    : band: 1.998 us, 2.998 us, 3.999 us
+33.0    : base: 0.999 us [99.957%], band: 1.998 us, 2.998 us, 3.999 us
+33.0    : MFM: OK, trk: 033, sec: 18
+33.1    : frev: 75898, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+33.1    : band: 2.001 us, 2.999 us, 4.003 us
+33.1    : base: 1.000 us [99.945%], band: 2.001 us, 2.999 us, 4.003 us
+33.1    : MFM: OK*, trk: 033, sec: 18, *H +1
+34.0    : frev: 75917, drift: 0.133 us, tfer: 363618 B/s, rpm: 300.027
+34.0    : band: 1.998 us, 2.998 us, 3.992 us
+34.0    : base: 0.999 us [99.874%], band: 1.998 us, 2.998 us, 3.992 us
+34.0    : MFM: OK, trk: 034, sec: 18
+34.1    : frev: 75917, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+34.1    : band: 1.998 us, 3.000 us, 4.003 us
+34.1    : base: 1.000 us [99.951%], band: 1.998 us, 3.000 us, 4.003 us
+34.1    : MFM: OK, trk: 034, sec: 18
+35.0    : frev: 75936, drift: 0.142 us, tfer: 362947 B/s, rpm: 300.027
+35.0    : band: 1.998 us, 2.999 us, 3.998 us
+35.0    : base: 1.000 us [99.948%], band: 1.998 us, 2.999 us, 3.998 us
+35.0    : MFM: OK, trk: 035, sec: 18
+35.1    : frev: 75899, drift: 0.133 us, tfer: 364266 B/s, rpm: 300.027
+35.1    : band: 2.000 us, 3.000 us, 3.988 us
+35.1    : base: 1.000 us [99.869%], band: 2.000 us, 3.000 us, 3.988 us
+35.1    : MFM: OK*, trk: 035, sec: 18, *H +1
+36.0    : frev: 75919, drift: 0.200 us, tfer: 363618 B/s, rpm: 300.027
+36.0    : band: 1.998 us, 2.998 us, 3.996 us
+36.0    : base: 0.999 us [99.916%], band: 1.998 us, 2.998 us, 3.996 us
+36.0    : MFM: OK, trk: 036, sec: 18
+36.1    : frev: 75917, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+36.1    : band: 2.001 us, 2.998 us, 4.001 us
+36.1    : base: 0.999 us [99.963%], band: 2.001 us, 2.998 us, 4.001 us
+36.1    : MFM: OK*, trk: 036, sec: 18, *H +3
+37.0    : frev: 75920, drift: 0.200 us, tfer: 362947 B/s, rpm: 300.027
+37.0    : band: 1.998 us, 2.998 us, 3.979 us
+37.0    : base: 0.999 us [99.732%], band: 1.998 us, 2.998 us, 3.979 us
+37.0    : MFM: OK, trk: 037, sec: 18
+37.1    : frev: 75883, drift: 0.175 us, tfer: 363955 B/s, rpm: 300.027
+37.1    : band: 1.999 us, 2.998 us, 3.994 us
+37.1    : base: 0.999 us [99.902%], band: 1.999 us, 2.998 us, 3.994 us
+37.1    : MFM: OK*, trk: 037, sec: 18, *H +1
+38.0    : frev: 75917, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+38.0    : band: 1.998 us, 2.998 us, 3.999 us
+38.0    : base: 0.999 us [99.951%], band: 1.998 us, 2.998 us, 3.999 us
+38.0    : MFM: OK, trk: 038, sec: 18
+38.1    : frev: 75917, drift: 0.125 us, tfer: 364266 B/s, rpm: 300.027
+38.1    : band: 2.000 us, 2.999 us, 4.003 us
+38.1    : base: 1.000 us [99.953%], band: 2.000 us, 2.999 us, 4.003 us
+38.1    : MFM: OK*, trk: 038, sec: 18, *H +1
+39.0    : frev: 75936, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+39.0    : band: 1.998 us, 2.999 us, 4.006 us
+39.0    : base: 1.000 us [99.896%], band: 1.998 us, 2.999 us, 4.006 us
+39.0    : MFM: OK, trk: 039, sec: 18
+39.1    : frev: 75900, drift: 0.183 us, tfer: 363955 B/s, rpm: 300.027
+39.1    : band: 2.000 us, 2.999 us, 3.990 us
+39.1    : base: 1.000 us [99.871%], band: 2.000 us, 2.999 us, 3.990 us
+39.1    : MFM: OK*, trk: 039, sec: 18, *H +1
+40.0    : frev: 75920, drift: 0.125 us, tfer: 363618 B/s, rpm: 300.027
+40.0    : band: 1.998 us, 3.000 us, 3.996 us
+40.0    : base: 1.000 us [99.932%], band: 1.998 us, 3.000 us, 3.996 us
+40.0    : MFM: OK, trk: 040, sec: 18
+40.1    : frev: 75918, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+40.1    : band: 1.999 us, 2.999 us, 3.999 us
+40.1    : base: 1.000 us [99.971%], band: 1.999 us, 2.999 us, 3.999 us
+40.1    : MFM: OK*, trk: 040, sec: 18, *H +2
+41.0    : frev: 75900, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+41.0    : band: 1.998 us, 2.999 us, 3.996 us
+41.0    : base: 1.000 us [99.917%], band: 1.998 us, 2.999 us, 3.996 us
+41.0    : MFM: OK, trk: 041, sec: 18
+41.1    : frev: 75880, drift: 0.142 us, tfer: 363955 B/s, rpm: 300.027
+41.1    : band: 1.999 us, 2.999 us, 4.003 us
+41.1    : base: 1.000 us [99.952%], band: 1.999 us, 2.999 us, 4.003 us
+41.1    : MFM: OK*, trk: 041, sec: 18, *H +3
+42.0    : frev: 75916, drift: 0.200 us, tfer: 362947 B/s, rpm: 300.027
+42.0    : band: 2.001 us, 3.000 us, 3.996 us
+42.0    : base: 1.000 us [99.942%], band: 2.001 us, 3.000 us, 3.996 us
+42.0    : MFM: OK, trk: 042, sec: 18
+42.1    : frev: 75899, drift: 0.117 us, tfer: 364266 B/s, rpm: 300.027
+42.1    : band: 2.001 us, 2.999 us, 3.999 us?
+42.1    : base: 1.000 us [99.958%], band: 2.001 us, 2.999 us, 3.999 us?
+42.1    : MFM: OK, trk: 042, sec: 18
+43.0    : frev: 75897, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+43.0    : band: 1.998 us, 2.999 us, 3.993 us
+43.0    : base: 1.000 us [99.885%], band: 1.998 us, 2.999 us, 3.993 us
+43.0    : MFM: OK, trk: 043, sec: 18
+43.1    : frev: 75878, drift: 0.142 us, tfer: 363955 B/s, rpm: 300.027
+43.1    : band: 1.998 us, 2.998 us, 4.044 us
+43.1    : base: 0.999 us [99.472%], band: 1.998 us, 2.998 us, 4.044 us
+43.1    : MFM: OK*, trk: 043, sec: 18, *H
+44.0    : frev: 75934, drift: 0.133 us, tfer: 362947 B/s, rpm: 300.027
+44.0    : band: 1.999 us, 2.998 us, 3.996 us
+44.0    : base: 0.999 us [99.921%], band: 1.999 us, 2.998 us, 3.996 us
+44.0    : MFM: OK, trk: 044, sec: 18
+44.1    : frev: 75917, drift: 0.133 us, tfer: 364266 B/s, rpm: 300.027
+44.1    : band: 1.998 us, 3.000 us, 4.003 us
+44.1    : base: 1.000 us [99.952%], band: 1.998 us, 3.000 us, 4.003 us
+44.1    : MFM: OK, trk: 044, sec: 18
+45.0    : frev: 75898, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+45.0    : band: 1.998 us, 2.999 us, 3.999 us?
+45.0    : base: 1.000 us [99.954%], band: 1.998 us, 2.999 us, 3.999 us?
+45.0    : MFM: OK, trk: 045, sec: 18
+45.1    : frev: 75879, drift: 0.142 us, tfer: 363334 B/s, rpm: 300.027
+45.1    : band: 2.001 us, 3.001 us, 4.003 us
+45.1    : base: 1.000 us [99.952%], band: 2.001 us, 3.001 us, 4.003 us
+45.1    : MFM: OK, trk: 045, sec: 18
+46.0    : frev: 75937, drift: 0.175 us, tfer: 362947 B/s, rpm: 300.027
+46.0    : band: 1.998 us, 2.998 us, 3.999 us?
+46.0    : base: 0.999 us [99.951%], band: 1.998 us, 2.998 us, 3.999 us?
+46.0    : MFM: OK, trk: 046, sec: 18
+46.1    : frev: 75918, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+46.1    : band: 1.999 us, 2.998 us, 3.999 us?
+46.1    : base: 0.999 us [99.957%], band: 1.999 us, 2.998 us, 3.999 us?
+46.1    : MFM: OK*, trk: 046, sec: 18, *H +1
+47.0    : frev: 75918, drift: 0.100 us, tfer: 363618 B/s, rpm: 300.027
+47.0    : band: 1.998 us, 2.999 us, 3.999 us
+47.0    : base: 1.000 us [99.949%], band: 1.998 us, 2.999 us, 3.999 us
+47.0    : MFM: OK, trk: 047, sec: 18
+47.1    : frev: 75899, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+47.1    : band: 2.001 us, 2.999 us, 4.003 us
+47.1    : base: 1.000 us [99.940%], band: 2.001 us, 2.999 us, 4.003 us
+47.1    : MFM: OK, trk: 047, sec: 18
+48.0    : frev: 75953, drift: 0.125 us, tfer: 362947 B/s, rpm: 300.027
+48.0    : band: 2.001 us, 2.998 us, 4.002 us
+48.0    : base: 0.999 us [99.956%], band: 2.001 us, 2.998 us, 4.002 us
+48.0    : MFM: OK, trk: 048, sec: 18
+48.1    : frev: 75934, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+48.1    : band: 2.001 us, 2.998 us, 3.999 us?
+48.1    : base: 0.999 us [99.967%], band: 2.001 us, 2.998 us, 3.999 us?
+48.1    : MFM: OK*, trk: 048, sec: 18, *H +1
+49.0    : frev: 75918, drift: 0.183 us, tfer: 362947 B/s, rpm: 300.027
+49.0    : band: 1.998 us, 2.999 us, 4.001 us
+49.0    : base: 1.000 us [99.960%], band: 1.998 us, 2.999 us, 4.001 us
+49.0    : MFM: OK, trk: 049, sec: 18
+49.1    : frev: 75900, drift: 0.117 us, tfer: 363644 B/s, rpm: 300.027
+49.1    : band: 1.998 us, 2.998 us, 4.003 us
+49.1    : base: 0.999 us [99.934%], band: 1.998 us, 2.998 us, 4.003 us
+49.1    : MFM: OK, trk: 049, sec: 18
+50.0    : frev: 75935, drift: 0.166 us, tfer: 363618 B/s, rpm: 300.027
+50.0    : band: 2.001 us, 2.998 us, 4.024 us
+50.0    : base: 0.999 us [99.713%], band: 2.001 us, 2.998 us, 4.024 us
+50.0    : MFM: OK, trk: 050, sec: 18
+50.1    : frev: 75917, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+50.1    : band: 2.001 us, 2.998 us, 3.988 us
+50.1    : base: 0.999 us [99.845%], band: 2.001 us, 2.998 us, 3.988 us
+50.1    : MFM: OK*, trk: 050, sec: 18, *H +1
+51.0    : frev: 75918, drift: 0.158 us, tfer: 362947 B/s, rpm: 300.027
+51.0    : band: 2.001 us, 3.000 us, 3.999 us
+51.0    : base: 1.000 us [99.974%], band: 2.001 us, 3.000 us, 3.999 us
+51.0    : MFM: OK, trk: 051, sec: 18
+51.1    : frev: 75900, drift: 0.208 us, tfer: 363955 B/s, rpm: 300.027
+51.1    : band: 1.998 us, 2.999 us, 4.003 us
+51.1    : base: 1.000 us [99.935%], band: 1.998 us, 2.999 us, 4.003 us
+51.1    : MFM: OK, trk: 051, sec: 18
+52.0    : frev: 75934, drift: 0.166 us, tfer: 363282 B/s, rpm: 300.027
+52.0    : band: 2.001 us, 3.000 us, 3.996 us
+52.0    : base: 1.000 us [99.940%], band: 2.001 us, 3.000 us, 3.996 us
+52.0    : MFM: OK, trk: 052, sec: 18
+52.1    : frev: 75917, drift: 0.175 us, tfer: 363955 B/s, rpm: 300.027
+52.1    : band: 1.998 us, 2.999 us, 3.999 us?
+52.1    : base: 1.000 us [99.953%], band: 1.998 us, 2.999 us, 3.999 us?
+52.1    : MFM: OK, trk: 052, sec: 18
+53.0    : frev: 75899, drift: 0.133 us, tfer: 363282 B/s, rpm: 300.027
+53.0    : band: 1.998 us, 2.999 us, 4.017 us
+53.0    : base: 1.000 us [99.782%], band: 1.998 us, 2.999 us, 4.017 us
+53.0    : MFM: OK, trk: 053, sec: 18
+53.1    : frev: 75882, drift: 0.158 us, tfer: 363644 B/s, rpm: 300.027
+53.1    : band: 1.998 us, 2.998 us, 4.003 us
+53.1    : base: 0.999 us [99.934%], band: 1.998 us, 2.998 us, 4.003 us
+53.1    : MFM: OK, trk: 053, sec: 18
+54.0    : frev: 75934, drift: 0.125 us, tfer: 362947 B/s, rpm: 300.027
+54.0    : band: 2.001 us, 2.998 us, 4.037 us
+54.0    : base: 0.999 us [99.560%], band: 2.001 us, 2.998 us, 4.037 us
+54.0    : MFM: OK, trk: 054, sec: 18
+54.1    : frev: 75917, drift: 0.191 us, tfer: 364266 B/s, rpm: 300.027
+54.1    : band: 1.998 us, 2.998 us, 3.993 us
+54.1    : base: 0.999 us [99.887%], band: 1.998 us, 2.998 us, 3.993 us
+54.1    : MFM: OK, trk: 054, sec: 18
+55.0    : frev: 75917, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+55.0    : band: 1.998 us, 2.998 us, 3.996 us
+55.0    : base: 0.999 us [99.917%], band: 1.998 us, 2.998 us, 3.996 us
+55.0    : MFM: OK, trk: 055, sec: 18
+55.1    : frev: 75900, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+55.1    : band: 1.998 us, 3.000 us, 3.962 us
+55.1    : base: 1.000 us [99.562%], band: 1.998 us, 3.000 us, 3.962 us
+55.1    : MFM: OK, trk: 055, sec: 18
+56.0    : frev: 75953, drift: 0.150 us, tfer: 363618 B/s, rpm: 300.027
+56.0    : band: 1.998 us, 2.998 us, 4.007 us
+56.0    : base: 0.999 us [99.885%], band: 1.998 us, 2.998 us, 4.007 us
+56.0    : MFM: OK, trk: 056, sec: 18
+56.1    : frev: 75935, drift: 0.133 us, tfer: 364266 B/s, rpm: 300.027
+56.1    : band: 1.998 us, 2.998 us, 3.993 us
+56.1    : base: 0.999 us [99.887%], band: 1.998 us, 2.998 us, 3.993 us
+56.1    : MFM: OK, trk: 056, sec: 18
+57.0    : frev: 75916, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+57.0    : band: 1.999 us, 2.998 us, 3.996 us
+57.0    : base: 0.999 us [99.925%], band: 1.999 us, 2.998 us, 3.996 us
+57.0    : MFM: OK, trk: 057, sec: 18
+57.1    : frev: 75897, drift: 0.125 us, tfer: 364266 B/s, rpm: 300.027
+57.1    : band: 2.001 us, 3.000 us, 4.003 us
+57.1    : base: 1.000 us [99.953%], band: 2.001 us, 3.000 us, 4.003 us
+57.1    : MFM: OK, trk: 057, sec: 18
+58.0    : frev: 75935, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+58.0    : band: 2.000 us, 2.999 us, 4.004 us
+58.0    : base: 1.000 us [99.938%], band: 2.000 us, 2.999 us, 4.004 us
+58.0    : MFM: OK, trk: 058, sec: 18
+58.1    : frev: 75916, drift: 0.191 us, tfer: 364266 B/s, rpm: 300.027
+58.1    : band: 2.001 us, 2.998 us, 3.996 us
+58.1    : base: 0.999 us [99.923%], band: 2.001 us, 2.998 us, 3.996 us
+58.1    : MFM: OK, trk: 058, sec: 18
+59.0    : frev: 75916, drift: 0.150 us, tfer: 363618 B/s, rpm: 300.027
+59.0    : band: 1.999 us, 2.999 us, 4.006 us
+59.0    : base: 1.000 us [99.913%], band: 1.999 us, 2.999 us, 4.006 us
+59.0    : MFM: OK, trk: 059, sec: 18
+59.1    : frev: 75897, drift: 0.183 us, tfer: 364266 B/s, rpm: 300.027
+59.1    : band: 2.001 us, 2.998 us, 4.004 us
+59.1    : base: 0.999 us [99.924%], band: 2.001 us, 2.998 us, 4.004 us
+59.1    : MFM: OK, trk: 059, sec: 18
+60.0    : frev: 75955, drift: 0.133 us, tfer: 364578 B/s, rpm: 300.027
+60.0    : band: 2.000 us, 2.999 us, 3.991 us
+60.0    : base: 1.000 us [99.882%], band: 2.000 us, 2.999 us, 3.991 us
+60.0    : MFM: OK, trk: 060, sec: 18
+60.1    : frev: 75937, drift: 0.125 us, tfer: 363644 B/s, rpm: 300.027
+60.1    : band: 2.001 us, 2.998 us, 4.003 us
+60.1    : base: 0.999 us [99.941%], band: 2.001 us, 2.998 us, 4.003 us
+60.1    : MFM: OK, trk: 060, sec: 18
+61.0    : frev: 75918, drift: 0.175 us, tfer: 363618 B/s, rpm: 300.027
+61.0    : band: 1.999 us, 2.999 us, 3.996 us
+61.0    : base: 1.000 us [99.930%], band: 1.999 us, 2.999 us, 3.996 us
+61.0    : MFM: OK, trk: 061, sec: 18
+61.1    : frev: 75900, drift: 0.175 us, tfer: 363955 B/s, rpm: 300.027
+61.1    : band: 1.998 us, 2.998 us, 3.998 us
+61.1    : base: 0.999 us [99.943%], band: 1.998 us, 2.998 us, 3.998 us
+61.1    : MFM: OK, trk: 061, sec: 18
+62.0    : frev: 75952, drift: 0.183 us, tfer: 363282 B/s, rpm: 300.027
+62.0    : band: 1.999 us, 2.999 us, 4.003 us
+62.0    : base: 1.000 us [99.937%], band: 1.999 us, 2.999 us, 4.003 us
+62.0    : MFM: OK*, trk: 062, sec: 18, *H +4
+62.1    : frev: 75934, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+62.1    : band: 2.001 us, 2.998 us, 4.003 us
+62.1    : base: 0.999 us [99.941%], band: 2.001 us, 2.998 us, 4.003 us
+62.1    : MFM: OK*, trk: 062, sec: 18, *H
+63.0    : frev: 75935, drift: 0.158 us, tfer: 362947 B/s, rpm: 300.027
+63.0    : band: 1.999 us, 2.999 us, 4.013 us
+63.0    : base: 1.000 us [99.832%], band: 1.999 us, 2.999 us, 4.013 us
+63.0    : MFM: OK*, trk: 063, sec: 18, *H +1
+63.1    : frev: 75921, drift: 0.175 us, tfer: 364266 B/s, rpm: 300.027
+63.1    : band: 1.998 us, 2.998 us, 3.998 us
+63.1    : base: 0.999 us [99.944%], band: 1.998 us, 2.998 us, 3.998 us
+63.1    : MFM: OK, trk: 063, sec: 18
+64.0    : frev: 75950, drift: 0.150 us, tfer: 364578 B/s, rpm: 300.027
+64.0    : band: 2.000 us, 2.999 us, 4.003 us
+64.0    : base: 1.000 us [99.951%], band: 2.000 us, 2.999 us, 4.003 us
+64.0    : MFM: OK*, trk: 064, sec: 18, *H +1
+64.1    : frev: 75933, drift: 0.183 us, tfer: 364266 B/s, rpm: 300.027
+64.1    : band: 2.001 us, 2.998 us, 4.003 us
+64.1    : base: 0.999 us [99.941%], band: 2.001 us, 2.998 us, 4.003 us
+64.1    : MFM: OK*, trk: 064, sec: 18, *H
+65.0    : frev: 75915, drift: 0.191 us, tfer: 363282 B/s, rpm: 300.027
+65.0    : band: 1.999 us, 2.999 us, 3.996 us
+65.0    : base: 1.000 us [99.933%], band: 1.999 us, 2.999 us, 3.996 us
+65.0    : MFM: OK*, trk: 065, sec: 18, *H +1
+65.1    : frev: 75900, drift: 0.158 us, tfer: 363955 B/s, rpm: 300.027
+65.1    : band: 1.998 us, 2.998 us, 4.001 us
+65.1    : base: 0.999 us [99.951%], band: 1.998 us, 2.998 us, 4.001 us
+65.1    : MFM: OK, trk: 065, sec: 18
+66.0    : frev: 75934, drift: 0.125 us, tfer: 362947 B/s, rpm: 300.027
+66.0    : band: 2.000 us, 3.000 us, 4.010 us
+66.0    : base: 1.000 us [99.885%], band: 2.000 us, 3.000 us, 4.010 us
+66.0    : MFM: OK*, trk: 066, sec: 18, *H +3
+66.1    : frev: 75915, drift: 0.166 us, tfer: 364266 B/s, rpm: 300.027
+66.1    : band: 1.998 us, 3.000 us, 4.000 us
+66.1    : base: 1.000 us [99.977%], band: 1.998 us, 3.000 us, 4.000 us
+66.1    : MFM: OK*, trk: 066, sec: 18, *H
+67.0    : frev: 75914, drift: 0.166 us, tfer: 362947 B/s, rpm: 300.027
+67.0    : band: 1.999 us, 2.999 us, 3.996 us
+67.0    : base: 1.000 us [99.922%], band: 1.999 us, 2.999 us, 3.996 us
+67.0    : MFM: OK*, trk: 067, sec: 18, *H
+67.1    : frev: 75904, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+67.1    : band: 2.001 us, 2.998 us, 3.999 us?
+67.1    : base: 0.999 us [99.958%], band: 2.001 us, 2.998 us, 3.999 us?
+67.1    : MFM: OK, trk: 067, sec: 18
+68.0    : frev: 75937, drift: 0.208 us, tfer: 362947 B/s, rpm: 300.027
+68.0    : band: 1.998 us, 2.999 us, 4.003 us
+68.0    : base: 1.000 us [99.937%], band: 1.998 us, 2.999 us, 4.003 us
+68.0    : MFM: OK*, trk: 068, sec: 18, *H
+68.1    : frev: 75914, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+68.1    : band: 1.998 us, 3.000 us, 4.003 us
+68.1    : base: 1.000 us [99.946%], band: 1.998 us, 3.000 us, 4.003 us
+68.1    : MFM: OK*, trk: 068, sec: 18, *H
+69.0    : frev: 75898, drift: 0.142 us, tfer: 363618 B/s, rpm: 300.027
+69.0    : band: 1.998 us, 2.999 us, 3.999 us?
+69.0    : base: 1.000 us [99.953%], band: 1.998 us, 2.999 us, 3.999 us?
+69.0    : MFM: OK*, trk: 069, sec: 18, *H
+69.1    : frev: 75885, drift: 0.150 us, tfer: 363955 B/s, rpm: 300.027
+69.1    : band: 2.001 us, 2.998 us, 4.007 us
+69.1    : base: 0.999 us [99.895%], band: 2.001 us, 2.998 us, 4.007 us
+69.1    : MFM: OK*, trk: 069, sec: 18, *H +1
+70.0    : frev: 75934, drift: 0.158 us, tfer: 363282 B/s, rpm: 300.027
+70.0    : band: 2.001 us, 2.999 us, 4.004 us
+70.0    : base: 1.000 us [99.928%], band: 2.001 us, 2.999 us, 4.004 us
+70.0    : MFM: OK, trk: 070, sec: 18
+70.1    : frev: 75914, drift: 0.142 us, tfer: 364266 B/s, rpm: 300.027
+70.1    : band: 1.998 us, 2.998 us, 3.982 us
+70.1    : base: 0.999 us [99.761%], band: 1.998 us, 2.998 us, 3.982 us
+70.1    : MFM: OK*, trk: 070, sec: 18, *H
+71.0    : frev: 75917, drift: 0.158 us, tfer: 363618 B/s, rpm: 300.027
+71.0    : band: 1.999 us, 2.998 us, 3.996 us
+71.0    : base: 0.999 us [99.920%], band: 1.999 us, 2.998 us, 3.996 us
+71.0    : MFM: OK, trk: 071, sec: 18
+71.1    : frev: 75900, drift: 0.183 us, tfer: 363955 B/s, rpm: 300.027
+71.1    : band: 1.998 us, 2.998 us, 3.996 us
+71.1    : base: 0.999 us [99.916%], band: 1.998 us, 2.998 us, 3.996 us
+71.1    : MFM: OK, trk: 071, sec: 18
+72.0    : frev: 75936, drift: 0.142 us, tfer: 362947 B/s, rpm: 300.027
+72.0    : band: 1.998 us, 2.999 us, 4.003 us
+72.0    : base: 1.000 us [99.937%], band: 1.998 us, 2.999 us, 4.003 us
+72.0    : MFM: OK, trk: 072, sec: 18
+72.1    : frev: 75917, drift: 0.175 us, tfer: 364266 B/s, rpm: 300.027
+72.1    : band: 2.001 us, 2.999 us, 3.978 us
+72.1    : base: 1.000 us [99.738%], band: 2.001 us, 2.999 us, 3.978 us
+72.1    : MFM: OK*, trk: 072, sec: 18, *H +1
+73.0    : frev: 75903, drift: 0.166 us, tfer: 363618 B/s, rpm: 300.027
+73.0    : band: 1.998 us, 2.998 us, 4.004 us
+73.0    : base: 0.999 us [99.919%], band: 1.998 us, 2.998 us, 4.004 us
+73.0    : MFM: OK, trk: 073, sec: 18
+73.1    : frev: 75886, drift: 0.175 us, tfer: 363955 B/s, rpm: 300.027
+73.1    : band: 1.998 us, 2.998 us, 4.037 us
+73.1    : base: 0.999 us [99.547%], band: 1.998 us, 2.998 us, 4.037 us
+73.1    : MFM: OK, trk: 073, sec: 18
+74.0    : frev: 75918, drift: 0.117 us, tfer: 362947 B/s, rpm: 300.027
+74.0    : band: 2.001 us, 3.000 us, 3.979 us
+74.0    : base: 1.000 us [99.758%], band: 2.001 us, 3.000 us, 3.979 us
+74.0    : MFM: OK, trk: 074, sec: 18
+74.1    : frev: 75894, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+74.1    : band: 2.001 us, 2.998 us, 4.001 us
+74.1    : base: 0.999 us [99.969%], band: 2.001 us, 2.998 us, 4.001 us
+74.1    : MFM: OK*, trk: 074, sec: 18, *H +2
+75.0    : frev: 75898, drift: 0.191 us, tfer: 363618 B/s, rpm: 300.027
+75.0    : band: 2.001 us, 3.000 us, 4.001 us
+75.0    : base: 1.000 us [99.970%], band: 2.001 us, 3.000 us, 4.001 us
+75.0    : MFM: OK, trk: 075, sec: 18
+75.1    : frev: 75886, drift: 0.175 us, tfer: 363955 B/s, rpm: 300.027
+75.1    : band: 1.998 us, 2.998 us, 3.999 us
+75.1    : base: 0.999 us [99.954%], band: 1.998 us, 2.998 us, 3.999 us
+75.1    : MFM: OK, trk: 075, sec: 18
+76.0    : frev: 75933, drift: 0.166 us, tfer: 363618 B/s, rpm: 300.027
+76.0    : band: 1.999 us, 2.999 us, 3.985 us
+76.0    : base: 1.000 us [99.805%], band: 1.999 us, 2.999 us, 3.985 us
+76.0    : MFM: OK, trk: 076, sec: 18
+76.1    : frev: 75906, drift: 0.150 us, tfer: 364266 B/s, rpm: 300.027
+76.1    : band: 2.001 us, 2.999 us, 3.994 us
+76.1    : base: 1.000 us [99.910%], band: 2.001 us, 2.999 us, 3.994 us
+76.1    : MFM: OK*, trk: 076, sec: 18, *H +1
+77.0    : frev: 75896, drift: 0.183 us, tfer: 363282 B/s, rpm: 300.027
+77.0    : band: 2.001 us, 2.998 us, 3.998 us
+77.0    : base: 0.999 us [99.953%], band: 2.001 us, 2.998 us, 3.998 us
+77.0    : MFM: OK, trk: 077, sec: 18
+77.1    : frev: 75885, drift: 0.166 us, tfer: 363955 B/s, rpm: 300.027
+77.1    : band: 1.999 us, 2.998 us, 4.002 us
+77.1    : base: 0.999 us [99.947%], band: 1.999 us, 2.998 us, 4.002 us
+77.1    : MFM: OK*, trk: 077, sec: 18, *H +1
+78.0    : frev: 75934, drift: 0.158 us, tfer: 363282 B/s, rpm: 300.027
+78.0    : band: 2.001 us, 2.998 us, 4.005 us
+78.0    : base: 0.999 us [99.911%], band: 2.001 us, 2.998 us, 4.005 us
+78.0    : MFM: OK, trk: 078, sec: 18
+78.1    : frev: 75900, drift: 0.133 us, tfer: 364266 B/s, rpm: 300.027
+78.1    : band: 2.001 us, 3.000 us, 3.996 us
+78.1    : base: 1.000 us [99.946%], band: 2.001 us, 3.000 us, 3.996 us
+78.1    : MFM: OK, trk: 078, sec: 18
+79.0    : frev: 75919, drift: 0.125 us, tfer: 363618 B/s, rpm: 300.027
+79.0    : band: 2.001 us, 3.000 us, 4.001 us
+79.0    : base: 1.000 us [99.972%], band: 2.001 us, 3.000 us, 4.001 us
+79.0    : MFM: OK, trk: 079, sec: 18
+79.1    : frev: 75914, drift: 0.158 us, tfer: 364266 B/s, rpm: 300.027
+79.1    : band: 2.000 us, 2.999 us, 3.954 us
+79.1    : base: 1.000 us [99.471%], band: 2.000 us, 2.999 us, 3.954 us
+79.1    : MFM: OK*, trk: 079, sec: 18, *H +1
+80.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+80.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.0    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+81.1    : frev: 0, drift: 0.000 us, tfer: 0 B/s, rpm: 300.027
+
+Enjoy your shiny new disk image!
+Please consider helping us to preserve media and continue development:
+www.softpres.org/donate
+

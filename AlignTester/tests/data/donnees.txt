@@ -1,0 +1,682 @@
+KryoFlux DiskTool Console, v3.00_Win64, uiv.1, Apr 15 2018, 23:44:54
+(c) 2009-2018 KryoFlux Products & Services Ltd.
+Developed by The Software Preservation Society, www.softpres.org
+Licensed for private, non-commercial use only.
+
+00.0    : frev: 47010, drift: 0.591 us, tfer: 226349 B/s, rpm: 300.709
+00.0    : band: 3.981 us, 5.971 us, 7.962 us
+00.0    : base: 1.990 us [99.521%], band: 3.981 us, 5.971 us, 7.962 us
+00.0    : AmigaDOS: OK, trk: 000, sec: 11
+00.1    : frev: 38167, drift: 0.533 us, tfer: 182994 B/s, rpm: 300.709
+00.1    : band: 3.981 us, 5.971 us, 7.963 us
+00.1    : base: 1.990 us [99.532%], band: 3.981 us, 5.971 us, 7.963 us
+00.1    : AmigaDOS: <unformatted>
+01.0    : frev: 43791, drift: 0.483 us, tfer: 209782 B/s, rpm: 300.733
+01.0    : band: 3.981 us, 5.972 us, 7.962 us
+01.0    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+01.0    : AmigaDOS: OK, trk: 002, sec: 11
+01.1    : frev: 42987, drift: 0.474 us, tfer: 206383 B/s, rpm: 300.733
+01.1    : band: 3.981 us, 5.972 us, 7.962 us
+01.1    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+01.1    : AmigaDOS: OK, trk: 003, sec: 11
+02.0    : frev: 42941, drift: 0.832 us, tfer: 206197 B/s, rpm: 300.733
+02.0    : band: 3.981 us, 5.972 us, 7.963 us
+02.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+02.0    : AmigaDOS: OK, trk: 004, sec: 11
+02.1    : frev: 41812, drift: 0.350 us, tfer: 200430 B/s, rpm: 300.732
+02.1    : band: 3.981 us, 5.972 us, 7.963 us
+02.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+02.1    : AmigaDOS: OK, trk: 005, sec: 11
+03.0    : frev: 42243, drift: 0.683 us, tfer: 203453 B/s, rpm: 300.733
+03.0    : band: 3.981 us, 5.972 us, 7.963 us
+03.0    : base: 1.991 us [99.535%], band: 3.981 us, 5.972 us, 7.963 us
+03.0    : AmigaDOS: OK, trk: 006, sec: 11
+03.1    : frev: 40810, drift: 0.699 us, tfer: 196143 B/s, rpm: 300.732
+03.1    : band: 3.981 us, 5.972 us, 7.962 us
+03.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+03.1    : AmigaDOS: OK, trk: 007, sec: 11
+04.0    : frev: 42438, drift: 0.982 us, tfer: 204360 B/s, rpm: 300.733
+04.0    : band: 3.981 us, 5.972 us, 7.963 us
+04.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+04.0    : AmigaDOS: OK, trk: 008, sec: 11
+04.1    : frev: 43089, drift: 0.891 us, tfer: 206569 B/s, rpm: 300.732
+04.1    : band: 3.981 us, 5.972 us, 7.962 us
+04.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+04.1    : AmigaDOS: OK, trk: 009, sec: 11
+05.0    : frev: 43789, drift: 0.674 us, tfer: 209782 B/s, rpm: 300.732
+05.0    : band: 3.981 us, 5.972 us, 7.963 us
+05.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.963 us
+05.0    : AmigaDOS: OK, trk: 010, sec: 11
+05.1    : frev: 45757, drift: 0.941 us, tfer: 220208 B/s, rpm: 300.733
+05.1    : band: 3.981 us, 5.972 us, 7.964 us
+05.1    : base: 1.991 us [99.539%], band: 3.981 us, 5.972 us, 7.964 us
+05.1    : AmigaDOS: OK, trk: 011, sec: 11
+06.0    : frev: 41012, drift: 0.391 us, tfer: 196311 B/s, rpm: 300.733
+06.0    : band: 3.981 us, 5.972 us, 7.962 us
+06.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+06.0    : AmigaDOS: OK, trk: 012, sec: 11
+06.1    : frev: 43225, drift: 0.516 us, tfer: 207316 B/s, rpm: 300.733
+06.1    : band: 3.981 us, 5.972 us, 7.963 us
+06.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+06.1    : AmigaDOS: OK, trk: 013, sec: 11
+07.0    : frev: 43590, drift: 0.641 us, tfer: 209782 B/s, rpm: 300.733
+07.0    : band: 3.981 us, 5.972 us, 7.961 us
+07.0    : base: 1.991 us [99.524%], band: 3.981 us, 5.972 us, 7.961 us
+07.0    : AmigaDOS: OK, trk: 014, sec: 11
+07.1    : frev: 43763, drift: 0.491 us, tfer: 209974 B/s, rpm: 300.733
+07.1    : band: 3.981 us, 5.972 us, 7.963 us
+07.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.963 us
+07.1    : AmigaDOS: OK, trk: 015, sec: 11
+08.0    : frev: 42722, drift: 0.666 us, tfer: 204907 B/s, rpm: 300.732
+08.0    : band: 3.981 us, 5.972 us, 7.963 us
+08.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+08.0    : AmigaDOS: OK, trk: 016, sec: 11
+08.1    : frev: 40635, drift: 0.866 us, tfer: 195308 B/s, rpm: 300.733
+08.1    : band: 3.981 us, 5.972 us, 7.963 us
+08.1    : base: 1.991 us [99.535%], band: 3.981 us, 5.972 us, 7.963 us
+08.1    : AmigaDOS: OK, trk: 017, sec: 11
+09.0    : frev: 40582, drift: 0.666 us, tfer: 195142 B/s, rpm: 300.732
+09.0    : band: 3.981 us, 5.972 us, 7.963 us
+09.0    : base: 1.991 us [99.534%], band: 3.981 us, 5.972 us, 7.963 us
+09.0    : AmigaDOS: OK, trk: 018, sec: 11
+09.1    : frev: 40067, drift: 0.508 us, tfer: 192520 B/s, rpm: 300.733
+09.1    : band: 3.981 us, 5.972 us, 7.962 us
+09.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+09.1    : AmigaDOS: OK, trk: 019, sec: 11
+10.0    : frev: 40317, drift: 0.250 us, tfer: 193250 B/s, rpm: 300.732
+10.0    : band: 3.981 us, 5.972 us, 7.963 us
+10.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+10.0    : AmigaDOS: OK, trk: 020, sec: 11
+10.1    : frev: 41025, drift: 0.533 us, tfer: 197495 B/s, rpm: 300.733
+10.1    : band: 3.981 us, 5.972 us, 7.962 us
+10.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+10.1    : AmigaDOS: OK, trk: 021, sec: 11
+11.0    : frev: 40741, drift: 0.691 us, tfer: 195474 B/s, rpm: 300.733
+11.0    : band: 3.981 us, 5.972 us, 7.962 us
+11.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+11.0    : AmigaDOS: OK, trk: 022, sec: 11
+11.1    : frev: 40251, drift: 0.416 us, tfer: 193495 B/s, rpm: 300.733
+11.1    : band: 3.981 us, 5.972 us, 7.962 us
+11.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+11.1    : AmigaDOS: OK, trk: 023, sec: 11
+12.0    : frev: 41582, drift: 0.824 us, tfer: 199384 B/s, rpm: 300.733
+12.0    : band: 3.981 us, 5.972 us, 7.962 us
+12.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+12.0    : AmigaDOS: OK, trk: 024, sec: 11
+12.1    : frev: 40089, drift: 0.474 us, tfer: 192520 B/s, rpm: 300.733
+12.1    : band: 3.981 us, 5.972 us, 7.962 us
+12.1    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+12.1    : AmigaDOS: OK, trk: 025, sec: 11
+13.0    : frev: 40205, drift: 0.458 us, tfer: 193332 B/s, rpm: 300.733
+13.0    : band: 3.981 us, 5.972 us, 7.963 us
+13.0    : base: 1.991 us [99.537%], band: 3.981 us, 5.972 us, 7.963 us
+13.0    : AmigaDOS: OK, trk: 026, sec: 11
+13.1    : frev: 40433, drift: 0.558 us, tfer: 194150 B/s, rpm: 300.733
+13.1    : band: 3.981 us, 5.972 us, 7.962 us
+13.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+13.1    : AmigaDOS: OK, trk: 027, sec: 11
+14.0    : frev: 39925, drift: 0.283 us, tfer: 191555 B/s, rpm: 300.733
+14.0    : band: 3.981 us, 5.971 us, 7.962 us
+14.0    : base: 1.990 us [99.526%], band: 3.981 us, 5.971 us, 7.962 us
+14.0    : AmigaDOS: OK, trk: 028, sec: 11
+14.1    : frev: 39795, drift: 0.674 us, tfer: 191236 B/s, rpm: 300.732
+14.1    : band: 3.981 us, 5.972 us, 7.963 us
+14.1    : base: 1.991 us [99.536%], band: 3.981 us, 5.972 us, 7.963 us
+14.1    : AmigaDOS: OK, trk: 029, sec: 11
+15.0    : frev: 40868, drift: 0.483 us, tfer: 195976 B/s, rpm: 300.733
+15.0    : band: 3.981 us, 5.971 us, 7.961 us
+15.0    : base: 1.990 us [99.518%], band: 3.981 us, 5.971 us, 7.961 us
+15.0    : AmigaDOS: OK, trk: 030, sec: 11
+15.1    : frev: 39507, drift: 0.458 us, tfer: 189341 B/s, rpm: 300.733
+15.1    : band: 3.981 us, 5.972 us, 7.963 us
+15.1    : base: 1.991 us [99.534%], band: 3.981 us, 5.972 us, 7.963 us
+15.1    : AmigaDOS: OK, trk: 031, sec: 11
+16.0    : frev: 41103, drift: 1.174 us, tfer: 197495 B/s, rpm: 300.733
+16.0    : band: 3.981 us, 5.972 us, 7.964 us
+16.0    : base: 1.991 us [99.536%], band: 3.981 us, 5.972 us, 7.964 us
+16.0    : AmigaDOS: OK, trk: 032, sec: 11
+16.1    : frev: 40003, drift: 0.891 us, tfer: 192197 B/s, rpm: 300.733
+16.1    : band: 3.981 us, 5.972 us, 7.964 us
+16.1    : base: 1.991 us [99.535%], band: 3.981 us, 5.972 us, 7.964 us
+16.1    : AmigaDOS: OK, trk: 033, sec: 11
+17.0    : frev: 40225, drift: 0.608 us, tfer: 193169 B/s, rpm: 300.757
+17.0    : band: 3.982 us, 5.972 us, 7.963 us
+17.0    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+17.0    : AmigaDOS: OK, trk: 034, sec: 11
+17.1    : frev: 39942, drift: 0.133 us, tfer: 191876 B/s, rpm: 300.757
+17.1    : band: 3.982 us, 5.972 us, 7.963 us
+17.1    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+17.1    : AmigaDOS: OK, trk: 035, sec: 11
+18.0    : frev: 39860, drift: 0.458 us, tfer: 191182 B/s, rpm: 300.733
+18.0    : band: 3.981 us, 5.972 us, 7.965 us
+18.0    : base: 1.991 us [99.546%], band: 3.981 us, 5.972 us, 7.965 us
+18.0    : AmigaDOS: OK, trk: 036, sec: 11
+18.1    : frev: 40065, drift: 0.857 us, tfer: 192359 B/s, rpm: 300.733
+18.1    : band: 3.981 us, 5.972 us, 7.963 us
+18.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+18.1    : AmigaDOS: OK, trk: 037, sec: 11
+19.0    : frev: 40899, drift: 0.491 us, tfer: 196143 B/s, rpm: 300.757
+19.0    : band: 3.982 us, 5.972 us, 7.963 us
+19.0    : base: 1.991 us [99.539%], band: 3.982 us, 5.972 us, 7.963 us
+19.0    : AmigaDOS: OK, trk: 038, sec: 11
+19.1    : frev: 40563, drift: 0.541 us, tfer: 194810 B/s, rpm: 300.757
+19.1    : band: 3.982 us, 5.972 us, 7.965 us
+19.1    : base: 1.991 us [99.547%], band: 3.982 us, 5.972 us, 7.965 us
+19.1    : AmigaDOS: OK, trk: 039, sec: 11
+20.0    : frev: 40317, drift: 0.441 us, tfer: 193440 B/s, rpm: 300.733
+20.0    : band: 3.981 us, 5.971 us, 7.961 us
+20.0    : base: 1.990 us [99.518%], band: 3.981 us, 5.971 us, 7.961 us
+20.0    : AmigaDOS: OK, trk: 040, sec: 11
+20.1    : frev: 39373, drift: 0.458 us, tfer: 189341 B/s, rpm: 300.733
+20.1    : band: 3.981 us, 5.972 us, 7.963 us
+20.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+20.1    : AmigaDOS: OK, trk: 041, sec: 11
+21.0    : frev: 40556, drift: 0.466 us, tfer: 195142 B/s, rpm: 300.733
+21.0    : band: 3.981 us, 5.972 us, 7.962 us
+21.0    : base: 1.991 us [99.524%], band: 3.981 us, 5.972 us, 7.962 us
+21.0    : AmigaDOS: OK, trk: 042, sec: 11
+21.1    : frev: 39931, drift: 0.699 us, tfer: 191876 B/s, rpm: 300.733
+21.1    : band: 3.981 us, 5.972 us, 7.962 us
+21.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+21.1    : AmigaDOS: OK, trk: 043, sec: 11
+22.0    : frev: 39220, drift: 0.849 us, tfer: 188072 B/s, rpm: 300.733
+22.0    : band: 3.981 us, 5.972 us, 7.963 us
+22.0    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+22.0    : AmigaDOS: OK, trk: 044, sec: 11
+22.1    : frev: 39243, drift: 0.350 us, tfer: 188717 B/s, rpm: 300.733
+22.1    : band: 3.981 us, 5.972 us, 7.963 us
+22.1    : base: 1.991 us [99.536%], band: 3.981 us, 5.972 us, 7.963 us
+22.1    : AmigaDOS: OK, trk: 045, sec: 11
+23.0    : frev: 40645, drift: 0.599 us, tfer: 195308 B/s, rpm: 300.757
+23.0    : band: 3.982 us, 5.972 us, 7.963 us
+23.0    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+23.0    : AmigaDOS: OK, trk: 046, sec: 11
+23.1    : frev: 40600, drift: 1.140 us, tfer: 194976 B/s, rpm: 300.757
+23.1    : band: 3.982 us, 5.972 us, 7.963 us
+23.1    : base: 1.991 us [99.540%], band: 3.982 us, 5.972 us, 7.963 us
+23.1    : AmigaDOS: OK, trk: 047, sec: 11
+24.0    : frev: 40021, drift: 0.483 us, tfer: 191742 B/s, rpm: 300.733
+24.0    : band: 3.981 us, 5.972 us, 7.962 us
+24.0    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+24.0    : AmigaDOS: OK, trk: 048, sec: 11
+24.1    : frev: 40267, drift: 0.241 us, tfer: 193332 B/s, rpm: 300.732
+24.1    : band: 3.981 us, 5.972 us, 7.962 us
+24.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+24.1    : AmigaDOS: OK, trk: 049, sec: 11
+25.0    : frev: 39928, drift: 0.125 us, tfer: 191555 B/s, rpm: 300.733
+25.0    : band: 3.981 us, 5.972 us, 7.963 us
+25.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+25.0    : AmigaDOS: OK, trk: 050, sec: 11
+25.1    : frev: 40140, drift: 0.441 us, tfer: 192844 B/s, rpm: 300.733
+25.1    : band: 3.981 us, 5.972 us, 7.963 us
+25.1    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+25.1    : AmigaDOS: OK, trk: 051, sec: 11
+26.0    : frev: 40466, drift: 0.075 us, tfer: 194315 B/s, rpm: 300.733
+26.0    : band: 3.981 us, 5.972 us, 7.963 us
+26.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+26.0    : AmigaDOS: OK, trk: 052, sec: 11
+26.1    : frev: 39649, drift: 0.732 us, tfer: 190441 B/s, rpm: 300.732
+26.1    : band: 3.981 us, 5.972 us, 7.963 us
+26.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+26.1    : AmigaDOS: OK, trk: 053, sec: 11
+27.0    : frev: 39721, drift: 0.458 us, tfer: 190441 B/s, rpm: 300.733
+27.0    : band: 3.981 us, 5.972 us, 7.962 us
+27.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+27.0    : AmigaDOS: OK, trk: 054, sec: 11
+27.1    : frev: 40232, drift: 0.441 us, tfer: 193332 B/s, rpm: 300.733
+27.1    : band: 3.981 us, 5.972 us, 7.962 us
+27.1    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+27.1    : AmigaDOS: OK, trk: 055, sec: 11
+28.0    : frev: 40541, drift: 0.458 us, tfer: 194810 B/s, rpm: 300.733
+28.0    : band: 3.981 us, 5.972 us, 7.962 us
+28.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+28.0    : AmigaDOS: OK, trk: 056, sec: 11
+28.1    : frev: 40292, drift: 0.824 us, tfer: 193495 B/s, rpm: 300.733
+28.1    : band: 3.981 us, 5.972 us, 7.962 us
+28.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+28.1    : AmigaDOS: OK, trk: 057, sec: 11
+29.0    : frev: 40854, drift: 0.250 us, tfer: 196311 B/s, rpm: 300.733
+29.0    : band: 3.981 us, 5.972 us, 7.962 us
+29.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+29.0    : AmigaDOS: OK, trk: 058, sec: 11
+29.1    : frev: 40121, drift: 0.408 us, tfer: 192844 B/s, rpm: 300.733
+29.1    : band: 3.981 us, 5.972 us, 7.962 us
+29.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+29.1    : AmigaDOS: OK, trk: 059, sec: 11
+30.0    : frev: 39644, drift: 0.974 us, tfer: 189889 B/s, rpm: 300.757
+30.0    : band: 3.982 us, 5.973 us, 7.962 us
+30.0    : base: 1.991 us [99.535%], band: 3.982 us, 5.973 us, 7.962 us
+30.0    : AmigaDOS: OK, trk: 060, sec: 11
+30.1    : frev: 40160, drift: 0.791 us, tfer: 192682 B/s, rpm: 300.757
+30.1    : band: 3.981 us, 5.972 us, 7.964 us
+30.1    : base: 1.991 us [99.543%], band: 3.981 us, 5.972 us, 7.964 us
+30.1    : AmigaDOS: OK, trk: 061, sec: 11
+31.0    : frev: 40318, drift: 0.441 us, tfer: 193631 B/s, rpm: 300.757
+31.0    : band: 3.981 us, 5.972 us, 7.963 us
+31.0    : base: 1.991 us [99.538%], band: 3.981 us, 5.972 us, 7.963 us
+31.0    : AmigaDOS: OK, trk: 062, sec: 11
+31.1    : frev: 40043, drift: 0.699 us, tfer: 192359 B/s, rpm: 300.757
+31.1    : band: 3.982 us, 5.972 us, 7.963 us
+31.1    : base: 1.991 us [99.539%], band: 3.982 us, 5.972 us, 7.963 us
+31.1    : AmigaDOS: OK, trk: 063, sec: 11
+32.0    : frev: 40507, drift: 0.732 us, tfer: 194810 B/s, rpm: 300.733
+32.0    : band: 3.981 us, 5.972 us, 7.963 us
+32.0    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+32.0    : AmigaDOS: OK, trk: 064, sec: 11
+32.1    : frev: 40259, drift: 1.165 us, tfer: 193169 B/s, rpm: 300.733
+32.1    : band: 3.981 us, 5.972 us, 7.962 us
+32.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+32.1    : AmigaDOS: OK, trk: 065, sec: 11
+33.0    : frev: 40387, drift: 0.449 us, tfer: 194315 B/s, rpm: 300.733
+33.0    : band: 3.981 us, 5.972 us, 7.963 us
+33.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+33.0    : AmigaDOS: OK, trk: 066, sec: 11
+33.1    : frev: 40187, drift: 0.666 us, tfer: 193006 B/s, rpm: 300.733
+33.1    : band: 3.981 us, 5.972 us, 7.962 us
+33.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+33.1    : AmigaDOS: OK, trk: 067, sec: 11
+34.0    : frev: 40307, drift: 0.474 us, tfer: 193658 B/s, rpm: 300.733
+34.0    : band: 3.981 us, 5.972 us, 7.962 us
+34.0    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+34.0    : AmigaDOS: OK, trk: 068, sec: 11
+34.1    : frev: 40017, drift: 0.882 us, tfer: 192359 B/s, rpm: 300.733
+34.1    : band: 3.981 us, 5.972 us, 7.963 us
+34.1    : base: 1.991 us [99.534%], band: 3.981 us, 5.972 us, 7.963 us
+34.1    : AmigaDOS: OK, trk: 069, sec: 11
+35.0    : frev: 40002, drift: 0.841 us, tfer: 191929 B/s, rpm: 300.733
+35.0    : band: 3.981 us, 5.972 us, 7.962 us
+35.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+35.0    : AmigaDOS: OK, trk: 070, sec: 11
+35.1    : frev: 39795, drift: 0.483 us, tfer: 190758 B/s, rpm: 300.733
+35.1    : band: 3.981 us, 5.972 us, 7.962 us
+35.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+35.1    : AmigaDOS: OK, trk: 071, sec: 11
+36.0    : frev: 40254, drift: 0.266 us, tfer: 193250 B/s, rpm: 300.733
+36.0    : band: 3.981 us, 5.972 us, 7.963 us
+36.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+36.0    : AmigaDOS: OK, trk: 072, sec: 11
+36.1    : frev: 40123, drift: 0.907 us, tfer: 192682 B/s, rpm: 300.733
+36.1    : band: 3.981 us, 5.972 us, 7.963 us
+36.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.963 us
+36.1    : AmigaDOS: OK, trk: 073, sec: 11
+37.0    : frev: 40312, drift: 0.100 us, tfer: 193060 B/s, rpm: 300.757
+37.0    : band: 3.982 us, 5.972 us, 7.963 us
+37.0    : base: 1.991 us [99.540%], band: 3.982 us, 5.972 us, 7.963 us
+37.0    : AmigaDOS: OK, trk: 074, sec: 11
+37.1    : frev: 39110, drift: 0.566 us, tfer: 187944 B/s, rpm: 300.757
+37.1    : band: 3.981 us, 5.972 us, 7.963 us
+37.1    : base: 1.991 us [99.541%], band: 3.981 us, 5.972 us, 7.963 us
+37.1    : AmigaDOS: OK, trk: 075, sec: 11
+38.0    : frev: 39561, drift: 1.182 us, tfer: 189706 B/s, rpm: 300.732
+38.0    : band: 3.981 us, 5.972 us, 7.963 us
+38.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+38.0    : AmigaDOS: OK, trk: 076, sec: 11
+38.1    : frev: 40989, drift: 0.749 us, tfer: 196817 B/s, rpm: 300.732
+38.1    : band: 3.981 us, 5.972 us, 7.962 us
+38.1    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+38.1    : AmigaDOS: OK, trk: 077, sec: 11
+39.0    : frev: 39835, drift: 0.258 us, tfer: 190997 B/s, rpm: 300.733
+39.0    : band: 3.981 us, 5.972 us, 7.963 us
+39.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+39.0    : AmigaDOS: OK, trk: 078, sec: 11
+39.1    : frev: 41097, drift: 0.691 us, tfer: 197836 B/s, rpm: 300.732
+39.1    : band: 3.981 us, 5.972 us, 7.962 us
+39.1    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+39.1    : AmigaDOS: OK, trk: 079, sec: 11
+40.0    : frev: 47192, drift: 0.924 us, tfer: 227274 B/s, rpm: 300.757
+40.0    : band: 3.982 us, 5.972 us, 7.964 us
+40.0    : base: 1.991 us [99.540%], band: 3.982 us, 5.972 us, 7.964 us
+40.0    : AmigaDOS: OK, trk: 080, sec: 11
+40.1    : frev: 47659, drift: 0.791 us, tfer: 228862 B/s, rpm: 300.756
+40.1    : band: 3.982 us, 5.972 us, 7.964 us
+40.1    : base: 1.991 us [99.545%], band: 3.982 us, 5.972 us, 7.964 us
+40.1    : AmigaDOS: OK, trk: 081, sec: 11
+41.0    : frev: 41195, drift: 0.708 us, tfer: 197836 B/s, rpm: 300.732
+41.0    : band: 3.981 us, 5.972 us, 7.963 us
+41.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+41.0    : AmigaDOS: OK, trk: 082, sec: 11
+41.1    : frev: 46550, drift: 0.566 us, tfer: 223781 B/s, rpm: 300.733
+41.1    : band: 3.981 us, 5.972 us, 7.963 us
+41.1    : base: 1.991 us [99.534%], band: 3.981 us, 5.972 us, 7.963 us
+41.1    : AmigaDOS: OK, trk: 083, sec: 11
+42.0    : frev: 46350, drift: 0.749 us, tfer: 222451 B/s, rpm: 300.756
+42.0    : band: 3.982 us, 5.972 us, 7.963 us
+42.0    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+42.0    : AmigaDOS: OK, trk: 084, sec: 11
+42.1    : frev: 38794, drift: 0.150 us, tfer: 186113 B/s, rpm: 300.757
+42.1    : band: 3.982 us, 5.973 us, 7.963 us
+42.1    : base: 1.991 us [99.541%], band: 3.982 us, 5.973 us, 7.963 us
+42.1    : AmigaDOS: OK, trk: 085, sec: 11
+43.0    : frev: 38783, drift: 0.033 us, tfer: 186113 B/s, rpm: 300.733
+43.0    : band: 3.981 us, 5.972 us, 7.962 us
+43.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+43.0    : AmigaDOS: OK, trk: 086, sec: 11
+43.1    : frev: 38785, drift: 0.408 us, tfer: 186113 B/s, rpm: 300.733
+43.1    : band: 3.981 us, 5.971 us, 7.962 us
+43.1    : base: 1.990 us [99.528%], band: 3.981 us, 5.971 us, 7.962 us
+43.1    : AmigaDOS: OK, trk: 087, sec: 11
+44.0    : frev: 38787, drift: 0.782 us, tfer: 186113 B/s, rpm: 300.733
+44.0    : band: 3.981 us, 5.972 us, 7.962 us
+44.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+44.0    : AmigaDOS: OK, trk: 088, sec: 11
+44.1    : frev: 38773, drift: 0.092 us, tfer: 186113 B/s, rpm: 300.733
+44.1    : band: 3.981 us, 5.972 us, 7.962 us
+44.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+44.1    : AmigaDOS: OK, trk: 089, sec: 11
+45.0    : frev: 38784, drift: 0.824 us, tfer: 185937 B/s, rpm: 300.733
+45.0    : band: 3.981 us, 5.972 us, 7.962 us
+45.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+45.0    : AmigaDOS: OK, trk: 090, sec: 11
+45.1    : frev: 38772, drift: 0.716 us, tfer: 185761 B/s, rpm: 300.733
+45.1    : band: 3.981 us, 5.972 us, 7.962 us
+45.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+45.1    : AmigaDOS: OK, trk: 091, sec: 11
+46.0    : frev: 38786, drift: 0.816 us, tfer: 186113 B/s, rpm: 300.733
+46.0    : band: 3.981 us, 5.972 us, 7.962 us
+46.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+46.0    : AmigaDOS: OK, trk: 092, sec: 11
+46.1    : frev: 38773, drift: 0.516 us, tfer: 185937 B/s, rpm: 300.733
+46.1    : band: 3.981 us, 5.972 us, 7.962 us
+46.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+46.1    : AmigaDOS: OK, trk: 093, sec: 11
+47.0    : frev: 38775, drift: 0.033 us, tfer: 186113 B/s, rpm: 300.733
+47.0    : band: 3.981 us, 5.972 us, 7.962 us
+47.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+47.0    : AmigaDOS: OK, trk: 094, sec: 11
+47.1    : frev: 38783, drift: 0.158 us, tfer: 186264 B/s, rpm: 300.733
+47.1    : band: 3.981 us, 5.972 us, 7.962 us
+47.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+47.1    : AmigaDOS: OK, trk: 095, sec: 11
+48.0    : frev: 38784, drift: 0.200 us, tfer: 186113 B/s, rpm: 300.733
+48.0    : band: 3.981 us, 5.972 us, 7.962 us
+48.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+48.0    : AmigaDOS: OK, trk: 096, sec: 11
+48.1    : frev: 38764, drift: 0.483 us, tfer: 185937 B/s, rpm: 300.733
+48.1    : band: 3.981 us, 5.972 us, 7.962 us
+48.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+48.1    : AmigaDOS: OK, trk: 097, sec: 11
+49.0    : frev: 38761, drift: 0.566 us, tfer: 185937 B/s, rpm: 300.733
+49.0    : band: 3.981 us, 5.972 us, 7.962 us
+49.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+49.0    : AmigaDOS: OK, trk: 098, sec: 11
+49.1    : frev: 38761, drift: 0.042 us, tfer: 185937 B/s, rpm: 300.733
+49.1    : band: 3.981 us, 5.972 us, 7.962 us
+49.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+49.1    : AmigaDOS: OK, trk: 099, sec: 11
+50.0    : frev: 38771, drift: 0.566 us, tfer: 186113 B/s, rpm: 300.757
+50.0    : band: 3.982 us, 5.972 us, 7.963 us
+50.0    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+50.0    : AmigaDOS: OK, trk: 100, sec: 11
+50.1    : frev: 38772, drift: 0.516 us, tfer: 185937 B/s, rpm: 300.757
+50.1    : band: 3.982 us, 5.973 us, 7.963 us
+50.1    : base: 1.991 us [99.540%], band: 3.982 us, 5.973 us, 7.963 us
+50.1    : AmigaDOS: OK, trk: 101, sec: 11
+51.0    : frev: 38761, drift: 0.508 us, tfer: 185586 B/s, rpm: 300.733
+51.0    : band: 3.981 us, 5.972 us, 7.962 us
+51.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+51.0    : AmigaDOS: OK, trk: 102, sec: 11
+51.1    : frev: 38761, drift: 0.533 us, tfer: 185937 B/s, rpm: 300.733
+51.1    : band: 3.981 us, 5.972 us, 7.962 us
+51.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+51.1    : AmigaDOS: OK, trk: 103, sec: 11
+52.0    : frev: 38782, drift: 0.083 us, tfer: 186113 B/s, rpm: 300.757
+52.0    : band: 3.982 us, 5.972 us, 7.963 us
+52.0    : base: 1.991 us [99.536%], band: 3.982 us, 5.972 us, 7.963 us
+52.0    : AmigaDOS: OK, trk: 104, sec: 11
+52.1    : frev: 38772, drift: 0.724 us, tfer: 185761 B/s, rpm: 300.756
+52.1    : band: 3.982 us, 5.972 us, 7.963 us
+52.1    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+52.1    : AmigaDOS: OK, trk: 105, sec: 11
+53.0    : frev: 38786, drift: 0.474 us, tfer: 185761 B/s, rpm: 300.733
+53.0    : band: 3.981 us, 5.972 us, 7.962 us
+53.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+53.0    : AmigaDOS: OK, trk: 106, sec: 11
+53.1    : frev: 38773, drift: 0.449 us, tfer: 185937 B/s, rpm: 300.733
+53.1    : band: 3.981 us, 5.972 us, 7.962 us
+53.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+53.1    : AmigaDOS: OK, trk: 107, sec: 11
+54.0    : frev: 40548, drift: 0.674 us, tfer: 194976 B/s, rpm: 300.756
+54.0    : band: 3.982 us, 5.972 us, 7.963 us
+54.0    : base: 1.991 us [99.539%], band: 3.982 us, 5.972 us, 7.963 us
+54.0    : AmigaDOS: OK, trk: 108, sec: 11
+54.1    : frev: 41766, drift: 0.941 us, tfer: 201486 B/s, rpm: 300.757
+54.1    : band: 3.982 us, 5.972 us, 7.963 us
+54.1    : base: 1.991 us [99.539%], band: 3.982 us, 5.972 us, 7.963 us
+54.1    : AmigaDOS: OK, trk: 109, sec: 11
+55.0    : frev: 39708, drift: 0.558 us, tfer: 190257 B/s, rpm: 300.733
+55.0    : band: 3.981 us, 5.972 us, 7.962 us
+55.0    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+55.0    : AmigaDOS: OK, trk: 110, sec: 11
+55.1    : frev: 38505, drift: 0.483 us, tfer: 184714 B/s, rpm: 300.733
+55.1    : band: 3.981 us, 5.972 us, 7.962 us
+55.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+55.1    : AmigaDOS: OK, trk: 111, sec: 11
+56.0    : frev: 39153, drift: 0.483 us, tfer: 187534 B/s, rpm: 300.733
+56.0    : band: 3.981 us, 5.972 us, 7.962 us
+56.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+56.0    : AmigaDOS: OK, trk: 112, sec: 11
+56.1    : frev: 38206, drift: 0.516 us, tfer: 183335 B/s, rpm: 300.733
+56.1    : band: 3.981 us, 5.972 us, 7.962 us
+56.1    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+56.1    : AmigaDOS: OK, trk: 113, sec: 11
+57.0    : frev: 41385, drift: 0.658 us, tfer: 198865 B/s, rpm: 300.757
+57.0    : band: 3.982 us, 5.972 us, 7.963 us
+57.0    : base: 1.991 us [99.540%], band: 3.982 us, 5.972 us, 7.963 us
+57.0    : AmigaDOS: OK, trk: 114, sec: 11
+57.1    : frev: 42028, drift: 0.166 us, tfer: 202019 B/s, rpm: 300.757
+57.1    : band: 3.982 us, 5.972 us, 7.963 us
+57.1    : base: 1.991 us [99.537%], band: 3.982 us, 5.972 us, 7.963 us
+57.1    : AmigaDOS: OK, trk: 115, sec: 11
+58.0    : frev: 41517, drift: 0.524 us, tfer: 199384 B/s, rpm: 300.757
+58.0    : band: 3.982 us, 5.972 us, 7.963 us
+58.0    : base: 1.991 us [99.536%], band: 3.982 us, 5.972 us, 7.963 us
+58.0    : AmigaDOS: OK, trk: 116, sec: 11
+58.1    : frev: 40801, drift: 0.574 us, tfer: 195976 B/s, rpm: 300.757
+58.1    : band: 3.982 us, 5.972 us, 7.963 us
+58.1    : base: 1.991 us [99.536%], band: 3.982 us, 5.972 us, 7.963 us
+58.1    : AmigaDOS: OK, trk: 117, sec: 11
+59.0    : frev: 42473, drift: 0.449 us, tfer: 203815 B/s, rpm: 300.709
+59.0    : band: 3.981 us, 5.971 us, 7.962 us
+59.0    : base: 1.990 us [99.521%], band: 3.981 us, 5.971 us, 7.962 us
+59.0    : AmigaDOS: OK, trk: 118, sec: 11
+59.1    : frev: 40852, drift: 0.541 us, tfer: 195976 B/s, rpm: 300.709
+59.1    : band: 3.981 us, 5.971 us, 7.962 us
+59.1    : base: 1.990 us [99.523%], band: 3.981 us, 5.971 us, 7.962 us
+59.1    : AmigaDOS: OK, trk: 119, sec: 11
+60.0    : frev: 40719, drift: 0.732 us, tfer: 195641 B/s, rpm: 300.733
+60.0    : band: 3.981 us, 5.972 us, 7.963 us
+60.0    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+60.0    : AmigaDOS: OK, trk: 120, sec: 11
+60.1    : frev: 41079, drift: 0.366 us, tfer: 197325 B/s, rpm: 300.733
+60.1    : band: 3.981 us, 5.972 us, 7.962 us
+60.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+60.1    : AmigaDOS: OK, trk: 121, sec: 11
+61.0    : frev: 40651, drift: 0.258 us, tfer: 195308 B/s, rpm: 300.733
+61.0    : band: 3.981 us, 5.972 us, 7.962 us
+61.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+61.0    : AmigaDOS: OK, trk: 122, sec: 11
+61.1    : frev: 40848, drift: 0.533 us, tfer: 196311 B/s, rpm: 300.733
+61.1    : band: 3.981 us, 5.972 us, 7.963 us
+61.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+61.1    : AmigaDOS: OK, trk: 123, sec: 11
+62.0    : frev: 40694, drift: 0.957 us, tfer: 195474 B/s, rpm: 300.709
+62.0    : band: 3.981 us, 5.971 us, 7.962 us
+62.0    : base: 1.990 us [99.521%], band: 3.981 us, 5.971 us, 7.962 us
+62.0    : AmigaDOS: OK, trk: 124, sec: 11
+62.1    : frev: 40813, drift: 0.291 us, tfer: 196143 B/s, rpm: 300.709
+62.1    : band: 3.981 us, 5.971 us, 7.962 us
+62.1    : base: 1.990 us [99.522%], band: 3.981 us, 5.971 us, 7.962 us
+62.1    : AmigaDOS: OK, trk: 125, sec: 11
+63.0    : frev: 40881, drift: 0.516 us, tfer: 196311 B/s, rpm: 300.733
+63.0    : band: 3.981 us, 5.972 us, 7.962 us
+63.0    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.962 us
+63.0    : AmigaDOS: OK, trk: 126, sec: 11
+63.1    : frev: 40480, drift: 0.508 us, tfer: 194480 B/s, rpm: 300.733
+63.1    : band: 3.981 us, 5.972 us, 7.963 us
+63.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.963 us
+63.1    : AmigaDOS: OK, trk: 127, sec: 11
+64.0    : frev: 40345, drift: 0.466 us, tfer: 193495 B/s, rpm: 300.733
+64.0    : band: 3.981 us, 5.972 us, 7.962 us
+64.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+64.0    : AmigaDOS: OK, trk: 128, sec: 11
+64.1    : frev: 40784, drift: 0.974 us, tfer: 196143 B/s, rpm: 300.733
+64.1    : band: 3.981 us, 5.972 us, 7.962 us
+64.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+64.1    : AmigaDOS: OK, trk: 129, sec: 11
+65.0    : frev: 40836, drift: 0.708 us, tfer: 196143 B/s, rpm: 300.733
+65.0    : band: 3.981 us, 5.972 us, 7.963 us
+65.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+65.0    : AmigaDOS: OK, trk: 130, sec: 11
+65.1    : frev: 40495, drift: 0.300 us, tfer: 194645 B/s, rpm: 300.732
+65.1    : band: 3.981 us, 5.972 us, 7.963 us
+65.1    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+65.1    : AmigaDOS: OK, trk: 131, sec: 11
+66.0    : frev: 40538, drift: 0.483 us, tfer: 194810 B/s, rpm: 300.733
+66.0    : band: 3.981 us, 5.972 us, 7.963 us
+66.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+66.0    : AmigaDOS: OK, trk: 132, sec: 11
+66.1    : frev: 40369, drift: 0.200 us, tfer: 193822 B/s, rpm: 300.733
+66.1    : band: 3.981 us, 5.972 us, 7.962 us
+66.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+66.1    : AmigaDOS: OK, trk: 133, sec: 11
+67.0    : frev: 40684, drift: 0.449 us, tfer: 195474 B/s, rpm: 300.733
+67.0    : band: 3.981 us, 5.972 us, 7.962 us
+67.0    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+67.0    : AmigaDOS: OK, trk: 134, sec: 11
+67.1    : frev: 41349, drift: 0.458 us, tfer: 198693 B/s, rpm: 300.733
+67.1    : band: 3.981 us, 5.972 us, 7.962 us
+67.1    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+67.1    : AmigaDOS: OK, trk: 135, sec: 11
+68.0    : frev: 40961, drift: 0.757 us, tfer: 196817 B/s, rpm: 300.732
+68.0    : band: 3.981 us, 5.972 us, 7.962 us
+68.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+68.0    : AmigaDOS: OK, trk: 136, sec: 11
+68.1    : frev: 40989, drift: 0.483 us, tfer: 196986 B/s, rpm: 300.733
+68.1    : band: 3.981 us, 5.972 us, 7.963 us
+68.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+68.1    : AmigaDOS: OK, trk: 137, sec: 11
+69.0    : frev: 41049, drift: 0.891 us, tfer: 197155 B/s, rpm: 300.733
+69.0    : band: 3.981 us, 5.972 us, 7.962 us
+69.0    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.962 us
+69.0    : AmigaDOS: OK, trk: 138, sec: 11
+69.1    : frev: 40785, drift: 0.241 us, tfer: 195976 B/s, rpm: 300.733
+69.1    : band: 3.981 us, 5.972 us, 7.963 us
+69.1    : base: 1.991 us [99.534%], band: 3.981 us, 5.972 us, 7.963 us
+69.1    : AmigaDOS: OK, trk: 139, sec: 11
+70.0    : frev: 40822, drift: 0.633 us, tfer: 196143 B/s, rpm: 300.733
+70.0    : band: 3.981 us, 5.972 us, 7.962 us
+70.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+70.0    : AmigaDOS: OK, trk: 140, sec: 11
+70.1    : frev: 40905, drift: 0.358 us, tfer: 196648 B/s, rpm: 300.733
+70.1    : band: 3.981 us, 5.972 us, 7.962 us
+70.1    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+70.1    : AmigaDOS: OK, trk: 141, sec: 11
+71.0    : frev: 41224, drift: 0.674 us, tfer: 198006 B/s, rpm: 300.733
+71.0    : band: 3.981 us, 5.972 us, 7.963 us
+71.0    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+71.0    : AmigaDOS: OK, trk: 142, sec: 11
+71.1    : frev: 46987, drift: 0.042 us, tfer: 225514 B/s, rpm: 300.733
+71.1    : band: 3.981 us, 5.972 us, 7.963 us
+71.1    : base: 1.991 us [99.533%], band: 3.981 us, 5.972 us, 7.963 us
+71.1    : AmigaDOS: OK, trk: 143, sec: 11
+72.0    : frev: 43581, drift: 0.250 us, tfer: 208636 B/s, rpm: 300.732
+72.0    : band: 3.981 us, 5.972 us, 7.963 us
+72.0    : base: 1.991 us [99.535%], band: 3.981 us, 5.972 us, 7.963 us
+72.0    : AmigaDOS: OK, trk: 144, sec: 11
+72.1    : frev: 42620, drift: 0.408 us, tfer: 205091 B/s, rpm: 300.733
+72.1    : band: 3.981 us, 5.972 us, 7.962 us
+72.1    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+72.1    : AmigaDOS: OK, trk: 145, sec: 11
+73.0    : frev: 43873, drift: 0.050 us, tfer: 210746 B/s, rpm: 300.733
+73.0    : band: 3.981 us, 5.972 us, 7.962 us
+73.0    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+73.0    : AmigaDOS: OK, trk: 146, sec: 11
+73.1    : frev: 47742, drift: 0.524 us, tfer: 229062 B/s, rpm: 300.733
+73.1    : band: 3.981 us, 5.972 us, 7.963 us
+73.1    : base: 1.991 us [99.530%], band: 3.981 us, 5.972 us, 7.963 us
+73.1    : AmigaDOS: OK, trk: 147, sec: 11
+74.0    : frev: 48873, drift: 0.558 us, tfer: 234599 B/s, rpm: 300.733
+74.0    : band: 3.981 us, 5.972 us, 7.960 us
+74.0    : base: 1.991 us [99.518%], band: 3.981 us, 5.972 us, 7.960 us
+74.0    : AmigaDOS: OK, trk: 148, sec: 11
+74.1    : frev: 48458, drift: 0.075 us, tfer: 232724 B/s, rpm: 300.733
+74.1    : band: 3.981 us, 5.971 us, 7.963 us
+74.1    : base: 1.990 us [99.534%], band: 3.981 us, 5.971 us, 7.963 us
+74.1    : AmigaDOS: OK, trk: 149, sec: 11
+75.0    : frev: 48379, drift: 0.691 us, tfer: 232518 B/s, rpm: 300.733
+75.0    : band: 3.981 us, 5.972 us, 7.962 us
+75.0    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+75.0    : AmigaDOS: OK, trk: 150, sec: 11
+75.1    : frev: 48777, drift: 0.449 us, tfer: 234389 B/s, rpm: 300.733
+75.1    : band: 3.981 us, 5.972 us, 7.963 us
+75.1    : base: 1.991 us [99.531%], band: 3.981 us, 5.972 us, 7.963 us
+75.1    : AmigaDOS: OK, trk: 151, sec: 11
+76.0    : frev: 49035, drift: 0.583 us, tfer: 235020 B/s, rpm: 300.733
+76.0    : band: 3.981 us, 5.972 us, 7.958 us
+76.0    : base: 1.991 us [99.507%], band: 3.981 us, 5.972 us, 7.958 us
+76.0    : AmigaDOS: OK, trk: 152, sec: 11
+76.1    : frev: 43347, drift: 0.749 us, tfer: 207692 B/s, rpm: 300.733
+76.1    : band: 3.981 us, 5.972 us, 7.963 us
+76.1    : base: 1.991 us [99.532%], band: 3.981 us, 5.972 us, 7.963 us
+76.1    : AmigaDOS: OK, trk: 153, sec: 11
+77.0    : frev: 41519, drift: 0.125 us, tfer: 199211 B/s, rpm: 300.733
+77.0    : band: 3.981 us, 5.972 us, 7.962 us
+77.0    : base: 1.991 us [99.529%], band: 3.981 us, 5.972 us, 7.962 us
+77.0    : AmigaDOS: OK, trk: 154, sec: 11
+77.1    : frev: 48950, drift: 0.949 us, tfer: 235020 B/s, rpm: 300.733
+77.1    : band: 3.981 us, 5.972 us, 7.962 us
+77.1    : base: 1.991 us [99.527%], band: 3.981 us, 5.972 us, 7.962 us
+77.1    : AmigaDOS: OK, trk: 155, sec: 11
+78.0    : frev: 49591, drift: 0.050 us, tfer: 238009 B/s, rpm: 300.733
+78.0    : band: 3.981 us, 5.972 us, 7.962 us
+78.0    : base: 1.991 us [99.528%], band: 3.981 us, 5.972 us, 7.962 us
+78.0    : AmigaDOS: OK, trk: 156, sec: 11
+78.1    : frev: 49065, drift: 0.033 us, tfer: 235654 B/s, rpm: 300.733
+78.1    : band: 3.981 us, 5.972 us, 7.962 us
+78.1    : base: 1.991 us [99.526%], band: 3.981 us, 5.972 us, 7.962 us
+78.1    : AmigaDOS: OK, trk: 157, sec: 11
+79.0    : frev: 48994, drift: 0.549 us, tfer: 235654 B/s, rpm: 300.733
+79.0    : band: 3.981 us, 5.972 us, 7.963 us
+79.0    : base: 1.991 us [99.536%], band: 3.981 us, 5.972 us, 7.963 us
+79.0    : AmigaDOS: OK, trk: 158, sec: 11
+79.1    : frev: 49654, drift: 0.416 us, tfer: 239094 B/s, rpm: 300.733
+79.1    : band: 3.981 us, 5.972 us, 7.962 us
+79.1    : base: 1.991 us [99.526%], band: 3.981 us, 5.972 us, 7.962 us
+79.1    : AmigaDOS: OK, trk: 159, sec: 11
+80.0    : frev: 26235, drift: 0.275 us, tfer: 125984 B/s, rpm: 250.823
+80.0    : band: 3.321 us, 4.981 us, 6.641 us, 8.301 us?, 11.622 us
+80.0    : base: 2.214 us [89.316%], band: 3.321 us, 6.641 us, 8.301 us?
+80.0    : AmigaDOS: <unformatted>
+80.1    : frev: 26711, drift: 0.966 us, tfer: 131550 B/s, rpm: 250.824
+80.1    : band: 3.320 us, 4.981 us, 6.642 us, 8.299 us, 11.622 us
+80.1    : base: 2.075 us [59.945%], band: 3.320 us, 6.642 us, 8.299 us
+80.1    : AmigaDOS: <unformatted>
+81.0    : frev: 24655, drift: 0.591 us, tfer: 119026 B/s, rpm: 250.126
+81.0    : band: 3.312 us, 4.966 us, 6.622 us, 8.278 us?, 11.589 us?
+81.0    : base: 2.207 us [89.630%], band: 3.312 us, 6.622 us, 8.278 us?
+81.0    : AmigaDOS: <unformatted>
+81.1    : frev: 23805, drift: 0.200 us, tfer: 119765 B/s, rpm: 250.126
+81.1    : band: 3.311 us, 4.967 us, 6.622 us, 8.279 us, 11.590 us?
+81.1    : base: 2.070 us [60.229%], band: 3.311 us, 6.622 us, 8.279 us
+81.1    : AmigaDOS: <unformatted>
+82.0    : frev: 28283, drift: 0.408 us, tfer: 152211 B/s, rpm: 250.126
+82.0    : band: 7.004 us, 7.894 us, 9.055 us, 10.241 us, 11.511 us
+82.0    : base: 1.974 us [32.012%], band: 7.894 us
+82.0    : AmigaDOS: <unformatted>
+82.1    : frev: 28181, drift: 0.683 us, tfer: 152211 B/s, rpm: 250.126
+82.1    : band: 7.245 us, 8.715 us, 9.890 us, 10.745 us, 12.309 us
+82.1    : base: 2.179 us [52.670%], band: 7.245 us, 8.715 us
+82.1    : AmigaDOS: <unformatted>
+83.0    : frev: 28240, drift: 0.383 us, tfer: 152708 B/s, rpm: 250.126
+83.0    : band: 7.351 us, 8.536 us, 9.577 us, 10.797 us, 12.433 us
+83.0    : base: 2.134 us [53.187%], band: 7.351 us, 8.536 us
+83.0    : AmigaDOS: <unformatted>
+83.1    : frev: 28261, drift: 0.441 us, tfer: 152353 B/s, rpm: 250.126
+83.1    : band: 7.915 us, 9.177 us, 10.231 us, 11.444 us, 12.723 us
+83.1    : base: 1.979 us [32.277%], band: 7.915 us
+83.1    : AmigaDOS: <unformatted>
+
+Enjoy your shiny new disk image!
+Please consider helping us to preserve media and continue development:
+www.softpres.org/donate
+
