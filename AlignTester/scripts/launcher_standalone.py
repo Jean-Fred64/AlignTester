@@ -114,15 +114,19 @@ def find_free_port(start_port=8000):
 
 def start_server(port=8000):
     """Démarre le serveur FastAPI"""
+    global BACKEND_DIR, FRONTEND_DIR
     try:
+        # Déterminer le chemin du backend à utiliser
+        backend_to_use = BACKEND_DIR
+        
         # Ajouter le backend au path Python si nécessaire
-        if BACKEND_DIR and BACKEND_DIR.exists():
-            backend_str = str(BACKEND_DIR.resolve())
+        if backend_to_use and backend_to_use.exists():
+            backend_str = str(backend_to_use.resolve())
             if backend_str not in sys.path:
                 sys.path.insert(0, backend_str)
             print(f"[*] Backend ajoute au path: {backend_str}")
         else:
-            print(f"[ERROR] Backend non trouve: {BACKEND_DIR}")
+            print(f"[ERROR] Backend non trouve: {backend_to_use}")
             print(f"[*] Path Python actuel: {sys.path}")
             print(f"[*] BASE_DIR: {BASE_DIR}")
             print(f"[*] Essai de recherche dans _internal...")
@@ -137,11 +141,12 @@ def start_server(port=8000):
                     backend_str = str(backend_internal.resolve())
                     sys.path.insert(0, backend_str)
                     print(f"[OK] Backend trouve dans _internal: {backend_str}")
-                    BACKEND_DIR = backend_internal
+                    backend_to_use = backend_internal
+                    BACKEND_DIR = backend_internal  # Mettre à jour la variable globale
                 else:
                     raise ImportError(f"Backend directory not found in {_internal}")
             else:
-                raise ImportError(f"Backend directory not found: {BACKEND_DIR}")
+                raise ImportError(f"Backend directory not found: {backend_to_use}")
         
         # Importer l'application FastAPI
         from main import app
