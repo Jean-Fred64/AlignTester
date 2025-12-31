@@ -51,6 +51,7 @@ jobs:
       
       - name: Determine platform name
         id: platform
+        shell: bash
         run: |
           if [ "$RUNNER_OS" == "Linux" ]; then
             echo "name=linux" >> $GITHUB_OUTPUT
