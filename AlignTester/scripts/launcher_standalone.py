@@ -46,25 +46,31 @@ else:
 # En mode développement, il est dans src/frontend/dist
 if getattr(sys, 'frozen', False):
     # Essayer plusieurs emplacements possibles
+    # PyInstaller peut placer les fichiers dans différents endroits
+    exe_dir = Path(sys.executable).parent
     possible_frontend_dirs = [
         BASE_DIR / "frontend" / "dist",
-        BASE_DIR / "frontend" / "dist",
+        BASE_DIR / "dist",  # Si frontend/dist est directement dans BASE_DIR
+        exe_dir / "frontend" / "dist",
+        exe_dir / "_internal" / "frontend" / "dist",
         BASE_DIR.parent / "frontend" / "dist",
     ]
     possible_backend_dirs = [
         BASE_DIR / "backend",
+        exe_dir / "backend",
+        exe_dir / "_internal" / "backend",
         BASE_DIR.parent / "backend",
     ]
     
     FRONTEND_DIR = None
     for dir_path in possible_frontend_dirs:
-        if dir_path.exists():
+        if dir_path.exists() and any(dir_path.iterdir()):
             FRONTEND_DIR = dir_path
             break
     
     BACKEND_DIR = None
     for dir_path in possible_backend_dirs:
-        if dir_path.exists():
+        if dir_path.exists() and (dir_path / "main.py").exists():
             BACKEND_DIR = dir_path
             break
 else:
