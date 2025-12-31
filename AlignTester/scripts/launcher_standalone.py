@@ -141,15 +141,16 @@ def start_server(port=8000):
         from main import app
         
         # Servir le frontend si disponible
-        if FRONTEND_DIR.exists() and any(FRONTEND_DIR.iterdir()):
+        if FRONTEND_DIR and FRONTEND_DIR.exists() and any(FRONTEND_DIR.iterdir()):
             from fastapi.staticfiles import StaticFiles
             # Servir les fichiers statiques
             app.mount("/", StaticFiles(directory=str(FRONTEND_DIR), html=True), name="static")
             print(f"[OK] Frontend trouve dans: {FRONTEND_DIR}")
         else:
-            print(f"[WARN] Frontend non trouve dans: {FRONTEND_DIR}")
+            frontend_msg = str(FRONTEND_DIR) if FRONTEND_DIR else "None"
+            print(f"[WARN] Frontend non trouve dans: {frontend_msg}")
             print("   L'application fonctionnera en mode API uniquement")
-            print("   Vous pouvez acceder a l'API sur http://127.0.0.1:{port}/api")
+            print(f"   Vous pouvez acceder a l'API sur http://127.0.0.1:{port}/api")
         
         # Démarrer le serveur
         print(f"[*] Demarrage du serveur sur http://127.0.0.1:{port}")
@@ -184,8 +185,10 @@ def main():
     print("[*] AlignTester - Version Standalone")
     print("=" * 60)
     print(f"[*] Repertoire de base: {BASE_DIR}")
-    print(f"[*] Frontend: {FRONTEND_DIR} ({'OK' if FRONTEND_DIR.exists() else 'MANQUANT'})")
-    print(f"[*] Backend: {BACKEND_DIR} ({'OK' if BACKEND_DIR.exists() else 'MANQUANT'})")
+    frontend_status = "OK" if (FRONTEND_DIR and FRONTEND_DIR.exists()) else "MANQUANT"
+    backend_status = "OK" if (BACKEND_DIR and BACKEND_DIR.exists()) else "MANQUANT"
+    print(f"[*] Frontend: {FRONTEND_DIR} ({frontend_status})")
+    print(f"[*] Backend: {BACKEND_DIR} ({backend_status})")
     print("=" * 60)
     
     # Trouver un port libre
