@@ -166,9 +166,21 @@ def start_server(port=8000):
         if not frontend_to_use or not frontend_to_use.exists():
             # Essayer de trouver le frontend dans plusieurs emplacements
             exe_dir = Path(sys.executable).parent
+            _internal = exe_dir / "_internal"
+            
+            # D'abord, lister le contenu de _internal pour debug
+            if _internal.exists():
+                print(f"[*] Contenu de _internal:")
+                try:
+                    for item in sorted(_internal.iterdir()):
+                        item_type = "DIR" if item.is_dir() else "FILE"
+                        print(f"[*]   - {item.name} ({item_type})")
+                except Exception as e:
+                    print(f"[*]   Erreur lors de la lecture: {e}")
+            
             search_paths = [
-                exe_dir / "_internal" / "frontend" / "dist",
-                exe_dir / "_internal" / "frontend",
+                _internal / "frontend" / "dist",
+                _internal / "frontend",
                 exe_dir / "frontend" / "dist",
                 exe_dir / "frontend",
                 BASE_DIR / "frontend" / "dist",
@@ -192,6 +204,12 @@ def start_server(port=8000):
                         break
                     else:
                         print(f"[*]   - {search_path} existe mais ne contient pas index.html")
+                        # Lister le contenu pour debug
+                        try:
+                            contents = list(search_path.iterdir())[:5]
+                            print(f"[*]     Contenu: {[x.name for x in contents]}")
+                        except:
+                            pass
                 else:
                     print(f"[*]   - {search_path} n'existe pas")
         
