@@ -166,7 +166,7 @@ datas_pydantic, binaries_pydantic, hiddenimports_pydantic = collect_all('pydanti
 datas_websockets, binaries_websockets, hiddenimports_websockets = collect_all('websockets')
 
 # Combiner toutes les données
-all_datas = list(datas) + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
+all_datas = {repr(datas)} + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
 all_binaries = binaries_fastapi + binaries_starlette + binaries_uvicorn + binaries_pydantic + binaries_websockets
 all_hiddenimports = hiddenimports_fastapi + hiddenimports_starlette + hiddenimports_uvicorn + hiddenimports_pydantic + hiddenimports_websockets
 
