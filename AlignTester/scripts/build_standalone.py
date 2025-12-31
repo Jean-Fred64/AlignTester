@@ -83,22 +83,22 @@ def build_frontend():
     
     try:
         result = subprocess.run(["npm", "run", "build"], check=True, capture_output=True, text=True)
-        print("✓ Build frontend réussi")
+        print("[OK] Build frontend reussi")
         
         dist_frontend = FRONTEND_DIR / "dist"
         if dist_frontend.exists():
-            print(f"✓ Frontend buildé dans: {dist_frontend}")
+            print(f"[OK] Frontend builde dans: {dist_frontend}")
             return dist_frontend
         else:
-            print("⚠️  Dossier dist non trouvé après le build")
+            print("[WARN] Dossier dist non trouve apres le build")
             return None
     except subprocess.CalledProcessError as e:
-        print(f"❌ Erreur lors du build frontend:")
+        print(f"[ERROR] Erreur lors du build frontend:")
         print(e.stdout)
         print(e.stderr)
         return None
     except FileNotFoundError:
-        print("⚠️  npm non trouvé, skip du build frontend")
+        print("[WARN] npm non trouve, skip du build frontend")
         return None
 
 def create_spec_file(platform_name, frontend_dist=None):
