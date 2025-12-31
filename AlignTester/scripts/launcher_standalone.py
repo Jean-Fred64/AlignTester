@@ -24,7 +24,19 @@ if sys.platform == 'win32':
 # Déterminer le chemin de base selon le mode d'exécution
 if getattr(sys, 'frozen', False):
     # Mode standalone (PyInstaller)
-    BASE_DIR = Path(sys.executable).parent
+    # PyInstaller place les fichiers dans _MEIPASS (temporaire) ou _internal (permanent)
+    if hasattr(sys, '_MEIPASS'):
+        # Mode onefile (fichier temporaire)
+        BASE_DIR = Path(sys._MEIPASS)
+    else:
+        # Mode onedir (dossier permanent)
+        BASE_DIR = Path(sys.executable).parent
+        # Les fichiers datas peuvent être dans _internal ou à côté de l'exécutable
+        _internal_dir = BASE_DIR / "_internal"
+        if _internal_dir.exists():
+            # Vérifier si les fichiers sont dans _internal
+            if (_internal_dir / "frontend").exists() or (_internal_dir / "backend").exists():
+                BASE_DIR = _internal_dir
 else:
     # Mode développement
     BASE_DIR = Path(__file__).parent.parent
@@ -33,8 +45,28 @@ else:
 # En mode standalone, le frontend est dans frontend/dist
 # En mode développement, il est dans src/frontend/dist
 if getattr(sys, 'frozen', False):
-    FRONTEND_DIR = BASE_DIR / "frontend" / "dist"
-    BACKEND_DIR = BASE_DIR / "backend"
+    # Essayer plusieurs emplacements possibles
+    possible_frontend_dirs = [
+        BASE_DIR / "frontend" / "dist",
+        BASE_DIR / "frontend" / "dist",
+        BASE_DIR.parent / "frontend" / "dist",
+    ]
+    possible_backend_dirs = [
+        BASE_DIR / "backend",
+        BASE_DIR.parent / "backend",
+    ]
+    
+    FRONTEND_DIR = None
+    for dir_path in possible_frontend_dirs:
+        if dir_path.exists():
+            FRONTEND_DIR = dir_path
+            break
+    
+    BACKEND_DIR = None
+    for dir_path in possible_backend_dirs:
+        if dir_path.exists():
+            BACKEND_DIR = dir_path
+            break
 else:
     # Mode développement
     FRONTEND_DIR = BASE_DIR.parent / "src" / "frontend" / "dist"
