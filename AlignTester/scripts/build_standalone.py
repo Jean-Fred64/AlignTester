@@ -20,8 +20,11 @@ if sys.platform == 'win32':
         sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
 
 # Chemins
-PROJECT_ROOT = Path(__file__).parent.parent.parent
-ALIGNTESTER_DIR = PROJECT_ROOT / "AlignTester"
+# __file__ est dans AlignTester/scripts/build_standalone.py
+# Donc parent = scripts, parent.parent = AlignTester, parent.parent.parent = racine du projet
+SCRIPT_DIR = Path(__file__).parent.resolve()
+PROJECT_ROOT = SCRIPT_DIR.parent.parent.resolve()
+ALIGNTESTER_DIR = SCRIPT_DIR.parent.resolve()  # AlignTester/
 BUILD_DIR = PROJECT_ROOT / "build_standalone"
 DIST_DIR = BUILD_DIR / "dist"
 
@@ -29,7 +32,7 @@ DIST_DIR = BUILD_DIR / "dist"
 SRC_DIR = ALIGNTESTER_DIR / "src"
 BACKEND_DIR = SRC_DIR / "backend"
 FRONTEND_DIR = SRC_DIR / "frontend"
-LAUNCHER_PATH = Path(__file__).parent / "launcher_standalone.py"
+LAUNCHER_PATH = SCRIPT_DIR / "launcher_standalone.py"
 
 def print_step(message):
     """Affiche un message de progression"""
