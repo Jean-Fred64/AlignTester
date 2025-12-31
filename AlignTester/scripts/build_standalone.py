@@ -10,6 +10,15 @@ import sys
 import platform
 from pathlib import Path
 
+# Configurer l'encodage UTF-8 pour Windows
+if sys.platform == 'win32':
+    import io
+    # Forcer UTF-8 pour stdout et stderr
+    if sys.stdout.encoding != 'utf-8':
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
+    if sys.stderr.encoding != 'utf-8':
+        sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8', errors='replace')
+
 # Chemins
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 ALIGNTESTER_DIR = PROJECT_ROOT / "AlignTester"
@@ -25,7 +34,7 @@ LAUNCHER_PATH = Path(__file__).parent / "launcher_standalone.py"
 def print_step(message):
     """Affiche un message de progression"""
     print(f"\n{'='*60}")
-    print(f"📦 {message}")
+    print(f"[*] {message}")
     print(f"{'='*60}")
 
 def check_dependencies():
@@ -35,9 +44,9 @@ def check_dependencies():
     # Vérifier PyInstaller
     try:
         import PyInstaller
-        print(f"✓ PyInstaller installé (version {PyInstaller.__version__})")
+        print(f"[OK] PyInstaller installe (version {PyInstaller.__version__})")
     except ImportError:
-        print("❌ PyInstaller n'est pas installé")
+        print("[ERROR] PyInstaller n'est pas installe")
         print("   Installez-le avec: pip install pyinstaller")
         return False
     
@@ -45,11 +54,11 @@ def check_dependencies():
     try:
         result = subprocess.run(["node", "--version"], capture_output=True, text=True)
         if result.returncode == 0:
-            print(f"✓ Node.js installé ({result.stdout.strip()})")
+            print(f"[OK] Node.js installe ({result.stdout.strip()})")
         else:
-            print("⚠️  Node.js non trouvé - le build frontend sera ignoré")
+            print("[WARN] Node.js non trouve - le build frontend sera ignore")
     except FileNotFoundError:
-        print("⚠️  Node.js non trouvé - le build frontend sera ignoré")
+        print("[WARN] Node.js non trouve - le build frontend sera ignore")
     
     return True
 
@@ -58,18 +67,18 @@ def build_frontend():
     print_step("Build du frontend")
     
     if not FRONTEND_DIR.exists():
-        print("⚠️  Dossier frontend non trouvé, skip du build frontend")
+        print("[WARN] Dossier frontend non trouve, skip du build frontend")
         return None
     
     # Vérifier si node_modules existe
     node_modules = FRONTEND_DIR / "node_modules"
     if not node_modules.exists():
-        print("📦 Installation des dépendances npm...")
+        print("[*] Installation des dependances npm...")
         os.chdir(FRONTEND_DIR)
         subprocess.run(["npm", "install"], check=False)
     
     # Build du frontend
-    print("🔨 Build du frontend avec Vite...")
+    print("[*] Build du frontend avec Vite...")
     os.chdir(FRONTEND_DIR)
     
     try:
@@ -117,7 +126,7 @@ def create_spec_file(platform_name, frontend_dist=None):
                 target_dir = f"frontend/dist/{rel_path.parent}" if rel_path.parent != Path('.') else "frontend/dist"
                 frontend_files.append((str(item), target_dir))
         datas.extend(frontend_files)
-        print(f"✓ Frontend ajouté: {frontend_dist} ({len(frontend_files)} fichiers)")
+        print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
     
     # Backend - inclure tous les fichiers Python
     if BACKEND_DIR.exists():
@@ -126,7 +135,7 @@ def create_spec_file(platform_name, frontend_dist=None):
             rel_path = py_file.relative_to(BACKEND_DIR)
             target_dir = f"backend/{rel_path.parent}" if rel_path.parent != Path('.') else "backend"
             datas.append((str(py_file), target_dir))
-        print(f"✓ Backend ajouté: {BACKEND_DIR}")
+        print(f"[OK] Backend ajoute: {BACKEND_DIR}")
     
     # Créer le contenu du spec file
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
@@ -193,7 +202,7 @@ coll = COLLECT(
     spec_path = BUILD_DIR / f"aligntester_{platform_name}.spec"
     spec_path.parent.mkdir(parents=True, exist_ok=True)
     spec_path.write_text(spec_content)
-    print(f"✓ Fichier .spec créé: {spec_path}")
+    print(f"[OK] Fichier .spec cree: {spec_path}")
     
     return spec_path
 
@@ -220,13 +229,13 @@ def build_with_pyinstaller(spec_path, platform_name):
         "--workpath", str(work_platform),
     ]
     
-    print(f"🔨 Exécution: {' '.join(cmd)}")
+    print(f"[*] Execution: {' '.join(cmd)}")
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
-        print("✓ Build PyInstaller réussi")
+        print("[OK] Build PyInstaller reussi")
         return dist_platform / "aligntester"
     except subprocess.CalledProcessError as e:
-        print(f"❌ Erreur lors du build PyInstaller:")
+        print(f"[ERROR] Erreur lors du build PyInstaller:")
         print(e.stdout)
         print(e.stderr)
         return None
@@ -279,15 +288,15 @@ Plateforme: {platform_name.title()}
     
     readme_path = dist_path / "README_STANDALONE.txt"
     readme_path.write_text(readme_content)
-    print(f"✓ README créé: {readme_path}")
+    print(f"[OK] README cree: {readme_path}")
 
 def main():
     """Fonction principale"""
     print("=" * 60)
-    print("🚀 Build de la version standalone d'AlignTester")
+    print("[*] Build de la version standalone d'AlignTester")
     print("=" * 60)
-    print(f"📂 Répertoire du projet: {PROJECT_ROOT}")
-    print(f"🖥️  Plateforme actuelle: {platform.system()} ({platform.machine()})")
+    print(f"[*] Repertoire du projet: {PROJECT_ROOT}")
+    print(f"[*] Plateforme actuelle: {platform.system()} ({platform.machine()})")
     print("=" * 60)
     
     # Vérifier les dépendances
@@ -310,8 +319,8 @@ def main():
     elif current_platform == "darwin":
         platform_name = "macos"
     else:
-        print(f"⚠️  Plateforme non reconnue: {current_platform}")
-        print("   Utilisation de 'linux' par défaut")
+        print(f"[WARN] Plateforme non reconnue: {current_platform}")
+        print("   Utilisation de 'linux' par defaut")
         platform_name = "linux"
     
     # Créer le fichier .spec
@@ -325,16 +334,16 @@ def main():
         create_readme_standalone(platform_name, dist_path)
         
         print("\n" + "=" * 60)
-        print("✅ Build terminé avec succès!")
+        print("[OK] Build termine avec succes!")
         print("=" * 60)
-        print(f"📁 Exécutable disponible dans: {dist_path}")
-        print(f"\n📦 Pour distribuer:")
+        print(f"[*] Executable disponible dans: {dist_path}")
+        print(f"\n[*] Pour distribuer:")
         print(f"   1. Compressez le dossier: {dist_path}")
         print(f"   2. Nommez-le: aligntester-standalone-{platform_name}.zip")
         print(f"   3. Distribuez-le aux utilisateurs")
         print("=" * 60)
     else:
-        print("\n❌ Le build a échoué")
+        print("\n[ERROR] Le build a echoue")
         sys.exit(1)
 
 if __name__ == "__main__":
