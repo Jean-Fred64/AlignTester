@@ -72,9 +72,7 @@ else:
     FRONTEND_DIR = BASE_DIR.parent / "src" / "frontend" / "dist"
     BACKEND_DIR = BASE_DIR.parent / "src" / "backend"
 
-# Ajouter le backend au path Python
-if BACKEND_DIR.exists():
-    sys.path.insert(0, str(BACKEND_DIR))
+# Ajouter le backend au path Python (sera fait dans start_server si nécessaire)
 
 # Variables globales pour le serveur
 server_thread = None
