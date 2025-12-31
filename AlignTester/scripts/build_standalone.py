@@ -150,55 +150,46 @@ def create_spec_file(platform_name, frontend_dist=None):
         print(f"[ERROR] Fichier launcher non trouve: {launcher_path_resolved}")
         return None
     
+    # Utiliser collect_all pour inclure automatiquement tous les modules
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
 
+from PyInstaller.utils.hooks import collect_all, collect_submodules
+
 block_cipher = None
+
+# Collecter tous les modules de FastAPI, Starlette, Uvicorn, etc.
+datas_fastapi, binaries_fastapi, hiddenimports_fastapi = collect_all('fastapi')
+datas_starlette, binaries_starlette, hiddenimports_starlette = collect_all('starlette')
+datas_uvicorn, binaries_uvicorn, hiddenimports_uvicorn = collect_all('uvicorn')
+datas_pydantic, binaries_pydantic, hiddenimports_pydantic = collect_all('pydantic')
+datas_websockets, binaries_websockets, hiddenimports_websockets = collect_all('websockets')
+
+# Combiner toutes les données
+all_datas = list(datas) + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
+all_binaries = binaries_fastapi + binaries_starlette + binaries_uvicorn + binaries_pydantic + binaries_websockets
+all_hiddenimports = hiddenimports_fastapi + hiddenimports_starlette + hiddenimports_uvicorn + hiddenimports_pydantic + hiddenimports_websockets
+
+# Ajouter d'autres imports nécessaires
+all_hiddenimports.extend([
+    'pydantic_settings',
+    'pyserial',
+    'pyserial.tools',
+    'pyserial.tools.list_ports',
+    'multipart',
+    'python_multipart',
+    'asyncio',
+    'json',
+    'platform',
+    'subprocess',
+])
 
 a = Analysis(
     [r'{launcher_path_str}'],
     pathex=[],
-    binaries=[],
-    datas={datas},
-    hiddenimports=[
-        'uvicorn',
-        'uvicorn.lifespan',
-        'uvicorn.lifespan.on',
-        'uvicorn.protocols',
-        'uvicorn.protocols.http',
-        'uvicorn.protocols.http.auto',
-        'uvicorn.protocols.websockets',
-        'uvicorn.protocols.websockets.auto',
-        'uvicorn.loops',
-        'uvicorn.loops.auto',
-        'uvicorn.logging',
-        'fastapi',
-        'fastapi.middleware',
-        'fastapi.middleware.cors',
-        'fastapi.staticfiles',
-        'fastapi.responses',
-        'fastapi.routing',
-        'fastapi.datastructures',
-        'starlette',
-        'starlette.applications',
-        'starlette.middleware',
-        'starlette.middleware.cors',
-        'starlette.staticfiles',
-        'starlette.responses',
-        'starlette.routing',
-        'websockets',
-        'websockets.server',
-        'websockets.client',
-        'pydantic',
-        'pydantic.fields',
-        'pydantic.main',
-        'pydantic_settings',
-        'pyserial',
-        'pyserial.tools',
-        'pyserial.tools.list_ports',
-        'multipart',
-        'python_multipart',
-    ],
+    binaries=all_binaries,
+    datas=all_datas,
+    hiddenimports=all_hiddenimports,
     hookspath=[],
     hooksconfig={{}},
     runtime_hooks=[],
