@@ -54,6 +54,10 @@ if getattr(sys, 'frozen', False):
         exe_dir / "frontend" / "dist",
         exe_dir / "_internal" / "frontend" / "dist",
         BASE_DIR.parent / "frontend" / "dist",
+        # Essayer aussi sans le sous-dossier dist
+        BASE_DIR / "frontend",
+        exe_dir / "frontend",
+        exe_dir / "_internal" / "frontend",
     ]
     possible_backend_dirs = [
         BASE_DIR / "backend",
@@ -64,9 +68,15 @@ if getattr(sys, 'frozen', False):
     
     FRONTEND_DIR = None
     for dir_path in possible_frontend_dirs:
-        if dir_path.exists() and any(dir_path.iterdir()):
-            FRONTEND_DIR = dir_path
-            break
+        if dir_path.exists():
+            # Vérifier si c'est un dossier dist ou contient index.html
+            if (dir_path / "index.html").exists() or any(dir_path.glob("*.html")):
+                FRONTEND_DIR = dir_path
+                break
+            # Ou si c'est un dossier avec des sous-dossiers assets
+            if (dir_path / "assets").exists():
+                FRONTEND_DIR = dir_path
+                break
     
     BACKEND_DIR = None
     for dir_path in possible_backend_dirs:
@@ -154,14 +164,36 @@ def start_server(port=8000):
         # Chercher le frontend si pas trouvé
         frontend_to_use = FRONTEND_DIR
         if not frontend_to_use or not frontend_to_use.exists():
-            # Essayer de trouver le frontend dans _internal
-            _internal = Path(sys.executable).parent / "_internal"
-            if _internal.exists():
-                frontend_internal = _internal / "frontend" / "dist"
-                if frontend_internal.exists():
-                    frontend_to_use = frontend_internal
-                    FRONTEND_DIR = frontend_internal  # Mettre à jour la variable globale
-                    print(f"[OK] Frontend trouve dans _internal: {frontend_internal}")
+            # Essayer de trouver le frontend dans plusieurs emplacements
+            exe_dir = Path(sys.executable).parent
+            search_paths = [
+                exe_dir / "_internal" / "frontend" / "dist",
+                exe_dir / "_internal" / "frontend",
+                exe_dir / "frontend" / "dist",
+                exe_dir / "frontend",
+                BASE_DIR / "frontend" / "dist",
+                BASE_DIR / "frontend",
+            ]
+            
+            print(f"[*] Recherche du frontend dans {len(search_paths)} emplacements...")
+            for search_path in search_paths:
+                if search_path.exists():
+                    # Vérifier si c'est un dossier dist valide
+                    if (search_path / "index.html").exists() or any(search_path.glob("*.html")):
+                        frontend_to_use = search_path
+                        FRONTEND_DIR = search_path
+                        print(f"[OK] Frontend trouve: {search_path}")
+                        break
+                    # Ou si c'est un dossier avec assets
+                    if (search_path / "assets").exists():
+                        frontend_to_use = search_path
+                        FRONTEND_DIR = search_path
+                        print(f"[OK] Frontend trouve (avec assets): {search_path}")
+                        break
+                    else:
+                        print(f"[*]   - {search_path} existe mais ne contient pas index.html")
+                else:
+                    print(f"[*]   - {search_path} n'existe pas")
         
         # Servir le frontend si disponible
         if frontend_to_use and frontend_to_use.exists() and any(frontend_to_use.iterdir()):
