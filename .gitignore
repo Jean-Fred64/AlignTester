@@ -82,6 +82,10 @@ test_data/
 htmlcov/
 .tox/
 
+# Fichiers Windows Zone.Identifier (métadonnées de téléchargement)
+*:Zone.Identifier
+**/*:Zone.Identifier
+
 # Structure du projet - Protection
 # Note: release/ peut être versionné ou ignoré selon préférence
 # Décommentez la ligne suivante si vous ne voulez pas versionner release/
