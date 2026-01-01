@@ -181,24 +181,26 @@ def create_spec_file(platform_name, frontend_dist=None):
         datas_lines.append(f"    ({src_escaped}, {dst_escaped}),")
     datas_str = "[\n" + "\n".join(datas_lines) + "\n]"
     
+    # Préparer le code Tree pour le frontend
+    if frontend_dist and frontend_dist.exists():
+        frontend_tree_code = f"frontend_tree = Tree(r'{frontend_dist.resolve()}', prefix='frontend/dist')"
+    else:
+        frontend_tree_code = "frontend_tree = []"
+    
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
 
 from PyInstaller.utils.hooks import collect_all, collect_submodules
-from PyInstaller.utils.win32.versioninfo import VSVersionInfo
-from PyInstaller.building.build_main import Analysis, PYZ, EXE, COLLECT
 from PyInstaller.building.api import Tree
+from pathlib import Path
 
 block_cipher = None
 
-# Données à inclure (frontend, backend)
-datas = {datas_str}
+# Utiliser Tree pour inclure le frontend complet
+{frontend_tree_code}
 
-# Utiliser Tree pour inclure le frontend complet si disponible
-frontend_tree = []
-if frontend_dist and frontend_dist.exists():
-    frontend_tree = Tree(str(frontend_dist.resolve()), prefix='frontend/dist')
-    print(f"[*] Tree frontend cree: {len(frontend_tree)} entrees")
+# Données à inclure (backend et autres)
+datas = {datas_str}
 
 # Collecter tous les modules de FastAPI, Starlette, Uvicorn, etc.
 datas_fastapi, binaries_fastapi, hiddenimports_fastapi = collect_all('fastapi')
