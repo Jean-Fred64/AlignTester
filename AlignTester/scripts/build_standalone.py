@@ -183,13 +183,25 @@ def create_spec_file(platform_name, frontend_dist=None):
             print(f"[*]   - {Path(src).name} -> {dst}")
     
     # Construire la liste datas en format Python avec des raw strings pour Windows
+    # IMPORTANT: PyInstaller nécessite des tuples (source, destination)
+    # où source est un chemin absolu et destination est un chemin relatif
     datas_lines = []
     for src, dst in valid_datas:
-        # Utiliser raw string pour éviter les problèmes d'échappement sur Windows
-        src_escaped = repr(str(src))
+        # Utiliser repr() pour échapper correctement les chemins
+        # Sur Windows, les backslashes doivent être échappées
+        src_str = str(Path(src).resolve())
+        # Utiliser des raw strings pour Windows, mais repr() gère déjà l'échappement
+        src_escaped = repr(src_str)
         dst_escaped = repr(dst)
         datas_lines.append(f"    ({src_escaped}, {dst_escaped}),")
     datas_str = "[\n" + "\n".join(datas_lines) + "\n]"
+    
+    # Log pour debug: afficher quelques exemples de datas frontend
+    frontend_datas = [(src, dst) for src, dst in valid_datas if dst.startswith("frontend")]
+    if frontend_datas:
+        print(f"[*] Exemples de datas frontend dans spec file:")
+        for src, dst in frontend_datas[:2]:
+            print(f"[*]   - {Path(src).name} -> {dst}")
     
     spec_content = f'''# -*- mode: python ; coding: utf-8 -*-
 # Fichier généré automatiquement pour {platform_name}
