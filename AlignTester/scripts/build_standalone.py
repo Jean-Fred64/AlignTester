@@ -119,10 +119,22 @@ def create_spec_file(platform_name, frontend_dist=None):
     # Collecter les données à inclure
     datas = []
     
-    # Frontend - sera inclus via Tree dans le spec file (plus efficace)
-    # On ne l'ajoute pas ici aux datas, Tree s'en chargera automatiquement
+    # Frontend - inclure le dossier dist complet
     if frontend_dist and frontend_dist.exists():
-        print(f"[OK] Frontend prepare pour Tree: {frontend_dist}")
+        # Inclure tous les fichiers du frontend dist récursivement
+        frontend_files = []
+        for item in frontend_dist.rglob("*"):
+            if item.is_file():
+                rel_path = item.relative_to(frontend_dist)
+                # PyInstaller place les fichiers datas dans _internal/ au même niveau que l'exécutable
+                # On doit donc utiliser le chemin relatif depuis frontend/dist
+                if rel_path.parent == Path('.'):
+                    target_dir = "frontend/dist"
+                else:
+                    target_dir = f"frontend/dist/{rel_path.parent}"
+                frontend_files.append((str(item.resolve()), target_dir))
+        datas.extend(frontend_files)
+        print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
     
     # Backend - inclure tous les fichiers Python
     if BACKEND_DIR.exists():
@@ -186,8 +198,8 @@ datas_uvicorn, binaries_uvicorn, hiddenimports_uvicorn = collect_all('uvicorn')
 datas_pydantic, binaries_pydantic, hiddenimports_pydantic = collect_all('pydantic')
 datas_websockets, binaries_websockets, hiddenimports_websockets = collect_all('websockets')
 
-# Combiner toutes les données (Tree frontend + fichiers individuels + autres)
-all_datas = frontend_tree + datas + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
+# Combiner toutes les données
+all_datas = datas + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
 all_binaries = binaries_fastapi + binaries_starlette + binaries_uvicorn + binaries_pydantic + binaries_websockets
 all_hiddenimports = hiddenimports_fastapi + hiddenimports_starlette + hiddenimports_uvicorn + hiddenimports_pydantic + hiddenimports_websockets
 
