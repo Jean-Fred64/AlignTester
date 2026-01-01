@@ -73,7 +73,25 @@ def build_frontend():
         print("[WARN] Dossier frontend non trouve, skip du build frontend")
         return None
     
-    # Vérifier si node_modules existe
+    dist_frontend = FRONTEND_DIR / "dist"
+    
+    # Vérifier si le frontend est déjà buildé (cas du workflow GitHub Actions)
+    if dist_frontend.exists() and (dist_frontend / "index.html").exists():
+        files_count = len(list(dist_frontend.rglob("*")))
+        print(f"[OK] Frontend deja builde, utilisation de la version existante: {dist_frontend}")
+        print(f"[*] {files_count} fichiers/fichiers trouves dans dist")
+        return dist_frontend
+    
+    # Si le frontend n'est pas buildé, essayer de le builder
+    # Vérifier si npm est disponible
+    try:
+        npm_version = subprocess.run(["npm", "--version"], check=True, capture_output=True, text=True)
+        print(f"[*] npm trouve (version {npm_version.stdout.strip()})")
+    except (subprocess.CalledProcessError, FileNotFoundError):
+        print("[WARN] npm non trouve et frontend non builde, impossible de continuer")
+        return None
+    
+    # Installer les dépendances si nécessaire
     node_modules = FRONTEND_DIR / "node_modules"
     if not node_modules.exists():
         print("[*] Installation des dependances npm...")
@@ -88,20 +106,16 @@ def build_frontend():
         result = subprocess.run(["npm", "run", "build"], check=True, capture_output=True, text=True)
         print("[OK] Build frontend reussi")
         
-        dist_frontend = FRONTEND_DIR / "dist"
-        if dist_frontend.exists():
+        if dist_frontend.exists() and (dist_frontend / "index.html").exists():
             print(f"[OK] Frontend builde dans: {dist_frontend}")
             return dist_frontend
         else:
-            print("[WARN] Dossier dist non trouve apres le build")
+            print("[WARN] Dossier dist non trouve ou incomplet apres le build")
             return None
     except subprocess.CalledProcessError as e:
         print(f"[ERROR] Erreur lors du build frontend:")
         print(e.stdout)
         print(e.stderr)
-        return None
-    except FileNotFoundError:
-        print("[WARN] npm non trouve, skip du build frontend")
         return None
 
 def create_spec_file(platform_name, frontend_dist=None):
