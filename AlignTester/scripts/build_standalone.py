@@ -339,22 +339,42 @@ def build_with_pyinstaller(spec_path, platform_name):
         print(f"[*]   - {frontend_internal} existe: {frontend_internal.exists()}")
         print(f"[*]   - {frontend_exe_dir} existe: {frontend_exe_dir.exists()}")
         
-        if frontend_internal.exists():
-            files = list(frontend_internal.rglob("*"))
-            files = [f for f in files if f.is_file()]
-            print(f"[OK] Frontend trouve dans _internal: {len(files)} fichiers")
-        elif frontend_exe_dir.exists():
-            files = list(frontend_exe_dir.rglob("*"))
-            files = [f for f in files if f.is_file()]
-            print(f"[OK] Frontend trouve dans exe_dir: {len(files)} fichiers")
-        else:
+        # Chercher récursivement index.html
+        frontend_found = False
+        for search_dir in [frontend_internal, frontend_exe_dir, _internal, exe_dir]:
+            if search_dir.exists():
+                html_files = list(search_dir.rglob("index.html"))
+                if html_files:
+                    html_dir = html_files[0].parent
+                    files = list(html_dir.rglob("*"))
+                    files = [f for f in files if f.is_file()]
+                    print(f"[OK] Frontend trouve dans {html_dir}: {len(files)} fichiers")
+                    frontend_found = True
+                    break
+        
+        if not frontend_found:
             print(f"[WARN] Frontend non trouve dans le build!")
             # Lister le contenu de _internal pour debug
             if _internal.exists():
-                print(f"[*] Contenu de _internal:")
-                for item in sorted(_internal.iterdir())[:10]:
+                print(f"[*] Contenu de _internal (premiers 20 elements):")
+                items = sorted(_internal.iterdir())
+                for item in items[:20]:
                     item_type = "DIR" if item.is_dir() else "FILE"
                     print(f"[*]   - {item.name} ({item_type})")
+                if len(items) > 20:
+                    print(f"[*]   ... et {len(items) - 20} autres elements")
+            
+            # Chercher tous les dossiers frontend
+            print(f"[*] Recherche de dossiers 'frontend' dans le build:")
+            for search_dir in [_internal, exe_dir]:
+                if search_dir.exists():
+                    frontend_dirs = list(search_dir.rglob("frontend"))
+                    if frontend_dirs:
+                        for fd in frontend_dirs:
+                            print(f"[*]   - Trouve: {fd}")
+                            if fd.is_dir():
+                                contents = list(fd.iterdir())[:5]
+                                print(f"[*]     Contenu: {[x.name for x in contents]}")
         
         return exe_dir
     except subprocess.CalledProcessError as e:
