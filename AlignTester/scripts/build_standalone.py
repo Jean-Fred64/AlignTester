@@ -119,22 +119,10 @@ def create_spec_file(platform_name, frontend_dist=None):
     # Collecter les données à inclure
     datas = []
     
-    # Frontend - inclure le dossier dist complet
+    # Frontend - sera inclus via Tree dans le spec file (plus efficace)
+    # On ne l'ajoute pas ici aux datas, Tree s'en chargera automatiquement
     if frontend_dist and frontend_dist.exists():
-        # Inclure tous les fichiers du frontend dist récursivement
-        frontend_files = []
-        for item in frontend_dist.rglob("*"):
-            if item.is_file():
-                rel_path = item.relative_to(frontend_dist)
-                # PyInstaller place les fichiers datas dans _internal/ au même niveau que l'exécutable
-                # On doit donc utiliser le chemin relatif depuis frontend/dist
-                if rel_path.parent == Path('.'):
-                    target_dir = "frontend/dist"
-                else:
-                    target_dir = f"frontend/dist/{rel_path.parent}"
-                frontend_files.append((str(item.resolve()), target_dir))
-        datas.extend(frontend_files)
-        print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
+        print(f"[OK] Frontend prepare pour Tree: {frontend_dist}")
     
     # Backend - inclure tous les fichiers Python
     if BACKEND_DIR.exists():
