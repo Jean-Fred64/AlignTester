@@ -299,6 +299,17 @@ coll = COLLECT(
     spec_path.write_text(spec_content)
     print(f"[OK] Fichier .spec cree: {spec_path}")
     
+    # Log pour debug: afficher quelques lignes du spec file concernant les datas
+    spec_lines = spec_content.split('\n')
+    datas_start = next((i for i, line in enumerate(spec_lines) if 'datas =' in line), None)
+    if datas_start is not None:
+        print(f"[*] Lignes datas dans spec file (premieres 10):")
+        for line in spec_lines[datas_start:datas_start+15]:
+            if line.strip() and not line.strip().startswith('#'):
+                # Tronquer les lignes très longues
+                display_line = line[:100] + "..." if len(line) > 100 else line
+                print(f"[*]   {display_line}")
+    
     return spec_path
 
 def build_with_pyinstaller(spec_path, platform_name):
