@@ -120,21 +120,13 @@ def create_spec_file(platform_name, frontend_dist=None):
     datas = []
     
     # Frontend - inclure le dossier dist complet
+    # PyInstaller peut copier un dossier entier avec la syntaxe (source_dir, dest_dir)
+    # Cela copie récursivement tout le contenu du dossier source vers dest_dir
     if frontend_dist and frontend_dist.exists():
-        # Inclure tous les fichiers du frontend dist récursivement
-        frontend_files = []
-        for item in frontend_dist.rglob("*"):
-            if item.is_file():
-                rel_path = item.relative_to(frontend_dist)
-                # PyInstaller place les fichiers datas dans _internal/ au même niveau que l'exécutable
-                # On doit donc utiliser le chemin relatif depuis frontend/dist
-                if rel_path.parent == Path('.'):
-                    target_dir = "frontend/dist"
-                else:
-                    target_dir = f"frontend/dist/{rel_path.parent}"
-                frontend_files.append((str(item.resolve()), target_dir))
-        datas.extend(frontend_files)
-        print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
+        # Utiliser la syntaxe (dossier_source, dossier_destination) pour copier récursivement
+        # PyInstaller copiera tout le contenu de frontend_dist vers frontend/dist
+        datas.append((str(frontend_dist.resolve()), "frontend/dist"))
+        print(f"[OK] Frontend ajoute (dossier complet): {frontend_dist} -> frontend/dist")
     
     # Backend - inclure tous les fichiers Python
     if BACKEND_DIR.exists():
