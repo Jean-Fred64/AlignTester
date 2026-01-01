@@ -120,13 +120,28 @@ def create_spec_file(platform_name, frontend_dist=None):
     datas = []
     
     # Frontend - inclure le dossier dist complet
-    # PyInstaller peut copier un dossier entier avec la syntaxe (source_dir, dest_dir)
-    # Cela copie récursivement tout le contenu du dossier source vers dest_dir
+    # PyInstaller nécessite que les fichiers soient spécifiés individuellement
+    # pour garantir l'inclusion récursive de tous les fichiers
     if frontend_dist and frontend_dist.exists():
-        # Utiliser la syntaxe (dossier_source, dossier_destination) pour copier récursivement
-        # PyInstaller copiera tout le contenu de frontend_dist vers frontend/dist
-        datas.append((str(frontend_dist.resolve()), "frontend/dist"))
-        print(f"[OK] Frontend ajoute (dossier complet): {frontend_dist} -> frontend/dist")
+        # Inclure tous les fichiers du frontend dist récursivement
+        frontend_files = []
+        for item in frontend_dist.rglob("*"):
+            if item.is_file():
+                rel_path = item.relative_to(frontend_dist)
+                # PyInstaller place les fichiers datas dans _internal/ au même niveau que l'exécutable
+                # Structure: _internal/frontend/dist/...
+                if rel_path.parent == Path('.'):
+                    # Fichier à la racine de dist (ex: index.html)
+                    target_dir = "frontend/dist"
+                else:
+                    # Fichier dans un sous-dossier (ex: assets/index.js)
+                    target_dir = f"frontend/dist/{rel_path.parent}"
+                # Utiliser resolve() pour obtenir le chemin absolu
+                frontend_files.append((str(item.resolve()), target_dir))
+        datas.extend(frontend_files)
+        print(f"[OK] Frontend ajoute: {frontend_dist} ({len(frontend_files)} fichiers)")
+        if frontend_files:
+            print(f"[*] Exemples: {frontend_files[0][1]}, {frontend_files[1][1] if len(frontend_files) > 1 else ''}")
     
     # Backend - inclure tous les fichiers Python
     if BACKEND_DIR.exists():
