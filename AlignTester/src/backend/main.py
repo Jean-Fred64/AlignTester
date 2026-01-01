@@ -25,9 +25,16 @@ app = FastAPI(
 )
 
 # Configuration CORS pour permettre les requêtes depuis le frontend
+# En mode standalone, le frontend est servi depuis le même serveur (127.0.0.1:8000 ou localhost:8000)
+# En mode développement, le frontend est servi depuis Vite (localhost:5173) ou React (localhost:3000)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000", "http://localhost:5173"],  # React dev servers
+    allow_origins=[
+        "http://localhost:3000",  # React dev server
+        "http://localhost:5173",  # Vite dev server
+        "http://127.0.0.1:8000",  # Standalone - même serveur (127.0.0.1)
+        "http://localhost:8000",  # Standalone - même serveur (localhost)
+    ],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
