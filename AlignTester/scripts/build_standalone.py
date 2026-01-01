@@ -321,7 +321,35 @@ def build_with_pyinstaller(spec_path, platform_name):
     try:
         result = subprocess.run(cmd, check=True, capture_output=True, text=True)
         print("[OK] Build PyInstaller reussi")
-        return dist_platform / "aligntester"
+        
+        # Vérifier que les fichiers frontend sont bien inclus
+        exe_dir = dist_platform / "aligntester"
+        _internal = exe_dir / "_internal"
+        frontend_internal = _internal / "frontend" / "dist"
+        frontend_exe_dir = exe_dir / "frontend" / "dist"
+        
+        print(f"[*] Verification inclusion frontend:")
+        print(f"[*]   - {frontend_internal} existe: {frontend_internal.exists()}")
+        print(f"[*]   - {frontend_exe_dir} existe: {frontend_exe_dir.exists()}")
+        
+        if frontend_internal.exists():
+            files = list(frontend_internal.rglob("*"))
+            files = [f for f in files if f.is_file()]
+            print(f"[OK] Frontend trouve dans _internal: {len(files)} fichiers")
+        elif frontend_exe_dir.exists():
+            files = list(frontend_exe_dir.rglob("*"))
+            files = [f for f in files if f.is_file()]
+            print(f"[OK] Frontend trouve dans exe_dir: {len(files)} fichiers")
+        else:
+            print(f"[WARN] Frontend non trouve dans le build!")
+            # Lister le contenu de _internal pour debug
+            if _internal.exists():
+                print(f"[*] Contenu de _internal:")
+                for item in sorted(_internal.iterdir())[:10]:
+                    item_type = "DIR" if item.is_dir() else "FILE"
+                    print(f"[*]   - {item.name} ({item_type})")
+        
+        return exe_dir
     except subprocess.CalledProcessError as e:
         print(f"[ERROR] Erreur lors du build PyInstaller:")
         print(e.stdout)
