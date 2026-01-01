@@ -185,11 +185,20 @@ def create_spec_file(platform_name, frontend_dist=None):
 # Fichier généré automatiquement pour {platform_name}
 
 from PyInstaller.utils.hooks import collect_all, collect_submodules
+from PyInstaller.utils.win32.versioninfo import VSVersionInfo
+from PyInstaller.building.build_main import Analysis, PYZ, EXE, COLLECT
+from PyInstaller.building.api import Tree
 
 block_cipher = None
 
 # Données à inclure (frontend, backend)
 datas = {datas_str}
+
+# Utiliser Tree pour inclure le frontend complet si disponible
+frontend_tree = []
+if frontend_dist and frontend_dist.exists():
+    frontend_tree = Tree(str(frontend_dist.resolve()), prefix='frontend/dist')
+    print(f"[*] Tree frontend cree: {len(frontend_tree)} entrees")
 
 # Collecter tous les modules de FastAPI, Starlette, Uvicorn, etc.
 datas_fastapi, binaries_fastapi, hiddenimports_fastapi = collect_all('fastapi')
@@ -198,8 +207,8 @@ datas_uvicorn, binaries_uvicorn, hiddenimports_uvicorn = collect_all('uvicorn')
 datas_pydantic, binaries_pydantic, hiddenimports_pydantic = collect_all('pydantic')
 datas_websockets, binaries_websockets, hiddenimports_websockets = collect_all('websockets')
 
-# Combiner toutes les données
-all_datas = datas + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
+# Combiner toutes les données (Tree frontend + fichiers individuels + autres)
+all_datas = frontend_tree + datas + datas_fastapi + datas_starlette + datas_uvicorn + datas_pydantic + datas_websockets
 all_binaries = binaries_fastapi + binaries_starlette + binaries_uvicorn + binaries_pydantic + binaries_websockets
 all_hiddenimports = hiddenimports_fastapi + hiddenimports_starlette + hiddenimports_uvicorn + hiddenimports_pydantic + hiddenimports_websockets
 
