@@ -166,10 +166,20 @@ def create_spec_file(platform_name, frontend_dist=None):
         else:
             print(f"[WARN] Fichier non trouve, ignore: {src}")
     
-    print(f"[*] {len(valid_datas)} fichiers datas valides sur {len(datas)}")
+    print(f"[*] {len(valid_datas)} fichiers datas valides sur {len(datas)} total)")
+    
+    # Compter les fichiers frontend et backend
+    frontend_count = sum(1 for _, dst in valid_datas if dst.startswith("frontend"))
+    backend_count = sum(1 for _, dst in valid_datas if dst.startswith("backend"))
+    print(f"[*]   - Frontend: {frontend_count} fichiers")
+    print(f"[*]   - Backend: {backend_count} fichiers")
+    
     if valid_datas:
         print(f"[*] Exemples de fichiers datas:")
-        for src, dst in valid_datas[:3]:
+        # Afficher au moins un exemple de frontend et de backend
+        frontend_examples = [(src, dst) for src, dst in valid_datas if dst.startswith("frontend")][:2]
+        backend_examples = [(src, dst) for src, dst in valid_datas if dst.startswith("backend")][:2]
+        for src, dst in frontend_examples + backend_examples:
             print(f"[*]   - {Path(src).name} -> {dst}")
     
     # Construire la liste datas en format Python avec des raw strings pour Windows
