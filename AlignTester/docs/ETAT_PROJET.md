@@ -265,6 +265,12 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
 - ✅ Documentation dans `docs/` (Greaseweazle, stratégie de développement)
 - ✅ `COMPARAISON_METHODES_ALIGNEMENT.md` : Comparaison des méthodes d'alignement (ImageDisk, dtc, gw align, Amiga Test Kit)
 - ✅ `AMELIORATIONS_ALIGNEMENT.md` : Documentation des améliorations implémentées (détection positionnement, cohérence, stabilité, feedback visuel)
+- ✅ **Documentation standalone** :
+  - ✅ `BUILD_STANDALONE.md` : Guide de build standalone
+  - ✅ `GUIDE_STANDALONE_UTILISATEUR.md` : Guide utilisateur pour version standalone
+  - ✅ `README_STANDALONE.md` : Guide rapide standalone
+  - ✅ `STANDALONE_RESUME.md` : Résumé du processus de build standalone
+  - ✅ `PLAN_STANDALONE.md` : Plan de développement standalone
 
 ### 🛠️ Scripts
 - ✅ `prepare_release.py` : Script pour préparer les releases
@@ -272,6 +278,13 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
 - ✅ Scripts de build (`build_windows_nuitka.sh`, `build_windows_from_linux.sh`)
 - ✅ Scripts de test Greaseweazle (`test_gw_wsl.sh`, `connect_greaseweazle_wsl.sh`)
 - ✅ Scripts utilitaires (diagnostic, fix Node.js, etc.)
+- ✅ **Scripts de build standalone** :
+  - ✅ `build_standalone.py` : Script principal de build standalone avec PyInstaller
+  - ✅ `launcher_standalone.py` : Launcher pour application standalone
+  - ✅ Support multi-plateformes (Windows, Linux, macOS)
+  - ✅ Intégration automatique du frontend et backend
+  - ✅ Génération de fichiers .spec PyInstaller
+  - ✅ Création d'archives ZIP pour distribution
 
 ---
 
@@ -294,18 +307,40 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
 - ⚠️ **Couverture de code** : À mesurer et améliorer
 
 ### 🚀 Configuration de Build
-- ⚠️ **Script de build** pour le frontend (production) : Vite configuré, script de build à créer
-- ✅ **Scripts de build standalone** : Scripts Nuitka disponibles (`build_windows_nuitka.sh`)
+- ✅ **Script de build** pour le frontend (production) : Vite configuré et fonctionnel
+- ✅ **Scripts de build standalone** : 
+  - ✅ Script PyInstaller complet (`build_standalone.py`)
+  - ✅ Launcher standalone (`launcher_standalone.py`)
+  - ✅ Support Windows, Linux, macOS
+  - ✅ Intégration frontend et backend automatique
+  - ✅ Workflow GitHub Actions pour builds multi-plateformes
 - ❌ **Configuration de déploiement** (Docker optionnel) : À créer
 - ❌ **Variables d'environnement** documentées (`.env.example`) : À créer
-- ⚠️ **Script de démarrage complet** (backend + frontend ensemble) : Scripts séparés existent
+- ✅ **Script de démarrage complet** (backend + frontend ensemble) : Launcher standalone disponible
 
 ### 📦 Version Standalone pour Débutants
-- ❌ **Architecture standalone** non planifiée
-- ❌ **Script de packaging** (PyInstaller, cx_Freeze, ou Electron)
-- ❌ **Installeur** pour Windows/Linux/macOS
-- ❌ **Documentation standalone** (guide d'installation et d'utilisation)
-- ❌ **Interface simplifiée** pour débutants (mode "simple" dans l'UI)
+- ✅ **Architecture standalone** : PyInstaller + Serveur intégré
+  - ✅ Exécutable unique par plateforme (Windows, Linux, macOS)
+  - ✅ Backend FastAPI intégré
+  - ✅ Frontend React buildé et inclus
+  - ✅ Launcher automatique avec ouverture du navigateur
+- ✅ **Script de packaging** : PyInstaller avec `build_standalone.py`
+  - ✅ Génération automatique de fichiers .spec
+  - ✅ Inclusion automatique des dépendances (FastAPI, Starlette, Uvicorn, Pydantic, WebSockets)
+  - ✅ Inclusion récursive du frontend buildé
+  - ✅ Inclusion du backend complet
+  - ✅ Gestion des chemins multi-plateformes
+  - ✅ Support Unicode (Windows)
+- ✅ **Distribution** : Archives ZIP pour Windows/Linux/macOS
+  - ✅ Builds automatiques via GitHub Actions
+  - ✅ Artefacts téléchargeables depuis GitHub
+  - ✅ Upload optionnel vers GitHub Releases
+- ✅ **Documentation standalone** : Guides complets créés
+  - ✅ Guide de build (`BUILD_STANDALONE.md`)
+  - ✅ Guide utilisateur (`GUIDE_STANDALONE_UTILISATEUR.md`)
+  - ✅ Guide rapide (`README_STANDALONE.md`)
+  - ✅ Résumé du processus (`STANDALONE_RESUME.md`)
+- ⚠️ **Interface simplifiée** pour débutants (mode "simple" dans l'UI) : À créer
 
 ### 🔐 Sécurité et Configuration
 - ⚠️ **Validation des entrées** : Validation Pydantic en place, à renforcer selon besoins
@@ -357,24 +392,35 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
 4. 📝 **Mesure de couverture** : À configurer et améliorer
 5. 📝 **Configurer CI/CD** (GitHub Actions) : À créer
 
-### Phase 3 : Version Standalone pour Débutants
-1. 📦 **Choisir la technologie de packaging**
-   - **Option 1** : PyInstaller (Python + backend + frontend buildé)
-   - **Option 2** : Electron (app desktop complète)
-   - **Option 3** : Build statique + serveur intégré (single executable)
+### Phase 3 : Version Standalone pour Débutants (✅ COMPLÉTÉE)
+1. ✅ **Choisir la technologie de packaging**
+   - ✅ **Option choisie** : PyInstaller (Python + backend + frontend buildé)
+   - ✅ Architecture : Single executable avec serveur intégré
    
-2. 📦 **Créer le script de build standalone**
-   - Inclure le backend Python
-   - Inclure le frontend buildé
-   - Inclure les dépendances nécessaires
-   - Créer un launcher simple
+2. ✅ **Créer le script de build standalone**
+   - ✅ Script `build_standalone.py` créé et fonctionnel
+   - ✅ Inclusion automatique du backend Python
+   - ✅ Inclusion automatique du frontend buildé (Vite)
+   - ✅ Inclusion automatique des dépendances (collect_all)
+   - ✅ Launcher `launcher_standalone.py` créé
+   - ✅ Détection automatique des chemins (onefile/onedir)
+   - ✅ Ouverture automatique du navigateur
+   - ✅ Gestion CORS pour standalone
+   - ✅ Support multi-plateformes (Windows, Linux, macOS)
 
-3. 📖 **Créer la documentation standalone**
-   - Guide d'installation simple
-   - Guide d'utilisation pour débutants
-   - FAQ
+3. ✅ **Créer la documentation standalone**
+   - ✅ Guide de build (`BUILD_STANDALONE.md`)
+   - ✅ Guide utilisateur (`GUIDE_STANDALONE_UTILISATEUR.md`)
+   - ✅ Guide rapide (`README_STANDALONE.md`)
+   - ✅ Résumé du processus (`STANDALONE_RESUME.md`)
 
-4. 🎨 **Créer une interface "mode simple"**
+4. ✅ **Workflow GitHub Actions**
+   - ✅ Builds automatiques multi-plateformes
+   - ✅ Génération d'artefacts ZIP
+   - ✅ Upload vers GitHub Releases (optionnel)
+   - ✅ Gestion des erreurs et continue-on-error
+
+5. ⚠️ **Créer une interface "mode simple"** (À FAIRE)
    - Masquer les options avancées
    - Guide pas à pas
    - Messages d'aide clairs
@@ -432,12 +478,12 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 | Tests | ✅ Implémentés | 70% | 63 tests backend, tests d'intégration |
 | Intégration Hardware | ✅ Complète | 90% | Détection automatique, sauvegarde port, optimisée |
 | Documentation | ✅ Complète | 80% | Documentation technique et guides |
-| Build/Deployment | ⚠️ Partiel | 50% | Scripts de build disponibles, Docker à créer |
-| Version Standalone | ⚠️ En planification | 20% | Scripts de base, architecture à finaliser |
+| Build/Deployment | ✅ Avancé | 85% | Scripts de build standalone complets, workflow GitHub Actions, Docker optionnel à créer |
+| Version Standalone | ✅ Complète | 95% | Architecture PyInstaller, builds multi-plateformes, documentation complète, mode simple à ajouter |
 
-**Estimation globale : ~98% prêt pour le développement**
+**Estimation globale : ~99% prêt pour le développement**
 
-### Prochaine étape : **Tests en Situation Réelle**
+### Prochaine étape : **Tests en Situation Réelle et Mode Simple**
 
 ---
 
@@ -471,12 +517,23 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 7. ✅ Optimiser l'interface (rendre plus compacte) - COMPLÉTÉ
 8. 🔧 Fiabiliser le Mode Direct si nécessaire
 9. 📝 Améliorer les tests (frontend, couverture)
-10. 📦 Développer la version standalone
+10. ✅ Développer la version standalone - COMPLÉTÉ
+11. 🎨 Créer une interface "mode simple" pour débutants
 
 ---
 
 **Dernière mise à jour :** État d'avancement complet - Janvier 2025
-**Dernière session :** Améliorations de la vérification Track 0 et navigation :
+**Dernière session :** Implémentation complète de la version standalone :
+  - ✅ Script de build standalone avec PyInstaller (`build_standalone.py`)
+  - ✅ Launcher standalone avec détection automatique des chemins (`launcher_standalone.py`)
+  - ✅ Intégration complète du frontend dans le build
+  - ✅ Correction CORS pour la communication frontend/backend en standalone
+  - ✅ Workflow GitHub Actions pour builds multi-plateformes (Windows, Linux, macOS)
+  - ✅ Documentation complète (guides de build, utilisateur, résumé)
+  - ✅ Builds fonctionnels et testés avec frontend intégré
+  - ✅ Gestion des erreurs et Unicode sur Windows
+  - ✅ Upload optionnel vers GitHub Releases
+**Session précédente :** Améliorations de la vérification Track 0 et navigation :
   - Correction de la vérification Track 0 : utilisation du format sélectionné, adaptation des positions de test selon le nombre de pistes
   - Ajout de `--motor-on` et `--force` pour les commandes seek (activation du moteur et déplacement audible)
   - Correction de l'accès à `stdout` (dictionnaire au lieu d'attribut)
@@ -616,6 +673,13 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
     - ✅ `PROPOSITIONS_FIABILISATION_ALIGNEMENT.md` : Propositions détaillées basées sur le manuel Panasonic JU-253
     - ✅ `ANALYSE_FIABILITE_ALIGNEMENT.md` : Analyse de la fiabilité du code actuel pour tester et régler l'alignement
     - ✅ `IMPLEMENTATION_TRACK0_VERIFICATION.md` : Documentation de l'implémentation de la vérification Track 0
+- ✅ **Version Standalone** :
+  - ✅ `PLAN_STANDALONE.md` : Plan de développement de la version standalone
+  - ✅ `BUILD_STANDALONE.md` : Guide détaillé pour créer les builds standalone
+  - ✅ `GUIDE_STANDALONE_UTILISATEUR.md` : Guide utilisateur complet pour la version standalone
+  - ✅ `README_STANDALONE.md` : Guide rapide pour utilisateurs standalone
+  - ✅ `STANDALONE_RESUME.md` : Résumé du processus de build standalone
+  - ✅ `.github/workflows/build-standalone.yml` : Workflow GitHub Actions pour builds automatiques
 
 **Prochaine revue :** Après validation en situation réelle avec un lecteur défectueux et réglage des vis
 
@@ -789,6 +853,9 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 
 ### Scripts Disponibles
 - ✅ Scripts de build (Nuitka, Windows, Linux)
+- ✅ **Scripts de build standalone** :
+  - ✅ `build_standalone.py` : Build PyInstaller multi-plateformes
+  - ✅ `launcher_standalone.py` : Launcher pour application standalone
 - ✅ Scripts de test Greaseweazle
 - ✅ Scripts de diagnostic et utilitaires
 - ✅ Scripts de démarrage développement
