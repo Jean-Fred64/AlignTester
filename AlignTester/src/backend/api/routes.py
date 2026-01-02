@@ -809,23 +809,77 @@ async def set_gw_path(request: GwPathRequest):
     """Définit le chemin vers gw.exe"""
     from .settings import settings_manager
     from pathlib import Path
+    import platform
     try:
+        # Normaliser le chemin (enlever les espaces en début/fin)
+        normalized_path = request.gw_path.strip()
+        
+        # Fonction pour convertir un chemin Windows en chemin WSL si nécessaire
+        def convert_windows_to_wsl_path(windows_path: str) -> str:
+            """Convertit un chemin Windows (ex: S:\...) en chemin WSL (/mnt/s/...)"""
+            # Vérifier si c'est un chemin Windows (format X:\...)
+            if len(windows_path) >= 3 and windows_path[1] == ':' and windows_path[2] in ['\\', '/']:
+                drive_letter = windows_path[0].lower()
+                remaining_path = windows_path[3:].replace('\\', '/')
+                return f"/mnt/{drive_letter}/{remaining_path}"
+            return windows_path
+        
+        # Convertir le chemin Windows en WSL si on est dans WSL et que c'est un chemin Windows
+        if platform.system() != "Windows" and len(normalized_path) >= 3 and normalized_path[1] == ':' and normalized_path[2] in ['\\', '/']:
+            normalized_path = convert_windows_to_wsl_path(normalized_path)
+        
         # Valider que le chemin existe (si c'est un chemin absolu)
-        path = Path(request.gw_path)
-        if path.is_absolute() and not path.exists():
-            raise HTTPException(
-                status_code=400,
-                detail=f"Le chemin spécifié n'existe pas: {request.gw_path}"
-            )
-        settings_manager.set_gw_path(request.gw_path)
+        path = Path(normalized_path)
+        
+        # Vérifier si c'est un chemin absolu (ou un chemin Windows)
+        is_absolute = path.is_absolute() or (len(normalized_path) >= 3 and normalized_path[1] == ':' and normalized_path[2] in ['\\', '/'])
+        
+        if is_absolute:
+            # Si c'est un dossier, chercher gw.exe dedans
+            if path.is_dir():
+                gw_exe_in_dir = path / "gw.exe"
+                if gw_exe_in_dir.exists():
+                    # Utiliser le chemin complet vers gw.exe
+                    normalized_path = str(gw_exe_in_dir.absolute())
+                else:
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"gw.exe non trouvé dans le dossier: {request.gw_path}"
+                    )
+            elif path.is_file():
+                # Vérifier que c'est bien gw.exe ou gw
+                if path.name.lower() not in ["gw.exe", "gw"]:
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Le fichier spécifié n'est pas gw.exe: {request.gw_path}"
+                    )
+                if not path.exists():
+                    raise HTTPException(
+                        status_code=400,
+                        detail=f"Le fichier spécifié n'existe pas: {request.gw_path}"
+                    )
+                # Utiliser le chemin absolu normalisé
+                normalized_path = str(path.absolute())
+            else:
+                # Le chemin n'existe pas du tout
+                raise HTTPException(
+                    status_code=400,
+                    detail=f"Le chemin spécifié n'existe pas: {request.gw_path}"
+                )
+        else:
+            # Chemin relatif - permettre de sauvegarder tel quel (sera cherché dans PATH)
+            pass
+        
+        # Sauvegarder le chemin normalisé
+        settings_manager.set_gw_path(normalized_path)
         
         # Mettre à jour l'executor global avec le nouveau chemin
-        executor.gw_path = request.gw_path
+        executor.gw_path = normalized_path
         
         return {
             "success": True,
-            "gw_path": request.gw_path,
-            "message": f"Chemin gw.exe défini sur {request.gw_path}"
+            "gw_path": normalized_path,  # Retourner le chemin normalisé
+            "message": f"Chemin gw.exe défini sur {normalized_path}"
         }
     except ValueError as e:
         raise HTTPException(

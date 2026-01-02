@@ -91,9 +91,9 @@ class GreaseweazleExecutor:
         else:
             # Si on est dans WSL, essayer d'utiliser gw.exe Windows si disponible
             if self._is_wsl():
-                # Chemin vers gw.exe Windows (ajustez selon votre configuration)
+                # Chemin vers gw.exe Windows - PRIORITÉ au chemin spécifique de l'utilisateur
                 possible_paths = [
-                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),
+                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),  # PRIORITÉ 1
                     Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23/gw.exe"),
                     Path("/mnt/c/Program Files/Greaseweazle/gw.exe"),
                     Path("/mnt/c/Program Files (x86)/Greaseweazle/gw.exe"),
@@ -101,9 +101,7 @@ class GreaseweazleExecutor:
                 ]
                 for gw_path in possible_paths:
                     if gw_path.exists():
-                        # Sauvegarder automatiquement le premier chemin trouvé si aucun n'est sauvegardé
-                        if not settings_manager.get_gw_path():
-                            settings_manager.set_gw_path(str(gw_path))
+                        # Ne pas sauvegarder automatiquement - l'utilisateur doit le faire manuellement
                         return str(gw_path)
             # Sinon, utiliser gw Linux (si installé)
             return "gw"
@@ -562,16 +560,18 @@ class GreaseweazleExecutor:
         else:
             # Linux/macOS/WSL
             if self._is_wsl():
-                # WSL: chercher gw.exe Windows
+                # WSL: chercher gw.exe Windows - PRIORITÉ au chemin spécifique de l'utilisateur
                 wsl_paths = [
-                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),
+                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),  # PRIORITÉ 1
                     Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23/gw.exe"),
                     Path("/mnt/c/Program Files/Greaseweazle/gw.exe"),
                     Path("/mnt/c/Program Files (x86)/Greaseweazle/gw.exe"),
                 ]
                 for gw_path in wsl_paths:
                     if gw_path.exists():
-                        found_paths.append(str(gw_path.absolute()))
+                        # Utiliser le chemin absolu normalisé
+                        abs_path = str(gw_path.absolute())
+                        found_paths.append(abs_path)
             
             # Chercher gw dans PATH
             gw_in_path = shutil.which("gw")

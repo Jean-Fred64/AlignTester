@@ -166,15 +166,24 @@ function App() {
         // Sauvegarder automatiquement si c'est un chemin valide
         handleSetGwPath()
       } else {
-        // Sinon, utiliser le nom du fichier et demander le chemin complet
+        // Dans un navigateur web standard, on ne peut pas obtenir le chemin complet pour des raisons de sécurité
+        // Afficher un message d'aide avec les instructions pour copier le chemin depuis l'explorateur
         const fileName = file.name
         
-        // Si c'est gw.exe ou gw, on peut suggérer un chemin
+        // Si c'est gw.exe ou gw, afficher des instructions claires
         if (fileName === 'gw.exe' || fileName === 'gw') {
-          // Mettre à jour l'input avec le nom du fichier
-          // L'utilisateur devra compléter avec le chemin complet
-          setGwPathInput(fileName)
-          alert(t('gwPathFileSelected') + ' ' + fileName + '. ' + t('gwPathCompletePath'))
+          // Message d'aide avec instructions pour copier le chemin depuis l'explorateur Windows
+          const helpMessage = t('gwPathFileSelected') + ' ' + fileName + '.\n\n' + 
+                             t('gwPathCopyInstructions') + '\n' +
+                             t('gwPathCopyInstructionsStep1') + '\n' +
+                             t('gwPathCopyInstructionsStep2') + '\n' +
+                             t('gwPathCopyInstructionsStep3') + '\n' +
+                             t('gwPathCopyInstructionsStep4')
+          
+          alert(helpMessage)
+          
+          // Laisser le champ vide pour que l'utilisateur puisse coller le chemin complet
+          setGwPathInput('')
         } else {
           setGwPathInput(fileName)
         }
@@ -221,11 +230,18 @@ function App() {
     try {
       setSavingGwPath(true)
       setError(null)
+      // Normaliser le chemin en enlevant les espaces en début/fin
+      const normalizedPath = gwPathInput.trim()
+      
       const response = await axios.post('http://localhost:8000/api/settings/gw-path', { 
-        gw_path: gwPathInput.trim() 
+        gw_path: normalizedPath
       })
+      
       if (response.data.success) {
-        setGwPath(gwPathInput.trim())
+        // Utiliser le chemin retourné par le serveur (qui peut être normalisé/absolu)
+        const savedPath = response.data.gw_path || normalizedPath
+        setGwPath(savedPath)
+        setGwPathInput(savedPath)  // Mettre à jour le champ avec le chemin normalisé
         // Rafraîchir les infos pour mettre à jour le chemin
         await fetchInfo()
         alert(t('gwPathSaved'))
@@ -676,9 +692,15 @@ function App() {
                 <div className="border-b border-gray-700 pb-3 mb-3">
                   <h3 className="text-base font-semibold mb-2">{t('gwPathConfig')}</h3>
                   <div className="space-y-2">
-                    <div className="text-xs text-gray-400 mb-1">
-                      {t('currentGwPath')} <span className="font-mono text-blue-400">{gwPath || info.gw_path}</span>
-                    </div>
+                    {(!gwPath && !info.gw_path) ? (
+                      <div className="text-xs text-yellow-400 mb-1 p-2 bg-yellow-900/20 rounded border border-yellow-700">
+                        ⚠️ {t('gwPathNotSet')} {t('gwPathPleaseSet')}
+                      </div>
+                    ) : (
+                      <div className="text-xs text-gray-400 mb-1">
+                        {t('currentGwPath')} <span className="font-mono text-blue-400">{gwPath || info.gw_path}</span>
+                      </div>
+                    )}
                     <div className="flex gap-2">
                       <input
                         type="text"
