@@ -93,7 +93,10 @@ export const translations = {
     browseGwPath: "Parcourir...",
     gwPathFileSelected: "Fichier sélectionné:",
     gwPathCompletePath: "Veuillez compléter avec le chemin complet du fichier (ex: /mnt/s/.../gw.exe)",
-    gwPathTip: "Vous pouvez saisir le chemin manuellement ou utiliser 'Parcourir' pour sélectionner le fichier. Appuyez sur Entrée pour sauvegarder.",
+    gwPathTip: "Vous pouvez saisir le chemin manuellement, utiliser 'Parcourir' pour sélectionner le fichier, ou 'Détecter' pour une détection automatique. Appuyez sur Entrée pour sauvegarder.",
+    gwPathDetect: "🔍 Détecter automatiquement",
+    gwPathDetected: "Chemin gw.exe détecté et sauvegardé",
+    gwPathDetectionFailed: "Impossible de détecter automatiquement gw.exe. Veuillez spécifier le chemin manuellement.",
     
     // Résultat de détection
     detectionResult: "Résultat de la Détection",
@@ -409,7 +412,10 @@ export const translations = {
     browseGwPath: "Browse...",
     gwPathFileSelected: "File selected:",
     gwPathCompletePath: "Please complete with the full file path (e.g., /mnt/s/.../gw.exe)",
-    gwPathTip: "You can enter the path manually or use 'Browse' to select the file. Press Enter to save.",
+    gwPathTip: "You can enter the path manually, use 'Browse' to select the file, or 'Detect' for automatic detection. Press Enter to save.",
+    gwPathDetect: "🔍 Detect automatically",
+    gwPathDetected: "gw.exe path detected and saved",
+    gwPathDetectionFailed: "Unable to automatically detect gw.exe. Please specify the path manually.",
     
     // Detection result
     detectionResult: "Detection Result",

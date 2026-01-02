@@ -6,6 +6,8 @@ Gère l'exécution des commandes gw.exe / gw
 import subprocess
 import platform
 import asyncio
+import sys
+import shutil
 from pathlib import Path
 from typing import Optional, Callable, List, Dict
 import json
@@ -48,9 +50,43 @@ class GreaseweazleExecutor:
         
         # Détection automatique
         if self.platform == "Windows":
+            # 1. Chercher dans le répertoire de l'exécutable (standalone)
+            if getattr(sys, 'frozen', False):
+                # Mode standalone (PyInstaller)
+                exe_dir = Path(sys.executable).parent
+                possible_paths_standalone = [
+                    exe_dir / "gw.exe",
+                    exe_dir / "greaseweazle" / "gw.exe",
+                    exe_dir / "greaseweazle-1.23" / "gw.exe",
+                    exe_dir.parent / "gw.exe",
+                    exe_dir.parent / "greaseweazle" / "gw.exe",
+                    exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
+                ]
+                for gw_path in possible_paths_standalone:
+                    if gw_path.exists():
+                        return str(gw_path.absolute())
+            
+            # 2. Chercher dans le répertoire courant (développement)
             gw_exe = Path("gw.exe")
             if gw_exe.exists():
                 return str(gw_exe.absolute())
+            
+            # 3. Chercher dans le répertoire de travail
+            cwd_gw = Path.cwd() / "gw.exe"
+            if cwd_gw.exists():
+                return str(cwd_gw.absolute())
+            
+            # 4. Chercher dans des emplacements Windows communs
+            possible_paths_common = [
+                Path("C:/Program Files/Greaseweazle/gw.exe"),
+                Path("C:/Program Files (x86)/Greaseweazle/gw.exe"),
+                Path.home() / "AppData/Local/Greaseweazle/gw.exe",
+            ]
+            for gw_path in possible_paths_common:
+                if gw_path.exists():
+                    return str(gw_path.absolute())
+            
+            # 5. En dernier recours, retourner juste "gw.exe" (sera cherché dans PATH)
             return "gw.exe"
         else:
             # Si on est dans WSL, essayer d'utiliser gw.exe Windows si disponible
@@ -60,6 +96,7 @@ class GreaseweazleExecutor:
                     Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),
                     Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23/gw.exe"),
                     Path("/mnt/c/Program Files/Greaseweazle/gw.exe"),
+                    Path("/mnt/c/Program Files (x86)/Greaseweazle/gw.exe"),
                     # Ajouter d'autres chemins possibles si nécessaire
                 ]
                 for gw_path in possible_paths:
@@ -450,6 +487,111 @@ class GreaseweazleExecutor:
             return result.returncode == 0
         except Exception:
             return False
+    
+    def detect_gw_path_auto(self) -> Dict:
+        """
+        Détecte automatiquement gw.exe dans tous les emplacements possibles
+        Retourne un dictionnaire avec les informations de détection
+        """
+        found_paths = []
+        
+        # D'abord, vérifier si un chemin est sauvegardé dans les settings
+        saved_path = settings_manager.get_gw_path()
+        if saved_path:
+            path = Path(saved_path)
+            if path.exists():
+                return {
+                    "found": True,
+                    "path": str(path.absolute()),
+                    "source": "saved_settings",
+                    "all_paths_checked": [str(path.absolute())]
+                }
+        
+        # Détection automatique
+        if self.platform == "Windows":
+            search_paths = []
+            
+            # 1. Répertoire de l'exécutable (standalone)
+            if getattr(sys, 'frozen', False):
+                exe_dir = Path(sys.executable).parent
+                search_paths.extend([
+                    exe_dir / "gw.exe",
+                    exe_dir / "greaseweazle" / "gw.exe",
+                    exe_dir / "greaseweazle-1.23" / "gw.exe",
+                    exe_dir.parent / "gw.exe",
+                    exe_dir.parent / "greaseweazle" / "gw.exe",
+                    exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
+                ])
+            
+            # 2. Répertoire courant
+            search_paths.extend([
+                Path("gw.exe"),
+                Path.cwd() / "gw.exe",
+            ])
+            
+            # 3. Emplacements Windows communs
+            search_paths.extend([
+                Path("C:/Program Files/Greaseweazle/gw.exe"),
+                Path("C:/Program Files (x86)/Greaseweazle/gw.exe"),
+                Path.home() / "AppData/Local/Greaseweazle/gw.exe",
+            ])
+            
+            # 4. Chercher dans le PATH (utiliser shutil.which)
+            gw_in_path = shutil.which("gw.exe")
+            if gw_in_path:
+                search_paths.append(Path(gw_in_path))
+            
+            # Vérifier tous les chemins
+            for gw_path in search_paths:
+                try:
+                    if gw_path.exists():
+                        abs_path = str(gw_path.absolute())
+                        found_paths.append(abs_path)
+                except Exception:
+                    pass
+            
+            if found_paths:
+                # Retourner le premier chemin trouvé
+                return {
+                    "found": True,
+                    "path": found_paths[0],
+                    "source": "auto_detection",
+                    "all_paths_checked": [str(p) for p in search_paths],
+                    "all_paths_found": found_paths
+                }
+        else:
+            # Linux/macOS/WSL
+            if self._is_wsl():
+                # WSL: chercher gw.exe Windows
+                wsl_paths = [
+                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23b/gw.exe"),
+                    Path("/mnt/s/Divers SSD M2/Test D7/Greaseweazle/greaseweazle-1.23/gw.exe"),
+                    Path("/mnt/c/Program Files/Greaseweazle/gw.exe"),
+                    Path("/mnt/c/Program Files (x86)/Greaseweazle/gw.exe"),
+                ]
+                for gw_path in wsl_paths:
+                    if gw_path.exists():
+                        found_paths.append(str(gw_path.absolute()))
+            
+            # Chercher gw dans PATH
+            gw_in_path = shutil.which("gw")
+            if gw_in_path:
+                found_paths.append(gw_in_path)
+        
+        if found_paths:
+            return {
+                "found": True,
+                "path": found_paths[0],
+                "source": "auto_detection",
+                "all_paths_found": found_paths
+            }
+        else:
+            return {
+                "found": False,
+                "path": None,
+                "source": "auto_detection",
+                "error": "Aucun exécutable gw.exe/gw trouvé"
+            }
     
     def detect_serial_ports(self) -> List[Dict]:
         """

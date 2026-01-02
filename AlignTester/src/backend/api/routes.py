@@ -833,6 +833,43 @@ async def set_gw_path(request: GwPathRequest):
             detail=str(e)
         )
 
+@router.post("/settings/gw-path/detect")
+async def detect_gw_path_auto():
+    """
+    Détecte automatiquement le chemin vers gw.exe dans tous les emplacements possibles
+    et le sauvegarde automatiquement si trouvé
+    """
+    from .settings import settings_manager
+    
+    # Utiliser la méthode de détection automatique
+    detection_result = executor.detect_gw_path_auto()
+    
+    if detection_result.get("found") and detection_result.get("path"):
+        detected_path = detection_result["path"]
+        
+        # Sauvegarder automatiquement le chemin trouvé
+        settings_manager.set_gw_path(detected_path)
+        
+        # Mettre à jour l'executor global
+        executor.gw_path = detected_path
+        
+        return {
+            "success": True,
+            "found": True,
+            "gw_path": detected_path,
+            "source": detection_result.get("source", "auto_detection"),
+            "message": f"gw.exe détecté et sauvegardé: {detected_path}",
+            "all_paths_found": detection_result.get("all_paths_found", [])
+        }
+    else:
+        return {
+            "success": False,
+            "found": False,
+            "gw_path": None,
+            "error": detection_result.get("error", "Aucun exécutable gw.exe/gw trouvé"),
+            "message": "Aucun exécutable gw.exe/gw trouvé. Veuillez spécifier le chemin manuellement."
+        }
+
 @router.post("/track0/verify")
 async def verify_track0_sensor(request: Track0VerifyRequest = Track0VerifyRequest()):
     """

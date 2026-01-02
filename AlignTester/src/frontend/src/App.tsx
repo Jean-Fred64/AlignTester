@@ -95,6 +95,7 @@ function App() {
   const [gwPath, setGwPath] = useState<string>('')
   const [gwPathInput, setGwPathInput] = useState<string>('')
   const [savingGwPath, setSavingGwPath] = useState(false)
+  const [detectingGwPath, setDetectingGwPath] = useState(false)
   const [showDriveInfo, setShowDriveInfo] = useState(false)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
@@ -149,32 +150,65 @@ function App() {
   const handleFileSelected = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      // Pour les applications web, on ne peut pas obtenir le chemin complet du fichier
-      // pour des raisons de sécurité. On utilise le nom du fichier ou on demande à l'utilisateur
-      // de saisir le chemin complet.
+      // Essayer d'obtenir le chemin complet si disponible
+      // Dans certains contextes (Electron, ou certains navigateurs avec API filesystem),
+      // on peut avoir accès au chemin complet via file.path ou d'autres propriétés
+      let fullPath: string | null = null
       
-      // Si on est dans un environnement qui supporte les chemins (comme Electron),
-      // on pourrait utiliser file.path, mais ici on va utiliser le nom du fichier
-      // et suggérer à l'utilisateur de compléter le chemin si nécessaire
+      // Vérifier si file.path existe (Electron, certains environnements)
+      if ((file as any).path) {
+        fullPath = (file as any).path
+      }
       
-      // Pour WSL/Windows, on peut essayer de construire le chemin
-      // Mais le plus simple est de demander le chemin complet
-      const fileName = file.name
-      
-      // Si c'est gw.exe ou gw, on peut suggérer un chemin
-      if (fileName === 'gw.exe' || fileName === 'gw') {
-        // Mettre à jour l'input avec le nom du fichier
-        // L'utilisateur devra compléter avec le chemin complet
-        setGwPathInput(fileName)
-        alert(t('gwPathFileSelected') + ' ' + fileName + '. ' + t('gwPathCompletePath'))
+      // Si on a le chemin complet, l'utiliser directement
+      if (fullPath) {
+        setGwPathInput(fullPath)
+        // Sauvegarder automatiquement si c'est un chemin valide
+        handleSetGwPath()
       } else {
-        setGwPathInput(fileName)
+        // Sinon, utiliser le nom du fichier et demander le chemin complet
+        const fileName = file.name
+        
+        // Si c'est gw.exe ou gw, on peut suggérer un chemin
+        if (fileName === 'gw.exe' || fileName === 'gw') {
+          // Mettre à jour l'input avec le nom du fichier
+          // L'utilisateur devra compléter avec le chemin complet
+          setGwPathInput(fileName)
+          alert(t('gwPathFileSelected') + ' ' + fileName + '. ' + t('gwPathCompletePath'))
+        } else {
+          setGwPathInput(fileName)
+        }
       }
     }
     
     // Réinitialiser l'input pour permettre de sélectionner le même fichier
     if (fileInputRef.current) {
       fileInputRef.current.value = ''
+    }
+  }
+
+  const handleDetectGwPath = async () => {
+    try {
+      setDetectingGwPath(true)
+      const response = await axios.post('http://localhost:8000/api/settings/gw-path/detect', {})
+      
+      if (response.data.success && response.data.found) {
+        const detectedPath = response.data.gw_path
+        setGwPath(detectedPath)
+        setGwPathInput(detectedPath)
+        alert(t('gwPathDetected') + ': ' + detectedPath)
+        // Rafraîchir les infos pour mettre à jour l'affichage
+        fetchInfo()
+      } else {
+        setError(response.data.error || response.data.message || t('gwPathDetectionFailed'))
+        alert(response.data.message || t('gwPathDetectionFailed'))
+      }
+    } catch (err: any) {
+      const errorMsg = err.response?.data?.detail || err.message || t('gwPathDetectionFailed')
+      setError(errorMsg)
+      alert(errorMsg)
+    } finally {
+      setDetectingGwPath(false)
     }
   }
 
@@ -666,6 +700,14 @@ function App() {
                         style={{ display: 'none' }}
                         onChange={handleFileSelected}
                       />
+                      <button
+                        onClick={handleDetectGwPath}
+                        disabled={detectingGwPath}
+                        className="px-4 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-600 disabled:cursor-not-allowed text-white font-medium rounded transition-colors text-sm"
+                        title={t('gwPathDetect')}
+                      >
+                        {detectingGwPath ? t('saving') : t('gwPathDetect')}
+                      </button>
                       <button
                         onClick={handleBrowseGwPath}
                         className="px-4 py-2 bg-gray-600 hover:bg-gray-700 text-white font-medium rounded transition-colors text-sm"
