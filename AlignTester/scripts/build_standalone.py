@@ -166,6 +166,39 @@ def create_spec_file(platform_name, frontend_dist=None):
             datas.append((str(py_file), target_dir))
         print(f"[OK] Backend ajoute: {BACKEND_DIR}")
     
+    # Diskdefs - inclure tous les fichiers diskdefs.cfg pour les formats de disquettes
+    # Chercher dans les sources Greaseweazle disponibles
+    diskdefs_source_dirs = [
+        ALIGNTESTER_DIR / "src" / "greaseweazle-1.23" / "src" / "greaseweazle" / "data",
+        ALIGNTESTER_DIR / "src" / "greaseweazle-1.23b" / "src" / "greaseweazle" / "data",
+        PROJECT_ROOT / "AlignTester" / "src" / "greaseweazle-1.23" / "src" / "greaseweazle" / "data",
+        PROJECT_ROOT / "AlignTester" / "src" / "greaseweazle-1.23b" / "src" / "greaseweazle" / "data",
+    ]
+    
+    diskdefs_dir = None
+    for dir_path in diskdefs_source_dirs:
+        if dir_path.exists() and (dir_path / "diskdefs.cfg").exists():
+            diskdefs_dir = dir_path
+            break
+    
+    if diskdefs_dir:
+        # Inclure tous les fichiers diskdefs*.cfg
+        diskdefs_files = []
+        target_dir = "diskdefs"  # Tous les fichiers iront dans diskdefs/
+        for cfg_file in diskdefs_dir.glob("diskdefs*.cfg"):
+            if cfg_file.is_file():
+                diskdefs_files.append((str(cfg_file.resolve()), target_dir))
+        
+        if diskdefs_files:
+            datas.extend(diskdefs_files)
+            print(f"[OK] Diskdefs ajoute: {diskdefs_dir} ({len(diskdefs_files)} fichiers)")
+            print(f"[*]   - Tous les profils de formats de disquettes inclus")
+        else:
+            print(f"[WARN] Aucun fichier diskdefs.cfg trouve dans: {diskdefs_dir}")
+    else:
+        print(f"[WARN] Dossier diskdefs non trouve dans les emplacements standards")
+        print(f"   Les formats de disquettes par defaut seront utilises")
+    
     # Greaseweazle - inclure gw.exe et toutes les DLLs nécessaires (Windows uniquement)
     if platform_name == "windows":
         greaseweazle_dir = PROJECT_ROOT / "greaseweazle-1.23"

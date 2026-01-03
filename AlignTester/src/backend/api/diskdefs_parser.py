@@ -21,7 +21,26 @@ class DiskDefsParser:
         Trouve le chemin vers diskdefs.cfg
         Cherche dans le dossier data/ à côté de gw.exe
         Le chemin typique est: <gw_path>/../lib/greaseweazle/data/diskdefs.cfg
+        En mode standalone, cherche aussi dans diskdefs/ à côté de l'exécutable
         """
+        import sys
+        
+        # En mode standalone (PyInstaller), chercher d'abord dans diskdefs/ à côté de l'exécutable
+        if getattr(sys, 'frozen', False):
+            exe_dir = Path(sys.executable).parent
+            _internal_dir = exe_dir / "_internal"
+            
+            # Chercher dans plusieurs emplacements possibles pour le mode standalone
+            standalone_paths = [
+                exe_dir / "diskdefs" / "diskdefs.cfg",  # À côté de l'exécutable
+                _internal_dir / "diskdefs" / "diskdefs.cfg",  # Dans _internal (onedir)
+                exe_dir.parent / "diskdefs" / "diskdefs.cfg",  # Dans le répertoire parent
+            ]
+            
+            for path in standalone_paths:
+                if path.exists():
+                    return path
+        
         gw_path = Path(self.executor.gw_path)
         
         # Si gw_path est un chemin absolu
