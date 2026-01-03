@@ -145,10 +145,20 @@ class GreaseweazleExecutor:
             # 1. Répertoire de l'exécutable (standalone)
             if getattr(sys, 'frozen', False):
                 exe_dir = Path(sys.executable).parent
+                _internal_dir = exe_dir / "_internal"
+                
+                # En mode standalone PyInstaller, chercher dans plusieurs emplacements
+                # PyInstaller peut placer les fichiers dans _internal/ ou à côté de l'exe
                 search_paths.extend([
+                    # À côté de l'exécutable
                     exe_dir / "gw.exe",
                     exe_dir / "greaseweazle" / "gw.exe",
                     exe_dir / "greaseweazle-1.23" / "gw.exe",
+                    # Dans _internal/ (PyInstaller onedir)
+                    _internal_dir / "gw.exe",
+                    _internal_dir / "greaseweazle" / "gw.exe",
+                    _internal_dir / "greaseweazle-1.23" / "gw.exe",
+                    # Dans le répertoire parent
                     exe_dir.parent / "gw.exe",
                     exe_dir.parent / "greaseweazle" / "gw.exe",
                     exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
@@ -191,11 +201,15 @@ class GreaseweazleExecutor:
         for gw_path in search_paths:
             try:
                 if gw_path.exists():
-                    return str(gw_path.resolve())
-            except (OSError, ValueError):
+                    resolved_path = str(gw_path.resolve())
+                    print(f"[GreaseweazleExecutor] gw.exe trouvé: {resolved_path}")
+                    return resolved_path
+            except (OSError, ValueError) as e:
+                print(f"[GreaseweazleExecutor] Erreur lors de la vérification de {gw_path}: {e}")
                 continue
         
         # En dernier recours, retourner le nom de l'exécutable (sera cherché dans PATH)
+        print(f"[GreaseweazleExecutor] gw.exe non trouvé, utilisation de 'gw.exe' (sera cherché dans PATH)")
         return "gw.exe" if self.platform == "Windows" else "gw"
     
     async def run_command(
@@ -402,11 +416,12 @@ class GreaseweazleExecutor:
     def check_version(self) -> Optional[str]:
         """Vérifie la version de Greaseweazle (host tools)"""
         try:
+            print(f"[GreaseweazleExecutor] Vérification de la version avec: {self.gw_path}")
             result = subprocess.run(
                 [self.gw_path, "--version"],
                 capture_output=True,
                 text=True,
-                timeout=2  # Timeout réduit pour éviter de bloquer
+                timeout=5  # Timeout augmenté pour standalone
             )
             if result.returncode == 0:
                 # Extraire la version des host tools (première ligne)
@@ -415,16 +430,24 @@ class GreaseweazleExecutor:
                 lines = output.split('\n')
                 for line in lines:
                     if line.startswith('Host Tools:'):
-                        return line.split(':', 1)[1].strip()
+                        version = line.split(':', 1)[1].strip()
+                        print(f"[GreaseweazleExecutor] Version détectée: {version}")
+                        return version
                 # Si pas de ligne "Host Tools:", retourner la première ligne
                 if output:
-                    return output.split('\n')[0].strip()
+                    version = output.split('\n')[0].strip()
+                    print(f"[GreaseweazleExecutor] Version détectée (première ligne): {version}")
+                    return version
+            else:
+                print(f"[GreaseweazleExecutor] Échec de la vérification de version (code {result.returncode})")
+                print(f"[GreaseweazleExecutor] stdout: {result.stdout[:200]}")
+                print(f"[GreaseweazleExecutor] stderr: {result.stderr[:200]}")
+        except FileNotFoundError:
+            print(f"[GreaseweazleExecutor] ERREUR: gw.exe non trouvé à: {self.gw_path}")
         except subprocess.TimeoutExpired:
-            # Timeout = gw.exe ne répond pas (peut-être pas accessible depuis WSL)
-            pass
+            print(f"[GreaseweazleExecutor] Timeout lors de la vérification de version")
         except Exception as e:
-            # Erreur silencieuse pour ne pas polluer les logs
-            pass
+            print(f"[GreaseweazleExecutor] Erreur lors de la vérification de version: {e}")
         return None
     
     def get_device_info(self) -> Optional[Dict]:
@@ -437,8 +460,9 @@ class GreaseweazleExecutor:
         try:
             # Utiliser la commande 'info' pour obtenir les infos du device
             # Note: gw.exe envoie la sortie dans stderr, pas stdout
-            # Timeout plus long pour WSL qui doit exécuter un exécutable Windows
-            timeout = 5 if self._is_wsl() else 2
+            # Timeout plus long pour standalone et WSL
+            timeout = 10 if (getattr(sys, 'frozen', False) or self._is_wsl()) else 5
+            print(f"[GreaseweazleExecutor] Récupération des infos device avec: {self.gw_path}")
             
             result = subprocess.run(
                 [self.gw_path, "info"],
@@ -465,8 +489,24 @@ class GreaseweazleExecutor:
                     "connected": False,
                     "error": result.stderr.strip() if result.stderr else "Device non connecté"
                 }
+        except FileNotFoundError:
+            # gw.exe non trouvé
+            error_msg = f"gw.exe non trouvé à: {self.gw_path}"
+            print(f"[GreaseweazleExecutor] ERREUR: {error_msg}")
+            return {
+                "port": None,
+                "model": None,
+                "mcu": None,
+                "firmware": None,
+                "serial": None,
+                "usb": None,
+                "connected": False,
+                "error": error_msg
+            }
         except subprocess.TimeoutExpired:
             # Timeout = Greaseweazle non connecté ou non accessible
+            error_msg = "Timeout: Greaseweazle non accessible (vérifiez la connexion USB ou le chemin vers gw.exe)"
+            print(f"[GreaseweazleExecutor] ERREUR: {error_msg}")
             return {
                 "port": None,
                 "model": None,
@@ -475,10 +515,14 @@ class GreaseweazleExecutor:
                 "serial": None,
                 "usb": None,
                 "connected": False,
-                "error": "Timeout: Greaseweazle non accessible (vérifiez la connexion USB)"
+                "error": error_msg
             }
         except Exception as e:
-            # Erreur silencieuse pour ne pas polluer les logs
+            # Erreur avec logs pour débogage
+            error_msg = f"Erreur: {str(e)}"
+            print(f"[GreaseweazleExecutor] ERREUR lors de get_device_info: {error_msg}")
+            import traceback
+            traceback.print_exc()
             return {
                 "port": None,
                 "model": None,
@@ -487,7 +531,7 @@ class GreaseweazleExecutor:
                 "serial": None,
                 "usb": None,
                 "connected": False,
-                "error": f"Erreur: {str(e)}"
+                "error": error_msg
             }
     
     def _filter_non_critical_errors(self, output: str) -> str:
@@ -609,10 +653,19 @@ class GreaseweazleExecutor:
             # 1. Répertoire de l'exécutable (standalone)
             if getattr(sys, 'frozen', False):
                 exe_dir = Path(sys.executable).parent
+                _internal_dir = exe_dir / "_internal"
+                
+                # En mode standalone PyInstaller, chercher dans plusieurs emplacements
                 search_paths.extend([
+                    # À côté de l'exécutable
                     exe_dir / "gw.exe",
                     exe_dir / "greaseweazle" / "gw.exe",
                     exe_dir / "greaseweazle-1.23" / "gw.exe",
+                    # Dans _internal/ (PyInstaller onedir)
+                    _internal_dir / "gw.exe",
+                    _internal_dir / "greaseweazle" / "gw.exe",
+                    _internal_dir / "greaseweazle-1.23" / "gw.exe",
+                    # Dans le répertoire parent
                     exe_dir.parent / "gw.exe",
                     exe_dir.parent / "greaseweazle" / "gw.exe",
                     exe_dir.parent / "greaseweazle-1.23" / "gw.exe",

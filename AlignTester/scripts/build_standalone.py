@@ -166,6 +166,30 @@ def create_spec_file(platform_name, frontend_dist=None):
             datas.append((str(py_file), target_dir))
         print(f"[OK] Backend ajoute: {BACKEND_DIR}")
     
+    # Greaseweazle - inclure gw.exe et toutes les DLLs nécessaires (Windows uniquement)
+    if platform_name == "windows":
+        greaseweazle_dir = PROJECT_ROOT / "greaseweazle-1.23"
+        if greaseweazle_dir.exists():
+            # Inclure gw.exe et toutes les DLLs dans un dossier greaseweazle/
+            greaseweazle_files = []
+            target_dir = "greaseweazle"
+            
+            # Fichiers à inclure : gw.exe et toutes les DLLs
+            for file_pattern in ["*.exe", "*.dll"]:
+                for gw_file in greaseweazle_dir.glob(file_pattern):
+                    if gw_file.is_file():
+                        greaseweazle_files.append((str(gw_file.resolve()), target_dir))
+            
+            if greaseweazle_files:
+                datas.extend(greaseweazle_files)
+                print(f"[OK] Greaseweazle ajoute: {greaseweazle_dir} ({len(greaseweazle_files)} fichiers)")
+                print(f"[*]   - gw.exe et {len(greaseweazle_files) - 1} DLLs inclus")
+            else:
+                print(f"[WARN] Aucun fichier gw.exe ou DLL trouve dans: {greaseweazle_dir}")
+        else:
+            print(f"[WARN] Dossier greaseweazle-1.23 non trouve: {greaseweazle_dir}")
+            print(f"   gw.exe ne sera pas inclus dans le package standalone")
+    
     # Créer le contenu du spec file
     # Convertir le chemin en string et utiliser des slashes normaux pour compatibilité
     launcher_path_resolved = LAUNCHER_PATH.resolve()
