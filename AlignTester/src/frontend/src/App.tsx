@@ -150,42 +150,33 @@ function App() {
   const handleFileSelected = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
     if (file) {
-      // Essayer d'obtenir le chemin complet si disponible
-      // Dans certains contextes (Electron, ou certains navigateurs avec API filesystem),
-      // on peut avoir accès au chemin complet via file.path ou d'autres propriétés
+      // Essayer d'obtenir le chemin complet si disponible (Electron, etc.)
       let fullPath: string | null = null
-      
-      // Vérifier si file.path existe (Electron, certains environnements)
       if ((file as any).path) {
         fullPath = (file as any).path
       }
       
-      // Si on a le chemin complet, l'utiliser directement
       if (fullPath) {
+        // Chemin complet disponible - l'utiliser directement
         setGwPathInput(fullPath)
-        // Sauvegarder automatiquement si c'est un chemin valide
-        handleSetGwPath()
       } else {
-        // Dans un navigateur web standard, on ne peut pas obtenir le chemin complet pour des raisons de sécurité
-        // Afficher un message d'aide avec les instructions pour copier le chemin depuis l'explorateur
+        // Dans un navigateur web standard, on ne peut pas obtenir le chemin complet
+        // Afficher un message d'aide clair
         const fileName = file.name
-        
-        // Si c'est gw.exe ou gw, afficher des instructions claires
         if (fileName === 'gw.exe' || fileName === 'gw') {
-          // Message d'aide avec instructions pour copier le chemin depuis l'explorateur Windows
-          const helpMessage = t('gwPathFileSelected') + ' ' + fileName + '.\n\n' + 
-                             t('gwPathCopyInstructions') + '\n' +
-                             t('gwPathCopyInstructionsStep1') + '\n' +
-                             t('gwPathCopyInstructionsStep2') + '\n' +
-                             t('gwPathCopyInstructionsStep3') + '\n' +
-                             t('gwPathCopyInstructionsStep4')
-          
-          alert(helpMessage)
-          
-          // Laisser le champ vide pour que l'utilisateur puisse coller le chemin complet
-          setGwPathInput('')
+          alert(
+            t('gwPathFileSelected') + ' ' + fileName + '.\n\n' + 
+            t('gwPathCopyInstructions') + '\n' +
+            t('gwPathCopyInstructionsStep1') + '\n' +
+            t('gwPathCopyInstructionsStep2') + '\n' +
+            t('gwPathCopyInstructionsStep3') + '\n' +
+            t('gwPathCopyInstructionsStep4')
+          )
+          setGwPathInput('') // Laisser l'utilisateur coller le chemin complet
         } else {
-          setGwPathInput(fileName)
+          // Fichier invalide
+          alert(t('gwPathInvalidFile') + ': ' + fileName)
+          setGwPathInput('')
         }
       }
     }
@@ -230,29 +221,36 @@ function App() {
     try {
       setSavingGwPath(true)
       setError(null)
-      // Normaliser le chemin en enlevant les espaces en début/fin
-      const normalizedPath = gwPathInput.trim()
       
       const response = await axios.post('http://localhost:8000/api/settings/gw-path', { 
-        gw_path: normalizedPath
+        gw_path: gwPathInput.trim()
       })
       
       if (response.data.success) {
-        // Utiliser le chemin retourné par le serveur (qui peut être normalisé/absolu)
-        const savedPath = response.data.gw_path || normalizedPath
+        // Le serveur retourne le chemin normalisé
+        const savedPath = response.data.gw_path
         setGwPath(savedPath)
-        setGwPathInput(savedPath)  // Mettre à jour le champ avec le chemin normalisé
-        // Rafraîchir les infos pour mettre à jour le chemin
+        setGwPathInput(savedPath)
         await fetchInfo()
-        alert(t('gwPathSaved'))
+        alert(t('gwPathSaved') + ': ' + savedPath)
       } else {
         setError(response.data.error || t('gwPathError'))
       }
     } catch (err: any) {
-      if (err.response?.status === 400 && err.response?.data?.detail?.includes('n\'existe pas')) {
-        setError(t('gwPathNotFound'))
+      // Gérer les erreurs avec des messages clairs
+      const errorDetail = err.response?.data?.detail || err.message || t('gwPathError')
+      
+      if (err.response?.status === 400) {
+        // Erreur de validation côté serveur
+        if (errorDetail.includes('n\'existe pas') || errorDetail.includes('n\'existe pas')) {
+          setError(t('gwPathNotFound') + ': ' + gwPathInput.trim())
+        } else if (errorDetail.includes('n\'est pas gw.exe')) {
+          setError(t('gwPathNotGwExe') + ': ' + gwPathInput.trim())
+        } else {
+          setError(errorDetail)
+        }
       } else {
-        setError(err.response?.data?.detail || err.message || t('gwPathError'))
+        setError(errorDetail)
       }
       console.error(err)
     } finally {
