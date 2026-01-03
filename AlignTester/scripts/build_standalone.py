@@ -199,75 +199,9 @@ def create_spec_file(platform_name, frontend_dist=None):
         print(f"[WARN] Dossier diskdefs non trouve dans les emplacements standards")
         print(f"   Les formats de disquettes par defaut seront utilises")
     
-    # Greaseweazle - inclure gw.exe, toutes les DLLs et le dossier lib (Windows uniquement)
-    if platform_name == "windows":
-        # Utiliser greaseweazle-1.23b_source qui contient la bonne version de gw.exe
-        greaseweazle_dir = ALIGNTESTER_DIR / "src" / "greaseweazle-1.23b_source"
-        if greaseweazle_dir.exists():
-            # Inclure gw.exe et toutes les DLLs dans un dossier greaseweazle/
-            greaseweazle_files = []
-            target_dir = "greaseweazle"
-            
-            # Fichiers à inclure : gw.exe et toutes les DLLs
-            for file_pattern in ["*.exe", "*.dll"]:
-                for gw_file in greaseweazle_dir.glob(file_pattern):
-                    if gw_file.is_file():
-                        greaseweazle_files.append((str(gw_file.resolve()), target_dir))
-            
-            # Inclure le dossier lib/ qui contient les modules Python (encodings, etc.)
-            # PyInstaller nécessite que les fichiers soient spécifiés individuellement
-            # pour garantir l'inclusion récursive de tous les fichiers
-            lib_dir = greaseweazle_dir / "lib"
-            if lib_dir.exists() and lib_dir.is_dir():
-                lib_files = []
-                for item in lib_dir.rglob("*"):
-                    if item.is_file():
-                        rel_path = item.relative_to(lib_dir)
-                        # Préserver la structure du dossier lib/
-                        if rel_path.parent == Path('.'):
-                            # Fichier à la racine de lib (ex: fichier.py)
-                            target_lib_dir = f"{target_dir}/lib"
-                        else:
-                            # Fichier dans un sous-dossier (ex: encodings/__init__.py)
-                            target_lib_dir = f"{target_dir}/lib/{rel_path.parent}"
-                        lib_files.append((str(item.resolve()), target_lib_dir))
-                
-                if lib_files:
-                    greaseweazle_files.extend(lib_files)
-                    print(f"[OK] Dossier lib/ ajoute: {lib_dir} ({len(lib_files)} fichiers)")
-                else:
-                    print(f"[WARN] Dossier lib/ vide: {lib_dir}")
-            
-            # Inclure le dossier share/ si présent (licences, etc.)
-            share_dir = greaseweazle_dir / "share"
-            if share_dir.exists() and share_dir.is_dir():
-                share_files = []
-                for item in share_dir.rglob("*"):
-                    if item.is_file():
-                        rel_path = item.relative_to(share_dir)
-                        if rel_path.parent == Path('.'):
-                            target_share_dir = f"{target_dir}/share"
-                        else:
-                            target_share_dir = f"{target_dir}/share/{rel_path.parent}"
-                        share_files.append((str(item.resolve()), target_share_dir))
-                
-                if share_files:
-                    greaseweazle_files.extend(share_files)
-                    print(f"[OK] Dossier share/ ajoute: {share_dir} ({len(share_files)} fichiers)")
-            
-            if greaseweazle_files:
-                datas.extend(greaseweazle_files)
-                exe_dll_count = sum(1 for f, _ in greaseweazle_files if Path(f).suffix in ['.exe', '.dll'])
-                other_count = len(greaseweazle_files) - exe_dll_count
-                print(f"[OK] Greaseweazle ajoute: {greaseweazle_dir} ({len(greaseweazle_files)} elements)")
-                print(f"[*]   - gw.exe et {exe_dll_count - 1} DLLs inclus")
-                if other_count > 0:
-                    print(f"[*]   - {other_count} fichiers du dossier lib/ et share/ inclus")
-            else:
-                print(f"[WARN] Aucun fichier gw.exe ou DLL trouve dans: {greaseweazle_dir}")
-        else:
-            print(f"[WARN] Dossier greaseweazle-1.23b_source non trouve: {greaseweazle_dir}")
-            print(f"   gw.exe ne sera pas inclus dans le package standalone")
+    # Note: Greaseweazle (gw.exe/gw) n'est pas inclus dans le package standalone
+    # L'utilisateur doit installer Greaseweazle séparément et le rendre accessible via PATH
+    # ou spécifier le chemin dans les paramètres de l'application
     
     # Créer le contenu du spec file
     # Convertir le chemin en string et utiliser des slashes normaux pour compatibilité

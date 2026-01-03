@@ -107,9 +107,11 @@ def _detect_gw_path(self) -> str:
 
 ### Pour la version standalone
 
-Le binaire `gw.exe` et toutes les DLLs doivent être inclus dans le package standalone :
-- Copier le dossier `greaseweazle-1.23/` complet
-- Ou inclure uniquement `gw.exe` + DLLs nécessaires dans le dossier de distribution
+**Note importante** : Greaseweazle n'est **pas inclus** dans le package standalone.
+
+L'utilisateur doit installer Greaseweazle séparément :
+- **Windows** : Installer `gw.exe` et le rendre accessible via PATH ou spécifier le chemin dans les paramètres
+- **Linux/macOS** : Installer via `pip install greaseweazle` ou via le gestionnaire de paquets du système
 
 ---
 

@@ -1,102 +1,24 @@
-# Correction du problème Greaseweazle dans la version standalone
+# Intégration Greaseweazle dans le standalone - Abandonnée
 
-## 🔴 Problème identifié
+## ⚠️ Statut : Abandonné
 
-Lors de l'exécution de `gw.exe` dans la version standalone Windows, l'erreur suivante se produit :
+L'intégration de Greaseweazle directement dans le package standalone Windows a été **abandonnée** car :
+- Tous les fichiers nécessaires n'étaient pas correctement intégrés dans le fichier zip
+- La gestion des dépendances (DLLs, modules Python) était complexe et peu fiable
+- L'approche ne fonctionnait pas de manière satisfaisante
 
-```
-Fatal Python error: init_fs_encoding: failed to get the Python codec of the filesystem encoding
-ModuleNotFoundError: No module named 'encodings'
-```
+## ✅ Solution actuelle
 
-## 🔍 Cause
+Greaseweazle n'est **pas inclus** dans le package standalone. L'utilisateur doit :
 
-Le binaire `gw.exe` est un exécutable Python créé avec **cx_Freeze** qui nécessite :
-1. L'exécutable `gw.exe` lui-même
-2. Les DLLs nécessaires (Visual C++ Runtime, Python DLL)
-3. **Le dossier `lib/`** qui contient tous les modules Python de base, notamment :
-   - `encodings/` (module essentiel pour l'encodage des fichiers)
-   - `greaseweazle/` (le package Greaseweazle)
-   - Tous les autres modules Python nécessaires
+1. **Installer Greaseweazle séparément** :
+   - **Windows** : Télécharger et installer `gw.exe` depuis [GitHub Greaseweazle](https://github.com/keirf/greaseweazle/releases)
+   - **Linux/macOS** : Installer via `pip install greaseweazle` ou via le gestionnaire de paquets
 
-Le script `build_standalone.py` n'incluait que `gw.exe` et les DLLs, mais **pas le dossier `lib/`**, ce qui causait l'erreur.
+2. **Configurer le chemin dans l'application** :
+   - L'application détecte automatiquement `gw.exe` ou `gw` dans le PATH
+   - Sinon, l'utilisateur peut spécifier le chemin manuellement dans les paramètres
 
-## ✅ Solution
+## 📝 Historique
 
-Le script `build_standalone.py` a été modifié pour inclure récursivement :
-- ✅ `gw.exe` et toutes les DLLs (comme avant)
-- ✅ **Tous les fichiers du dossier `lib/`** (nouveau)
-- ✅ **Tous les fichiers du dossier `share/`** (licences, etc.)
-
-### Modifications apportées
-
-Dans `AlignTester/scripts/build_standalone.py`, la section "Greaseweazle" a été mise à jour pour :
-
-1. **Inclure récursivement le dossier `lib/`** :
-   ```python
-   lib_dir = greaseweazle_dir / "lib"
-   if lib_dir.exists() and lib_dir.is_dir():
-       lib_files = []
-       for item in lib_dir.rglob("*"):
-           if item.is_file():
-               rel_path = item.relative_to(lib_dir)
-               target_lib_dir = f"{target_dir}/lib/{rel_path.parent}"
-               lib_files.append((str(item.resolve()), target_lib_dir))
-       greaseweazle_files.extend(lib_files)
-   ```
-
-2. **Inclure récursivement le dossier `share/`** (si présent)
-
-3. **Préserver la structure des dossiers** pour que `gw.exe` puisse trouver les modules dans `lib/`
-
-## 📦 Structure dans le build standalone
-
-Après le build, la structure sera :
-
-```
-aligntester-standalone-windows-x64/
-├── aligntester.exe
-├── _internal/
-│   ├── ...
-│   └── greaseweazle/
-│       ├── gw.exe
-│       ├── *.dll
-│       ├── lib/
-│       │   ├── encodings/
-│       │   ├── greaseweazle/
-│       │   └── ... (tous les modules Python)
-│       └── share/
-│           └── ...
-```
-
-## 🔧 Vérification
-
-Pour vérifier que le problème est résolu :
-
-1. **Rebuild la version standalone** :
-   ```bash
-   python AlignTester/scripts/build_standalone.py
-   ```
-
-2. **Vérifier que le dossier `lib/` est inclus** :
-   - Dans `build_standalone/dist/windows/aligntester/_internal/greaseweazle/`
-   - Le dossier `lib/` doit contenir `encodings/` et `greaseweazle/`
-
-3. **Tester `gw.exe`** :
-   ```cmd
-   cd _internal\greaseweazle
-   gw.exe --version
-   ```
-   
-   Cette commande devrait maintenant fonctionner sans erreur.
-
-## 📝 Notes
-
-- Le dossier `lib/` est essentiel car il contient tous les modules Python nécessaires à l'exécution de `gw.exe`
-- La structure des dossiers doit être préservée car `gw.exe` cherche les modules dans `lib/` relatif à son emplacement
-- Cette solution fonctionne car PyInstaller copie les fichiers dans `_internal/` en préservant la structure des dossiers
-
-## 🔗 Références
-
-- [cx_Freeze Documentation](https://cx-freeze.readthedocs.io/)
-- [PyInstaller datas documentation](https://pyinstaller.org/en/stable/spec-files.html#adding-files-to-the-bundle)
+Cette approche d'intégration avait été tentée pour simplifier l'installation, mais s'est révélée problématique. L'approche actuelle (installation séparée) est plus fiable et standard.
