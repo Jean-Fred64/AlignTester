@@ -201,7 +201,8 @@ def create_spec_file(platform_name, frontend_dist=None):
     
     # Greaseweazle - inclure gw.exe, toutes les DLLs et le dossier lib (Windows uniquement)
     if platform_name == "windows":
-        greaseweazle_dir = PROJECT_ROOT / "greaseweazle-1.23"
+        # Utiliser greaseweazle-1.23b_source qui contient la bonne version de gw.exe
+        greaseweazle_dir = ALIGNTESTER_DIR / "src" / "greaseweazle-1.23b_source"
         if greaseweazle_dir.exists():
             # Inclure gw.exe et toutes les DLLs dans un dossier greaseweazle/
             greaseweazle_files = []
@@ -265,7 +266,7 @@ def create_spec_file(platform_name, frontend_dist=None):
             else:
                 print(f"[WARN] Aucun fichier gw.exe ou DLL trouve dans: {greaseweazle_dir}")
         else:
-            print(f"[WARN] Dossier greaseweazle-1.23 non trouve: {greaseweazle_dir}")
+            print(f"[WARN] Dossier greaseweazle-1.23b_source non trouve: {greaseweazle_dir}")
             print(f"   gw.exe ne sera pas inclus dans le package standalone")
     
     # Créer le contenu du spec file
