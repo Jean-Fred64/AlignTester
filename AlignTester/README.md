@@ -2,13 +2,42 @@
 
 Application web moderne pour les tests d'alignement de têtes de disquette utilisant la carte Greaseweazle.
 
+## 📋 Vue d'ensemble
+
+AlignTester est une application web complète qui permet de tester et régler l'alignement des têtes de lecteurs de disquette en utilisant la carte Greaseweazle. L'application offre deux modes d'alignement :
+
+- **Mode automatique** : Alignement automatisé avec la commande `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23+)
+- **Mode manuel** : Alignement manuel avec navigation par pistes (fonctionne sur toutes les plateformes)
+
+## ⚠️ Compatibilité Greaseweazle
+
+### Version utilisée
+
+AlignTester utilise une **version compilée v1.23b de Greaseweazle** qui inclut la commande `align` issue du [Pull Request #592](https://github.com/keirf/greaseweazle/pull/592). Les sources de cette version sont disponibles dans `AlignTester/src/greaseweazle-1.23b.zip`.
+
+### Compatibilité par plateforme
+
+| Plateforme | Interface | Mode Automatique (`gw align`) | Mode Manuel (`gw read`) |
+|------------|-----------|-------------------------------|-------------------------|
+| **Windows** | ✅ Fonctionnelle | ✅ Disponible (v1.23+) | ✅ Disponible |
+| **Linux** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ✅ Disponible |
+| **macOS** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ✅ Disponible |
+
+**Note importante** :
+- L'interface fonctionne correctement sur toutes les plateformes
+- Le **mode automatique** nécessite Greaseweazle v1.23+ avec la commande `align`, actuellement disponible uniquement sur Windows
+- Le **mode manuel** fonctionne sur toutes les plateformes car il utilise `gw read` au lieu de `gw align`
+- Sous Linux/macOS, seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas la commande `align`
+
 ## 🚀 Démarrage rapide
 
 ### Prérequis
 
 - Python 3.9 ou supérieur
 - Node.js 18 ou supérieur
-- Greaseweazle avec la commande `align` (PR #592) ou version officielle quand mergé
+- **Greaseweazle** :
+  - **Windows** : Greaseweazle v1.23+ avec commande `align` (PR #592) - **Recommandé pour mode automatique**
+  - **Linux/macOS** : Greaseweazle v1.22+ (mode manuel uniquement)
 
 ### Installation
 
@@ -69,26 +98,35 @@ cd AlignTester/src/frontend
 npm run dev
 ```
 
-Le frontend sera accessible sur `http://localhost:3000`
-
-L'interface sera accessible sur `http://localhost:3000`
+Le frontend sera accessible sur `http://localhost:3000` (ou `http://localhost:5173` selon la configuration Vite)
 
 ## 📁 Structure du projet
 
 ```
 AlignTester/
 ├── src/
-│   ├── backend/          # Backend FastAPI
-│   │   ├── main.py       # Point d'entrée
-│   │   └── api/          # Routes et logique API
-│   └── frontend/         # Frontend React + TypeScript
-│       ├── src/
-│       └── package.json
-├── tests/                # Tests
-├── docs/                 # Documentation de développement
-├── scripts/              # Scripts utilitaires
-└── requirements.txt      # Dépendances Python
+│   ├── backend/                    # Backend FastAPI
+│   │   ├── main.py                # Point d'entrée
+│   │   └── api/                   # Routes et logique API
+│   ├── frontend/                   # Frontend React + TypeScript
+│   │   ├── src/
+│   │   └── package.json
+│   └── greaseweazle-1.23b.zip     # Sources Greaseweazle v1.23b (PR #592)
+├── tests/                          # Tests unitaires et d'intégration
+├── docs/                           # Documentation de développement
+├── scripts/                        # Scripts utilitaires
+│   ├── build_standalone.py         # Build standalone
+│   └── launcher_standalone.py      # Launcher standalone
+└── requirements.txt                # Dépendances Python
 ```
+
+### Sources Greaseweazle
+
+Le projet utilise les sources de Greaseweazle v1.23b (PR #592) pour le build standalone Windows. Les sources sont disponibles dans `AlignTester/src/greaseweazle-1.23b.zip` (11MB).
+
+**Note** : Le fichier zip doit être décompressé dans `AlignTester/src/greaseweazle-1.23b/` avant d'utiliser les scripts de build standalone.
+
+**Référence** : [Greaseweazle PR #592](https://github.com/keirf/greaseweazle/pull/592)
 
 ## 🛠️ Développement
 
@@ -122,6 +160,25 @@ cd AlignTester/tests
 pytest
 ```
 
+## 📦 Version Standalone
+
+AlignTester est disponible en version standalone (autonome) pour Windows, Linux et macOS. Cette version ne nécessite pas d'installation de Python ou Node.js.
+
+### Téléchargement
+
+Les builds standalone sont disponibles dans les [GitHub Releases](https://github.com/Jean-Fred64/AlignTester/releases) ou via les artefacts GitHub Actions.
+
+### Build depuis les sources
+
+Pour créer votre propre build standalone :
+
+```bash
+cd AlignTester
+python scripts/build_standalone.py
+```
+
+**Note** : Le build standalone Windows utilise Greaseweazle v1.23b compilé depuis le PR #592. Les sources sont disponibles dans `AlignTester/src/greaseweazle-1.23b.zip`.
+
 ## 📦 Préparation de la release
 
 Utilisez le script pour préparer la version finale :
@@ -132,17 +189,42 @@ python AlignTester/scripts/prepare_release.py
 
 ## 📚 Documentation
 
+### Documentation principale
+
+- **État du projet** : `docs/ETAT_PROJET.md` - État complet du développement
+- **Documentation Greaseweazle** : `docs/DOCUMENTATION_GREASEWEAZLE.md` - Guide complet d'utilisation
+- **Mode manuel** : `docs/MODE_MANUEL.md` - Guide du mode manuel d'alignement
+- **Build standalone** : `docs/BUILD_STANDALONE.md` - Guide de build standalone
+
+### Documentation technique
+
 - Documentation de développement : `docs/`
 - Analyse stratégique : `docs/ANALYSE_STRATEGIE_DEVELOPPEMENT.md`
+- Intégration Greaseweazle : `docs/INTEGRATION_GREASEWEAZLE.md`
 
 ## 🔧 Fonctionnalités
 
-- ✅ Détection automatique de la plateforme (Windows/Linux/macOS)
-- ✅ Détection de la disponibilité de la commande `align`
-- ✅ API REST pour les commandes
-- ✅ WebSocket pour affichage temps réel
-- ⏳ Interface de test d'alignement (en développement)
-- ⏳ Graphiques de visualisation (en développement)
+### Fonctionnalités principales
+
+- ✅ **Détection automatique** de Greaseweazle (Windows/Linux/macOS/WSL)
+- ✅ **Mode automatique d'alignement** : Alignement automatisé avec `gw align` (Windows uniquement, v1.23+)
+- ✅ **Mode manuel d'alignement** : Navigation par pistes avec lecture continue (toutes plateformes)
+- ✅ **API REST complète** pour toutes les commandes
+- ✅ **WebSocket** pour affichage en temps réel
+- ✅ **Interface moderne** avec React + TypeScript + TailwindCSS
+- ✅ **Multilingue** : Support FR/EN avec détection automatique
+- ✅ **Graphiques de visualisation** : Affichage des résultats avec Recharts
+- ✅ **Analyse avancée** : Cohérence, stabilité, positionnement, azimut, asymétrie
+- ✅ **Vérification Track 0** : Tests de capteur Track 0 selon manuel Panasonic
+- ✅ **Sélection de format** : Support de nombreux formats de disquette (IBM, Amiga, Apple, Commodore, etc.)
+- ✅ **Modes d'alignement multiples** : Direct, Ajustage Fin, Grande Précision
+- ✅ **Version standalone** : Application autonome pour Windows/Linux/macOS
+
+### Limitations connues
+
+- ⚠️ **Mode automatique** : Disponible uniquement sur Windows avec Greaseweazle v1.23+
+- ⚠️ **Linux/macOS** : Seule la version Greaseweazle v1.22 est disponible, sans support de `gw align`
+- ✅ **Mode manuel** : Fonctionne sur toutes les plateformes
 
 ## 📄 Licence
 
