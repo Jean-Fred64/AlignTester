@@ -327,6 +327,18 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
 - ❌ **Variables d'environnement** documentées (`.env.example`) : À créer
 - ✅ **Script de démarrage complet** (backend + frontend ensemble) : Launcher standalone disponible
 
+### ⚠️ Limitations de Compatibilité Greaseweazle
+- ⚠️ **Fonctionnalité `gw align` non disponible sur Linux/macOS** :
+  - ⚠️ L'interface fonctionne correctement sur Linux et macOS (version standalone)
+  - ⚠️ Cependant, la fonctionnalité principale d'alignement ne peut pas fonctionner car :
+    - ⚠️ La commande `gw align` n'est pas encore disponible dans Greaseweazle v1.22 (version actuelle sous Linux)
+    - ⚠️ La commande `gw align` est uniquement disponible dans Greaseweazle v1.23+ (actuellement uniquement sur Windows)
+  - ⚠️ **Sous Linux** : Seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas `gw align`
+  - ⚠️ **Sous macOS** : Même limitation (version disponible ne supporte pas `gw align`)
+  - ⚠️ **Sous Windows** : Greaseweazle v1.23+ est disponible avec support de `gw align`
+  - ✅ **Mode manuel d'alignement** : Fonctionne sur toutes les plateformes (utilise `gw read` au lieu de `gw align`)
+  - ✅ **Autres fonctionnalités** : Détection, navigation, analyse de pistes fonctionnent sur toutes les plateformes
+
 ### 📦 Version Standalone pour Débutants
 - ✅ **Architecture standalone** : PyInstaller + Serveur intégré
   - ✅ Exécutable unique par plateforme (Windows, Linux, macOS)
@@ -486,6 +498,7 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 | Frontend | ✅ Avancé | 96% | Composants complets, UI moderne, multilingue FR/EN, mode manuel, sélection de mode, affichage timings, vérification Track 0, affichage azimut/asymétrie |
 | Tests | ✅ Implémentés | 70% | 63 tests backend, tests d'intégration |
 | Intégration Hardware | ✅ Complète | 90% | Détection automatique, sauvegarde port, optimisée |
+| Compatibilité Greaseweazle | ⚠️ Limitée | 70% | Interface fonctionnelle sur toutes plateformes, mais `gw align` uniquement disponible sur Windows (v1.23+). Linux/macOS limités à v1.22 sans `gw align`. Mode manuel fonctionne partout. |
 | Documentation | ✅ Complète | 80% | Documentation technique et guides |
 | Build/Deployment | ✅ Avancé | 85% | Scripts de build standalone complets, workflow GitHub Actions, Docker optionnel à créer |
 | Version Standalone | ✅ Complète | 95% | Architecture PyInstaller, builds multi-plateformes, documentation complète, mode simple à ajouter |
@@ -514,6 +527,13 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 3. ⚠️ **Tests frontend** : À ajouter pour compléter la couverture
 4. ⚠️ **Configuration CI/CD** : À mettre en place
 
+### ⚠️ **Limitations Connues :**
+
+1. ⚠️ **Compatibilité Greaseweazle** :
+   - ⚠️ **Linux/macOS** : L'interface fonctionne, mais le mode automatique d'alignement (`gw align`) n'est pas disponible car Greaseweazle v1.22 (version disponible sous Linux) ne supporte pas cette commande
+   - ⚠️ **Windows** : Fonctionne complètement avec Greaseweazle v1.23+ qui supporte `gw align`
+   - ✅ **Mode manuel** : Fonctionne sur toutes les plateformes (utilise `gw read` au lieu de `gw align`)
+
 ### 🎯 **Recommandation : PRIORITÉ ACTUELLE**
 
 **Finaliser l'intégration hardware réelle** :
@@ -532,7 +552,13 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 ---
 
 **Dernière mise à jour :** État d'avancement complet - Janvier 2025
-**Dernière session :** Améliorations de la gestion du chemin gw.exe et build standalone :
+**Dernière session :** Correction des types MIME pour version standalone et documentation des limitations :
+  - ✅ Correction des types MIME pour fichiers JavaScript en version standalone (écran noir sur Windows résolu)
+  - ✅ Classe CustomStaticFiles pour forcer les types MIME corrects (application/javascript pour .js/.mjs)
+  - ✅ Documentation des limitations de compatibilité Greaseweazle (Linux/macOS limités à v1.22 sans `gw align`)
+  - ✅ Interface fonctionnelle sur toutes plateformes, mode automatique uniquement sur Windows (v1.23+)
+  - ✅ Mode manuel fonctionne sur toutes plateformes
+**Session précédente :** Améliorations de la gestion du chemin gw.exe et build standalone :
   - ✅ Refonte complète de la gestion du chemin gw.exe avec détection automatique améliorée
   - ✅ Endpoint `/api/settings/gw-path/detect` pour détection automatique et sauvegarde du chemin
   - ✅ Amélioration de la détection gw.exe dans la version standalone Windows
