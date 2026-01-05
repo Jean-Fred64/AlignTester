@@ -124,6 +124,8 @@ AlignTester/
 
 Le projet utilise les sources de Greaseweazle v1.23b (PR #592) pour le build standalone Windows. Les sources sont disponibles dans `AlignTester/src/greaseweazle-1.23b.zip` (11MB).
 
+**Téléchargement direct** : [greaseweazle-1.23b.zip](https://github.com/Jean-Fred64/AlignTester/raw/main/AlignTester/src/greaseweazle-1.23b.zip)
+
 **Note** : Le fichier zip doit être décompressé dans `AlignTester/src/greaseweazle-1.23b/` avant d'utiliser les scripts de build standalone.
 
 **Référence** : [Greaseweazle PR #592](https://github.com/keirf/greaseweazle/pull/592)
