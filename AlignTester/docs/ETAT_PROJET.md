@@ -336,7 +336,7 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
   - ⚠️ **Sous Linux** : Seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas `gw align`
   - ⚠️ **Sous macOS** : Même limitation (version disponible ne supporte pas `gw align`)
   - ⚠️ **Sous Windows** : Greaseweazle v1.23+ est disponible avec support de `gw align`
-  - ✅ **Mode manuel d'alignement** : Fonctionne sur toutes les plateformes (utilise `gw read` au lieu de `gw align`)
+  - ⚠️ **Mode manuel d'alignement** : Utilise également `gw align`, nécessite donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
   - ✅ **Autres fonctionnalités** : Détection, navigation, analyse de pistes fonctionnent sur toutes les plateformes
 
 ### 📦 Version Standalone pour Débutants
@@ -498,7 +498,7 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 | Frontend | ✅ Avancé | 96% | Composants complets, UI moderne, multilingue FR/EN, mode manuel, sélection de mode, affichage timings, vérification Track 0, affichage azimut/asymétrie |
 | Tests | ✅ Implémentés | 70% | 63 tests backend, tests d'intégration |
 | Intégration Hardware | ✅ Complète | 90% | Détection automatique, sauvegarde port, optimisée |
-| Compatibilité Greaseweazle | ⚠️ Limitée | 70% | Interface fonctionnelle sur toutes plateformes, mais `gw align` uniquement disponible sur Windows (v1.23+). Linux/macOS limités à v1.22 sans `gw align`. Mode manuel fonctionne partout. |
+| Compatibilité Greaseweazle | ⚠️ Limitée | 70% | Interface fonctionnelle sur toutes plateformes, mais `gw align` (utilisé par les deux modes) uniquement disponible sur Windows (v1.23+). Linux/macOS limités à v1.22 sans `gw align`. Les deux modes d'alignement nécessitent v1.23+. |
 | Documentation | ✅ Complète | 80% | Documentation technique et guides |
 | Build/Deployment | ✅ Avancé | 85% | Scripts de build standalone complets, workflow GitHub Actions, Docker optionnel à créer |
 | Version Standalone | ✅ Complète | 95% | Architecture PyInstaller, builds multi-plateformes, documentation complète, mode simple à ajouter |
@@ -530,9 +530,9 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 ### ⚠️ **Limitations Connues :**
 
 1. ⚠️ **Compatibilité Greaseweazle** :
-   - ⚠️ **Linux/macOS** : L'interface fonctionne, mais le mode automatique d'alignement (`gw align`) n'est pas disponible car Greaseweazle v1.22 (version disponible sous Linux) ne supporte pas cette commande
+   - ⚠️ **Linux/macOS** : L'interface fonctionne, mais les modes d'alignement (`gw align`) ne sont pas disponibles car Greaseweazle v1.22 (version disponible sous Linux) ne supporte pas cette commande
    - ⚠️ **Windows** : Fonctionne complètement avec Greaseweazle v1.23+ qui supporte `gw align`
-   - ✅ **Mode manuel** : Fonctionne sur toutes les plateformes (utilise `gw read` au lieu de `gw align`)
+   - ⚠️ **Les deux modes** (automatique et manuel) utilisent `gw align` et nécessitent donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
 
 ### 🎯 **Recommandation : PRIORITÉ ACTUELLE**
 
@@ -564,8 +564,8 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
   - ✅ Correction des types MIME pour fichiers JavaScript en version standalone (écran noir sur Windows résolu)
   - ✅ Classe CustomStaticFiles pour forcer les types MIME corrects (application/javascript pour .js/.mjs)
   - ✅ Documentation des limitations de compatibilité Greaseweazle (Linux/macOS limités à v1.22 sans `gw align`)
-  - ✅ Interface fonctionnelle sur toutes plateformes, mode automatique uniquement sur Windows (v1.23+)
-  - ✅ Mode manuel fonctionne sur toutes plateformes
+  - ✅ Interface fonctionnelle sur toutes plateformes, modes d'alignement uniquement sur Windows (v1.23+)
+  - ⚠️ Les deux modes (automatique et manuel) nécessitent `gw align` et donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
 **Session précédente :** Améliorations de la gestion du chemin gw.exe et build standalone :
   - ✅ Refonte complète de la gestion du chemin gw.exe avec détection automatique améliorée
   - ✅ Endpoint `/api/settings/gw-path/detect` pour détection automatique et sauvegarde du chemin

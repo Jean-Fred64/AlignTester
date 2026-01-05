@@ -7,7 +7,7 @@ Application web moderne pour les tests d'alignement de têtes de disquette utili
 AlignTester est une application web complète qui permet de tester et régler l'alignement des têtes de lecteurs de disquette en utilisant la carte Greaseweazle. L'application offre deux modes d'alignement :
 
 - **Mode automatique** : Alignement automatisé avec la commande `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23+)
-- **Mode manuel** : Alignement manuel avec navigation par pistes (fonctionne sur toutes les plateformes)
+- **Mode manuel** : Alignement manuel avec navigation par pistes utilisant également `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23+)
 
 ## ⚠️ Compatibilité Greaseweazle
 
@@ -17,17 +17,18 @@ AlignTester utilise une **version compilée v1.23b de Greaseweazle** qui inclut 
 
 ### Compatibilité par plateforme
 
-| Plateforme | Interface | Mode Automatique (`gw align`) | Mode Manuel (`gw read`) |
+| Plateforme | Interface | Mode Automatique (`gw align`) | Mode Manuel (`gw align`) |
 |------------|-----------|-------------------------------|-------------------------|
-| **Windows** | ✅ Fonctionnelle | ✅ Disponible (v1.23+) | ✅ Disponible |
-| **Linux** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ✅ Disponible |
-| **macOS** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ✅ Disponible |
+| **Windows** | ✅ Fonctionnelle | ✅ Disponible (v1.23+) | ✅ Disponible (v1.23+) |
+| **Linux** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ❌ Non disponible (v1.22 uniquement) |
+| **macOS** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ❌ Non disponible (v1.22 uniquement) |
 
 **Note importante** :
 - L'interface fonctionne correctement sur toutes les plateformes
-- Le **mode automatique** nécessite Greaseweazle v1.23+ avec la commande `align`, actuellement disponible uniquement sur Windows
-- Le **mode manuel** fonctionne sur toutes les plateformes car il utilise `gw read` au lieu de `gw align`
+- Les **deux modes** (automatique et manuel) utilisent la commande `gw align` et nécessitent Greaseweazle v1.23+
+- Sous Windows, Greaseweazle v1.23+ est disponible avec support de `gw align` (PR #592)
 - Sous Linux/macOS, seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas la commande `align`
+- Les deux modes d'alignement nécessitent donc Greaseweazle v1.23+ (actuellement disponible uniquement sur Windows)
 
 ## 🚀 Démarrage rapide
 
@@ -36,8 +37,8 @@ AlignTester utilise une **version compilée v1.23b de Greaseweazle** qui inclut 
 - Python 3.9 ou supérieur
 - Node.js 18 ou supérieur
 - **Greaseweazle** :
-  - **Windows** : Greaseweazle v1.23+ avec commande `align` (PR #592) - **Recommandé pour mode automatique**
-  - **Linux/macOS** : Greaseweazle v1.22+ (mode manuel uniquement)
+- **Windows** : Greaseweazle v1.23+ avec commande `align` (PR #592) - **Requis pour les modes d'alignement**
+- **Linux/macOS** : Greaseweazle v1.22+ (interface fonctionnelle, mais modes d'alignement non disponibles sans v1.23+)
 
 ### Installation
 
@@ -210,7 +211,7 @@ python AlignTester/scripts/prepare_release.py
 
 - ✅ **Détection automatique** de Greaseweazle (Windows/Linux/macOS/WSL)
 - ✅ **Mode automatique d'alignement** : Alignement automatisé avec `gw align` (Windows uniquement, v1.23+)
-- ✅ **Mode manuel d'alignement** : Navigation par pistes avec lecture continue (toutes plateformes)
+- ✅ **Mode manuel d'alignement** : Navigation par pistes avec lecture continue utilisant `gw align` (Windows uniquement, v1.23+)
 - ✅ **API REST complète** pour toutes les commandes
 - ✅ **WebSocket** pour affichage en temps réel
 - ✅ **Interface moderne** avec React + TypeScript + TailwindCSS
@@ -224,9 +225,9 @@ python AlignTester/scripts/prepare_release.py
 
 ### Limitations connues
 
-- ⚠️ **Mode automatique** : Disponible uniquement sur Windows avec Greaseweazle v1.23+
+- ⚠️ **Les deux modes d'alignement** : Disponibles uniquement sur Windows avec Greaseweazle v1.23+ (les deux utilisent `gw align`)
 - ⚠️ **Linux/macOS** : Seule la version Greaseweazle v1.22 est disponible, sans support de `gw align`
-- ✅ **Mode manuel** : Fonctionne sur toutes les plateformes
+- ⚠️ Les modes d'alignement nécessitent Greaseweazle v1.23+ (actuellement disponible uniquement sur Windows)
 
 ## 📄 Licence
 
