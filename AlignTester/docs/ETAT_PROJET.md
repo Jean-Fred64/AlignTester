@@ -32,13 +32,21 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
   - ✅ `POST /api/manual/move` : Déplacer la tête d'un nombre de pistes
   - ✅ `POST /api/manual/jump` : Sauter à une piste spécifique
   - ✅ `POST /api/manual/head` : Changer de tête (0 ou 1)
+  - ✅ `POST /api/manual/seek` : Déplacer la tête vers une piste spécifique (navigation permanente)
   - ✅ `POST /api/manual/recalibrate` : Recalibrer (seek track 0)
+  - ✅ `POST /api/manual/recal` : Recalibrer (alias pour recalibrate)
   - ✅ `POST /api/manual/analyze` : Analyser la piste actuelle
   - ✅ `POST /api/manual/settings` : Modifier les paramètres (format, num_reads, etc.)
   - ✅ `GET /api/manual/formats` : Liste des formats de disquette disponibles (avec paramètre `refresh` pour forcer le rafraîchissement du cache)
   - ✅ `POST /api/align/reset` : Réinitialiser les données d'alignement (mode auto et manuel)
   - ✅ `POST /api/align/hard-reset` : Envoyer la commande `gw reset` pour réinitialiser le hardware
   - ✅ `POST /api/track0/verify` : Vérifier le capteur Track 0 (tests de seek et lectures multiples)
+  - ✅ `GET /api/settings/drive` : Récupérer le lecteur sélectionné (A, B, 0, 1, 2, 3)
+  - ✅ `POST /api/settings/drive` : Définir le lecteur sélectionné
+  - ✅ `POST /api/drive/test` : Tester le lecteur avec séquence seek
+  - ✅ `GET /api/settings/gw-path` : Récupérer le chemin vers gw.exe
+  - ✅ `POST /api/settings/gw-path` : Définir le chemin vers gw.exe
+  - ✅ `POST /api/settings/gw-path/detect` : Détecter automatiquement le chemin vers gw.exe et le sauvegarder
 - ✅ **WebSocket** (`api/websocket.py`) pour communication temps réel
   - ✅ Gestion des connexions multiples
   - ✅ Messages typés (started, update, complete, cancelled, error)
@@ -114,6 +122,7 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
   - ✅ Réinitialisation des données (reset_data) avec conservation du format
   - ✅ Synchronisation du format avec le mode automatique
   - ✅ **Navigation permanente** : `seek`, `move_track`, `jump_track`, `recalibrate` fonctionnent même sans mode démarré
+  - ✅ **Endpoint `/api/manual/seek`** : Déplacement direct vers une piste spécifique (navigation permanente)
   - ✅ **Persistance de la position** : Sauvegarde de la position actuelle (track/head) dans l'état
   - ✅ **Modes d'alignement multiples** :
     - ✅ Mode Direct (1 lecture, ~150-200ms latence) - Activé et optimisé
@@ -523,7 +532,20 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 ---
 
 **Dernière mise à jour :** État d'avancement complet - Janvier 2025
-**Dernière session :** Implémentation complète de la version standalone :
+**Dernière session :** Améliorations de la gestion du chemin gw.exe et build standalone :
+  - ✅ Refonte complète de la gestion du chemin gw.exe avec détection automatique améliorée
+  - ✅ Endpoint `/api/settings/gw-path/detect` pour détection automatique et sauvegarde du chemin
+  - ✅ Amélioration de la détection gw.exe dans la version standalone Windows
+  - ✅ Inclusion de tous les profils diskdefs.cfg dans la version standalone
+  - ✅ Inclusion des dossiers lib/ et share/ de Greaseweazle dans le build standalone
+  - ✅ Utilisation de greaseweazle-1.23b_source pour le build standalone
+  - ✅ Correction CORS pour 127.0.0.1:8000 et localhost:8000 en mode standalone
+  - ✅ Amélioration de la gestion des chemins (dossier + conversion Windows/WSL)
+  - ✅ Endpoint `/api/manual/seek` pour navigation permanente vers une piste spécifique
+  - ✅ Endpoint `/api/manual/recal` (alias pour recalibrate)
+  - ✅ Endpoints complets pour gestion du lecteur (`/api/settings/drive`, `/api/drive/test`)
+  - ✅ Endpoints complets pour gestion du chemin gw.exe (`/api/settings/gw-path`, `/api/settings/gw-path/detect`)
+**Session précédente :** Implémentation complète de la version standalone :
   - ✅ Script de build standalone avec PyInstaller (`build_standalone.py`)
   - ✅ Launcher standalone avec détection automatique des chemins (`launcher_standalone.py`)
   - ✅ Intégration complète du frontend dans le build
@@ -628,8 +650,10 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
   - ✅ Sauvegarde du chemin dans les settings
   - ✅ Détection automatique avec sauvegarde du premier chemin trouvé
   - ✅ Interface de configuration dans la section "Informations Greaseweazle"
-  - ✅ Endpoints API : `GET /api/settings/gw-path`, `POST /api/settings/gw-path`
+  - ✅ Endpoints API : `GET /api/settings/gw-path`, `POST /api/settings/gw-path`, `POST /api/settings/gw-path/detect`
+  - ✅ Endpoint `/api/settings/gw-path/detect` pour détection automatique et sauvegarde en une seule opération
   - ✅ Affichage du chemin actuel
+  - ✅ Refonte complète de la gestion du chemin avec détection améliorée (dossier + conversion Windows/WSL)
   - ⚠️ **Bouton "Parcourir" partiellement implémenté** (priorité prochaine session)
     - ⚠️ Le dialogue de sélection de fichier ne peut pas obtenir le chemin complet (limitation navigateur web)
     - ⚠️ Nécessite amélioration pour une meilleure expérience utilisateur
@@ -680,6 +704,12 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
   - ✅ `README_STANDALONE.md` : Guide rapide pour utilisateurs standalone
   - ✅ `STANDALONE_RESUME.md` : Résumé du processus de build standalone
   - ✅ `.github/workflows/build-standalone.yml` : Workflow GitHub Actions pour builds automatiques
+  - ✅ **Améliorations récentes** :
+    - ✅ Utilisation de greaseweazle-1.23b_source pour le build standalone
+    - ✅ Inclusion de tous les profils diskdefs.cfg dans la version standalone
+    - ✅ Inclusion des dossiers lib/ et share/ de Greaseweazle dans le build
+    - ✅ Amélioration de la détection gw.exe dans la version standalone Windows
+    - ✅ Correction CORS pour 127.0.0.1:8000 et localhost:8000 en mode standalone
 
 **Prochaine revue :** Après validation en situation réelle avec un lecteur défectueux et réglage des vis
 

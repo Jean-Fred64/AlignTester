@@ -236,9 +236,53 @@ def start_server(port=8000):
         
         # Servir le frontend si disponible
         if frontend_to_use and frontend_to_use.exists() and any(frontend_to_use.iterdir()):
-            from fastapi.staticfiles import StaticFiles
-            # Servir les fichiers statiques
-            app.mount("/", StaticFiles(directory=str(frontend_to_use), html=True), name="static")
+            from starlette.staticfiles import StaticFiles as StarletteStaticFiles
+            from starlette.types import Scope
+            import mimetypes
+            
+            # Forcer les types MIME pour les fichiers JavaScript
+            mimetypes.add_type("application/javascript", ".js", strict=True)
+            mimetypes.add_type("text/javascript", ".js", strict=False)
+            mimetypes.add_type("application/json", ".json", strict=True)
+            mimetypes.add_type("text/css", ".css", strict=True)
+            mimetypes.add_type("application/wasm", ".wasm", strict=True)
+            
+            # Classe personnalisée pour corriger les types MIME
+            class CustomStaticFiles(StarletteStaticFiles):
+                async def __call__(self, scope: Scope, receive, send) -> None:
+                    # Intercepter la réponse pour corriger les types MIME
+                    async def send_wrapper(message):
+                        if message["type"] == "http.response.start":
+                            # Corriger le type MIME dans les headers
+                            # Les headers sont une liste de tuples (bytes, bytes)
+                            headers = message.get("headers", [])
+                            path = scope.get("path", "").lower()
+                            
+                            # Déterminer le bon type MIME
+                            content_type = None
+                            if path.endswith(".js") or path.endswith(".mjs"):
+                                content_type = b"application/javascript"
+                            elif path.endswith(".json"):
+                                content_type = b"application/json"
+                            elif path.endswith(".css"):
+                                content_type = b"text/css"
+                            elif path.endswith(".wasm"):
+                                content_type = b"application/wasm"
+                            
+                            # Remplacer ou ajouter le header content-type
+                            if content_type:
+                                # Retirer l'ancien content-type s'il existe
+                                headers = [(k, v) for k, v in headers if k.lower() != b"content-type"]
+                                # Ajouter le nouveau content-type
+                                headers.append((b"content-type", content_type))
+                                message["headers"] = headers
+                        
+                        await send(message)
+                    
+                    await super().__call__(scope, receive, send_wrapper)
+            
+            # Servir les fichiers statiques avec la classe personnalisée
+            app.mount("/", CustomStaticFiles(directory=str(frontend_to_use), html=True), name="static")
             print(f"[OK] Frontend servi depuis: {frontend_to_use}")
         else:
             frontend_msg = str(frontend_to_use) if frontend_to_use else "None"
