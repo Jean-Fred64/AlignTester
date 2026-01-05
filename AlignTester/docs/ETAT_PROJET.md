@@ -552,7 +552,15 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 ---
 
 **Dernière mise à jour :** État d'avancement complet - Janvier 2025
-**Dernière session :** Correction des types MIME pour version standalone et documentation des limitations :
+**Dernière session :** Amélioration de la documentation et ajout des sources Greaseweazle v1.23b :
+  - ✅ Amélioration complète du README principal (racine) et README de développement (AlignTester/)
+  - ✅ Ajout des informations de compatibilité Greaseweazle par plateforme dans les README
+  - ✅ Ajout du lien de téléchargement direct pour greaseweazle-1.23b.zip dans les README
+  - ✅ Ajout du fichier greaseweazle-1.23b.zip (11MB) au dépôt (une fois, sans suivi des modifications futures)
+  - ✅ Configuration .gitignore pour éviter les commits fréquents du fichier volumineux
+  - ✅ Documentation complète de l'utilisation de Greaseweazle v1.23b (PR #592) dans les README
+  - ✅ Clarification de la confusion entre README.md (racine) et AlignTester/README.md
+**Session précédente :** Correction des types MIME pour version standalone et documentation des limitations :
   - ✅ Correction des types MIME pour fichiers JavaScript en version standalone (écran noir sur Windows résolu)
   - ✅ Classe CustomStaticFiles pour forcer les types MIME corrects (application/javascript pour .js/.mjs)
   - ✅ Documentation des limitations de compatibilité Greaseweazle (Linux/macOS limités à v1.22 sans `gw align`)
@@ -736,6 +744,10 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
     - ✅ Inclusion des dossiers lib/ et share/ de Greaseweazle dans le build
     - ✅ Amélioration de la détection gw.exe dans la version standalone Windows
     - ✅ Correction CORS pour 127.0.0.1:8000 et localhost:8000 en mode standalone
+    - ✅ Correction des types MIME pour fichiers JavaScript (écran noir résolu)
+    - ✅ Classe CustomStaticFiles pour forcer les types MIME corrects
+    - ✅ Sources Greaseweazle v1.23b (PR #592) ajoutées au dépôt (greaseweazle-1.23b.zip, 11MB)
+    - ✅ Lien de téléchargement direct disponible dans les README
 
 **Prochaine revue :** Après validation en situation réelle avec un lecteur défectueux et réglage des vis
 
