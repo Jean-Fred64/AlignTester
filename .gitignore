@@ -101,3 +101,7 @@ AlignTester/**/node_modules/
 AlignTester/**/.env
 AlignTester/**/.env.local
 
+# Fichiers volumineux ajoutés une fois mais non suivis par la suite
+# Le fichier greaseweazle-1.23b.zip est dans le dépôt mais les modifications ne seront pas suivies
+AlignTester/src/greaseweazle-1.23b.zip
+

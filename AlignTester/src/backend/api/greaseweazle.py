@@ -124,7 +124,16 @@ class GreaseweazleExecutor:
         return _is_wsl()
     
     def _detect_gw_path(self) -> str:
-        """Détecte le chemin vers gw.exe ou gw"""
+        """
+        Détecte le chemin vers gw.exe ou gw de manière optimisée et robuste
+        
+        Ordre de priorité:
+        1. Chemin sauvegardé dans les settings (si valide)
+        2. Répertoire de l'exécutable (standalone) - plusieurs emplacements possibles
+        3. Répertoire courant et répertoire de travail
+        4. Emplacements Windows communs
+        5. PATH système
+        """
         # D'abord, vérifier si un chemin est sauvegardé dans les settings
         saved_path = settings_manager.get_gw_path()
         if saved_path:
@@ -132,37 +141,71 @@ class GreaseweazleExecutor:
                 # Normaliser le chemin sauvegardé (sans validation pour ne pas bloquer si le fichier a été déplacé)
                 normalized = normalize_gw_path(saved_path, validate=False)
                 path_obj = Path(normalized)
-                if path_obj.exists():
-                    return str(path_obj.resolve())
-            except (ValueError, OSError):
+                # Vérifier si c'est un fichier ou un dossier
+                if path_obj.is_file() and path_obj.exists():
+                    resolved = str(path_obj.resolve())
+                    print(f"[GreaseweazleExecutor] gw.exe trouvé (settings): {resolved}")
+                    return resolved
+                elif path_obj.is_dir():
+                    # Si c'est un dossier, chercher gw.exe dedans
+                    gw_exe = path_obj / "gw.exe"
+                    if gw_exe.exists():
+                        resolved = str(gw_exe.resolve())
+                        print(f"[GreaseweazleExecutor] gw.exe trouvé (settings, dossier): {resolved}")
+                        return resolved
+            except (ValueError, OSError) as e:
                 # Si le chemin sauvegardé est invalide, continuer avec la détection automatique
-                pass
+                print(f"[GreaseweazleExecutor] Chemin sauvegardé invalide, détection automatique: {e}")
         
         # Détection automatique - chercher dans les emplacements possibles
         search_paths = []
         
         if self.platform == "Windows":
-            # 1. Répertoire de l'exécutable (standalone)
+            # 1. Répertoire de l'exécutable (standalone) - PRIORITÉ MAXIMALE
             if getattr(sys, 'frozen', False):
-                exe_dir = Path(sys.executable).parent
+                exe_dir = Path(sys.executable).parent.resolve()
                 _internal_dir = exe_dir / "_internal"
                 
                 # En mode standalone PyInstaller, chercher dans plusieurs emplacements
                 # PyInstaller peut placer les fichiers dans _internal/ ou à côté de l'exe
-                search_paths.extend([
-                    # À côté de l'exécutable
+                # Structure typique: aligntester/aligntester.exe + aligntester/_internal/
+                standalone_paths = [
+                    # À côté de l'exécutable (priorité 1)
                     exe_dir / "gw.exe",
+                    # Dans _internal/ (PyInstaller onedir) - priorité 2
+                    _internal_dir / "gw.exe",
+                    # Dans des sous-dossiers à côté de l'exe
                     exe_dir / "greaseweazle" / "gw.exe",
                     exe_dir / "greaseweazle-1.23" / "gw.exe",
-                    # Dans _internal/ (PyInstaller onedir)
-                    _internal_dir / "gw.exe",
+                    exe_dir / "greaseweazle-1.23b" / "gw.exe",
+                    # Dans des sous-dossiers de _internal/
                     _internal_dir / "greaseweazle" / "gw.exe",
                     _internal_dir / "greaseweazle-1.23" / "gw.exe",
-                    # Dans le répertoire parent
-                    exe_dir.parent / "gw.exe",
-                    exe_dir.parent / "greaseweazle" / "gw.exe",
-                    exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
-                ])
+                    _internal_dir / "greaseweazle-1.23b" / "gw.exe",
+                ]
+                
+                # Ajouter aussi les chemins dans le répertoire parent (si l'exe est dans un sous-dossier)
+                if exe_dir.parent != exe_dir:  # Éviter les boucles infinies
+                    parent_paths = [
+                        exe_dir.parent / "gw.exe",
+                        exe_dir.parent / "greaseweazle" / "gw.exe",
+                        exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
+                        exe_dir.parent / "greaseweazle-1.23b" / "gw.exe",
+                    ]
+                    standalone_paths.extend(parent_paths)
+                
+                # Ajouter aussi le grand-parent (pour structure: dist/aligntester/aligntester.exe)
+                if exe_dir.parent.parent != exe_dir.parent:
+                    grandparent_paths = [
+                        exe_dir.parent.parent / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle" / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle-1.23" / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle-1.23b" / "gw.exe",
+                    ]
+                    standalone_paths.extend(grandparent_paths)
+                
+                search_paths.extend(standalone_paths)
+                print(f"[GreaseweazleExecutor] Mode standalone détecté, recherche dans {len(standalone_paths)} emplacements autour de {exe_dir}")
             
             # 2. Répertoire courant et répertoire de travail
             search_paths.extend([
@@ -175,9 +218,10 @@ class GreaseweazleExecutor:
                 Path("C:/Program Files/Greaseweazle/gw.exe"),
                 Path("C:/Program Files (x86)/Greaseweazle/gw.exe"),
                 Path.home() / "AppData/Local/Greaseweazle/gw.exe",
+                Path.home() / "AppData/Roaming/Greaseweazle/gw.exe",
             ])
             
-            # 4. Chercher dans PATH
+            # 4. Chercher dans PATH (en dernier pour ne pas surcharger les chemins locaux)
             gw_in_path = shutil.which("gw.exe")
             if gw_in_path:
                 search_paths.append(Path(gw_in_path))
@@ -197,19 +241,19 @@ class GreaseweazleExecutor:
             if gw_in_path:
                 search_paths.append(Path(gw_in_path))
         
-        # Tester tous les chemins
+        # Tester tous les chemins dans l'ordre de priorité
         for gw_path in search_paths:
             try:
-                if gw_path.exists():
+                if gw_path.exists() and gw_path.is_file():
                     resolved_path = str(gw_path.resolve())
-                    print(f"[GreaseweazleExecutor] gw.exe trouvé: {resolved_path}")
+                    print(f"[GreaseweazleExecutor] ✅ gw.exe trouvé: {resolved_path}")
                     return resolved_path
             except (OSError, ValueError) as e:
-                print(f"[GreaseweazleExecutor] Erreur lors de la vérification de {gw_path}: {e}")
+                # Ignorer silencieusement les erreurs de chemin (permissions, etc.)
                 continue
         
         # En dernier recours, retourner le nom de l'exécutable (sera cherché dans PATH)
-        print(f"[GreaseweazleExecutor] gw.exe non trouvé, utilisation de 'gw.exe' (sera cherché dans PATH)")
+        print(f"[GreaseweazleExecutor] ⚠️ gw.exe non trouvé dans {len(search_paths)} emplacements, utilisation de 'gw.exe' (sera cherché dans PATH)")
         return "gw.exe" if self.platform == "Windows" else "gw"
     
     async def run_command(
@@ -626,6 +670,8 @@ class GreaseweazleExecutor:
         """
         Détecte automatiquement gw.exe dans tous les emplacements possibles
         Retourne un dictionnaire avec les informations de détection
+        
+        Utilise la même logique que _detect_gw_path() mais retourne plus d'informations
         """
         found_paths = []
         all_paths_checked = []
@@ -636,13 +682,26 @@ class GreaseweazleExecutor:
             try:
                 normalized = normalize_gw_path(saved_path, validate=False)
                 path_obj = Path(normalized)
-                if path_obj.exists():
+                # Vérifier si c'est un fichier ou un dossier
+                if path_obj.is_file() and path_obj.exists():
+                    resolved = str(path_obj.resolve())
                     return {
                         "found": True,
-                        "path": str(path_obj.resolve()),
+                        "path": resolved,
                         "source": "saved_settings",
-                        "all_paths_checked": [str(path_obj.resolve())]
+                        "all_paths_checked": [resolved]
                     }
+                elif path_obj.is_dir():
+                    # Si c'est un dossier, chercher gw.exe dedans
+                    gw_exe = path_obj / "gw.exe"
+                    if gw_exe.exists():
+                        resolved = str(gw_exe.resolve())
+                        return {
+                            "found": True,
+                            "path": resolved,
+                            "source": "saved_settings",
+                            "all_paths_checked": [resolved]
+                        }
             except (ValueError, OSError):
                 pass
         
@@ -650,28 +709,50 @@ class GreaseweazleExecutor:
         search_paths = []
         
         if self.platform == "Windows":
-            # 1. Répertoire de l'exécutable (standalone)
+            # 1. Répertoire de l'exécutable (standalone) - PRIORITÉ MAXIMALE
             if getattr(sys, 'frozen', False):
-                exe_dir = Path(sys.executable).parent
+                exe_dir = Path(sys.executable).parent.resolve()
                 _internal_dir = exe_dir / "_internal"
                 
                 # En mode standalone PyInstaller, chercher dans plusieurs emplacements
-                search_paths.extend([
-                    # À côté de l'exécutable
+                standalone_paths = [
+                    # À côté de l'exécutable (priorité 1)
                     exe_dir / "gw.exe",
+                    # Dans _internal/ (PyInstaller onedir) - priorité 2
+                    _internal_dir / "gw.exe",
+                    # Dans des sous-dossiers à côté de l'exe
                     exe_dir / "greaseweazle" / "gw.exe",
                     exe_dir / "greaseweazle-1.23" / "gw.exe",
-                    # Dans _internal/ (PyInstaller onedir)
-                    _internal_dir / "gw.exe",
+                    exe_dir / "greaseweazle-1.23b" / "gw.exe",
+                    # Dans des sous-dossiers de _internal/
                     _internal_dir / "greaseweazle" / "gw.exe",
                     _internal_dir / "greaseweazle-1.23" / "gw.exe",
-                    # Dans le répertoire parent
-                    exe_dir.parent / "gw.exe",
-                    exe_dir.parent / "greaseweazle" / "gw.exe",
-                    exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
-                ])
+                    _internal_dir / "greaseweazle-1.23b" / "gw.exe",
+                ]
+                
+                # Ajouter aussi les chemins dans le répertoire parent
+                if exe_dir.parent != exe_dir:
+                    parent_paths = [
+                        exe_dir.parent / "gw.exe",
+                        exe_dir.parent / "greaseweazle" / "gw.exe",
+                        exe_dir.parent / "greaseweazle-1.23" / "gw.exe",
+                        exe_dir.parent / "greaseweazle-1.23b" / "gw.exe",
+                    ]
+                    standalone_paths.extend(parent_paths)
+                
+                # Ajouter aussi le grand-parent
+                if exe_dir.parent.parent != exe_dir.parent:
+                    grandparent_paths = [
+                        exe_dir.parent.parent / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle" / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle-1.23" / "gw.exe",
+                        exe_dir.parent.parent / "greaseweazle-1.23b" / "gw.exe",
+                    ]
+                    standalone_paths.extend(grandparent_paths)
+                
+                search_paths.extend(standalone_paths)
             
-            # 2. Répertoire courant
+            # 2. Répertoire courant et répertoire de travail
             search_paths.extend([
                 Path("gw.exe"),
                 Path.cwd() / "gw.exe",
@@ -682,9 +763,10 @@ class GreaseweazleExecutor:
                 Path("C:/Program Files/Greaseweazle/gw.exe"),
                 Path("C:/Program Files (x86)/Greaseweazle/gw.exe"),
                 Path.home() / "AppData/Local/Greaseweazle/gw.exe",
+                Path.home() / "AppData/Roaming/Greaseweazle/gw.exe",
             ])
             
-            # 4. Chercher dans le PATH
+            # 4. Chercher dans PATH
             gw_in_path = shutil.which("gw.exe")
             if gw_in_path:
                 search_paths.append(Path(gw_in_path))
@@ -707,7 +789,7 @@ class GreaseweazleExecutor:
         for gw_path in search_paths:
             all_paths_checked.append(str(gw_path))
             try:
-                if gw_path.exists():
+                if gw_path.exists() and gw_path.is_file():
                     abs_path = str(gw_path.resolve())
                     found_paths.append(abs_path)
             except (OSError, ValueError):
