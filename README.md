@@ -2,6 +2,8 @@
 
 Application web moderne et multi-plateforme pour les tests d'alignement de têtes de disquette utilisant la carte Greaseweazle.
 
+![GUI](https://github.com/Jean-Fred64/AlignTester/blob/main/AlignTester/docs/img/AlignTester%20-%20Test%20d'alignement%20Greaseweazle.png)
+
 ## 📁 Structure du projet
 
 ```
@@ -122,4 +124,5 @@ Les sources de Greaseweazle v1.23b sont disponibles dans `AlignTester/src/grease
 - Les deux modes d'alignement nécessitent donc Greaseweazle v1.23b (actuellement disponible uniquement sur Windows)
 
 Voir `AlignTester/docs/INTEGRATION_GREASEWEAZLE.md` pour plus de détails.
+
 
