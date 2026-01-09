@@ -192,18 +192,31 @@ python AlignTester/scripts/prepare_release.py
 
 ## 📚 Documentation
 
-### Documentation principale
+### 📖 Guide d'Utilisation (Recommandé)
+
+**Pour les utilisateurs** : Guides complets d'utilisation avec approche débutant et informations pour experts.
+
+- 🇫🇷 **[Guide d'Utilisation (Français)](docs/GUIDE_UTILISATION_FR.md)** - Guide complet en français
+- 🇬🇧 **[User Guide (English)](docs/GUIDE_UTILISATION_EN.md)** - Complete guide in English
+
+Ces guides couvrent :
+- Configuration initiale (détection Greaseweazle, sélection du lecteur, format de disquette)
+- Mode automatique d'alignement
+- Mode manuel d'alignement
+- Fonctionnalités avancées
+- Dépannage
+- Annexes techniques
+
+**📘 Wiki GitHub** : Ces guides sont également disponibles sur le [Wiki GitHub](https://github.com/Jean-Fred64/AlignTester/wiki) du projet.
+
+### Documentation technique
 
 - **État du projet** : `docs/ETAT_PROJET.md` - État complet du développement
 - **Documentation Greaseweazle** : `docs/DOCUMENTATION_GREASEWEAZLE.md` - Guide complet d'utilisation
 - **Mode manuel** : `docs/MODE_MANUEL.md` - Guide du mode manuel d'alignement
 - **Build standalone** : `docs/BUILD_STANDALONE.md` - Guide de build standalone
-
-### Documentation technique
-
-- Documentation de développement : `docs/`
-- Analyse stratégique : `docs/ANALYSE_STRATEGIE_DEVELOPPEMENT.md`
-- Intégration Greaseweazle : `docs/INTEGRATION_GREASEWEAZLE.md`
+- **Analyse stratégique** : `docs/ANALYSE_STRATEGIE_DEVELOPPEMENT.md`
+- **Intégration Greaseweazle** : `docs/INTEGRATION_GREASEWEAZLE.md`
 
 ## 🔧 Fonctionnalités
 

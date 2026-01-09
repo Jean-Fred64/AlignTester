@@ -52,6 +52,25 @@ python AlignTester/scripts/prepare_release.py
 
 ## 📚 Documentation
 
+### 📖 Guide d'Utilisation (Recommandé)
+
+**Pour les utilisateurs** : Guides complets d'utilisation avec approche débutant et informations pour experts.
+
+- 🇫🇷 **[Guide d'Utilisation (Français)](AlignTester/docs/GUIDE_UTILISATION_FR.md)** - Guide complet en français
+- 🇬🇧 **[User Guide (English)](AlignTester/docs/GUIDE_UTILISATION_EN.md)** - Complete guide in English
+
+Ces guides couvrent :
+- Configuration initiale (détection Greaseweazle, sélection du lecteur, format de disquette)
+- Mode automatique d'alignement
+- Mode manuel d'alignement
+- Fonctionnalités avancées
+- Dépannage
+- Annexes techniques
+
+**📘 Wiki GitHub** : Ces guides sont également disponibles sur le [Wiki GitHub](https://github.com/Jean-Fred64/AlignTester/wiki) du projet.
+
+### Documentation technique
+
 - **Structure du projet** : Voir `STRUCTURE_PROJET.md`
 - **Règles de développement** : Voir `RULES.md`
 - **Documentation technique** : Voir `AlignTester/docs/`
