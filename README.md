@@ -91,7 +91,7 @@ Les sources de Greaseweazle v1.23b sont disponibles dans `AlignTester/src/grease
 
 | Plateforme | Interface | Mode Automatique (`gw align`) | Mode Manuel (`gw align`) |
 |------------|-----------|-------------------------------|-------------------------|
-| **Windows** | ✅ Fonctionnelle | ✅ Disponible (v1.23+) | ✅ Disponible (v1.23+) |
+| **Windows** | ✅ Fonctionnelle | ✅ Disponible (v1.23b) | ✅ Disponible (v1.23b) |
 | **Linux** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ❌ Non disponible (v1.22 uniquement) |
 | **macOS** | ✅ Fonctionnelle | ❌ Non disponible (v1.22 uniquement) | ❌ Non disponible (v1.22 uniquement) |
 
