@@ -6,8 +6,8 @@ Application web moderne pour les tests d'alignement de têtes de disquette utili
 
 AlignTester est une application web complète qui permet de tester et régler l'alignement des têtes de lecteurs de disquette en utilisant la carte Greaseweazle. L'application offre deux modes d'alignement :
 
-- **Mode automatique** : Alignement automatisé avec la commande `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23+)
-- **Mode manuel** : Alignement manuel avec navigation par pistes utilisant également `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23+)
+- **Mode automatique** : Alignement automatisé avec la commande `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23b)
+- **Mode manuel** : Alignement manuel avec navigation par pistes utilisant également `gw align` (disponible uniquement sur Windows avec Greaseweazle v1.23b)
 
 ## ⚠️ Compatibilité Greaseweazle
 
@@ -25,10 +25,10 @@ AlignTester utilise une **version compilée v1.23b de Greaseweazle** qui inclut 
 
 **Note importante** :
 - L'interface fonctionne correctement sur toutes les plateformes
-- Les **deux modes** (automatique et manuel) utilisent la commande `gw align` et nécessitent Greaseweazle v1.23+
-- Sous Windows, Greaseweazle v1.23+ est disponible avec support de `gw align` (PR #592)
+- Les **deux modes** (automatique et manuel) utilisent la commande `gw align` et nécessitent Greaseweazle v1.23b
+- Sous Windows, Greaseweazle v1.23b est disponible avec support de `gw align` (PR #592)
 - Sous Linux/macOS, seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas la commande `align`
-- Les deux modes d'alignement nécessitent donc Greaseweazle v1.23+ (actuellement disponible uniquement sur Windows)
+- Les deux modes d'alignement nécessitent donc Greaseweazle v1.23b (actuellement disponible uniquement sur Windows)
 
 ## 🚀 Démarrage rapide
 
@@ -37,7 +37,7 @@ AlignTester utilise une **version compilée v1.23b de Greaseweazle** qui inclut 
 - Python 3.9 ou supérieur
 - Node.js 18 ou supérieur
 - **Greaseweazle** :
-- **Windows** : Greaseweazle v1.23+ avec commande `align` (PR #592) - **Requis pour les modes d'alignement**
+- **Windows** : Greaseweazle v1.23b avec commande `align` (PR #592) - **Requis pour les modes d'alignement**
 - **Linux/macOS** : Greaseweazle v1.22+ (interface fonctionnelle, mais modes d'alignement non disponibles sans v1.23+)
 
 ### Installation
@@ -225,9 +225,9 @@ python AlignTester/scripts/prepare_release.py
 
 ### Limitations connues
 
-- ⚠️ **Les deux modes d'alignement** : Disponibles uniquement sur Windows avec Greaseweazle v1.23+ (les deux utilisent `gw align`)
+- ⚠️ **Les deux modes d'alignement** : Disponibles uniquement sur Windows avec Greaseweazle v1.23b (les deux utilisent `gw align`)
 - ⚠️ **Linux/macOS** : Seule la version Greaseweazle v1.22 est disponible, sans support de `gw align`
-- ⚠️ Les modes d'alignement nécessitent Greaseweazle v1.23+ (actuellement disponible uniquement sur Windows)
+- ⚠️ Les modes d'alignement nécessitent Greaseweazle v1.23b (actuellement disponible uniquement sur Windows)
 
 ## 📄 Licence
 

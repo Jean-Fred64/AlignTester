@@ -97,10 +97,10 @@ Les sources de Greaseweazle v1.23b sont disponibles dans `AlignTester/src/grease
 
 **Note importante** :
 - L'interface fonctionne correctement sur toutes les plateformes
-- Les **deux modes** (automatique et manuel) utilisent la commande `gw align` et nécessitent Greaseweazle v1.23+
-- Sous Windows, Greaseweazle v1.23+ est disponible avec support de `gw align` (PR #592)
+- Les **deux modes** (automatique et manuel) utilisent la commande `gw align` et nécessitent Greaseweazle v1.23b
+- Sous Windows, Greaseweazle v1.23b est disponible avec support de `gw align` (PR #592)
 - Sous Linux/macOS, seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas la commande `align`
-- Les deux modes d'alignement nécessitent donc Greaseweazle v1.23+ (actuellement disponible uniquement sur Windows)
+- Les deux modes d'alignement nécessitent donc Greaseweazle v1.23b (actuellement disponible uniquement sur Windows)
 
 Voir `AlignTester/docs/INTEGRATION_GREASEWEAZLE.md` pour plus de détails.
 

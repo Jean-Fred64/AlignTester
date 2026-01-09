@@ -332,11 +332,11 @@ Ce document fait le point sur l'état actuel du projet AlignTester et liste ce q
   - ⚠️ L'interface fonctionne correctement sur Linux et macOS (version standalone)
   - ⚠️ Cependant, la fonctionnalité principale d'alignement ne peut pas fonctionner car :
     - ⚠️ La commande `gw align` n'est pas encore disponible dans Greaseweazle v1.22 (version actuelle sous Linux)
-    - ⚠️ La commande `gw align` est uniquement disponible dans Greaseweazle v1.23+ (actuellement uniquement sur Windows)
+    - ⚠️ La commande `gw align` est uniquement disponible dans Greaseweazle v1.23b (actuellement uniquement sur Windows)
   - ⚠️ **Sous Linux** : Seule la version Greaseweazle v1.22 est disponible, qui ne supporte pas `gw align`
   - ⚠️ **Sous macOS** : Même limitation (version disponible ne supporte pas `gw align`)
-  - ⚠️ **Sous Windows** : Greaseweazle v1.23+ est disponible avec support de `gw align`
-  - ⚠️ **Mode manuel d'alignement** : Utilise également `gw align`, nécessite donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
+  - ⚠️ **Sous Windows** : Greaseweazle v1.23b est disponible avec support de `gw align`
+  - ⚠️ **Mode manuel d'alignement** : Utilise également `gw align`, nécessite donc Greaseweazle v1.23b (disponible uniquement sur Windows)
   - ✅ **Autres fonctionnalités** : Détection, navigation, analyse de pistes fonctionnent sur toutes les plateformes
 
 ### 📦 Version Standalone pour Débutants
@@ -531,8 +531,8 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
 
 1. ⚠️ **Compatibilité Greaseweazle** :
    - ⚠️ **Linux/macOS** : L'interface fonctionne, mais les modes d'alignement (`gw align`) ne sont pas disponibles car Greaseweazle v1.22 (version disponible sous Linux) ne supporte pas cette commande
-   - ⚠️ **Windows** : Fonctionne complètement avec Greaseweazle v1.23+ qui supporte `gw align`
-   - ⚠️ **Les deux modes** (automatique et manuel) utilisent `gw align` et nécessitent donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
+   - ⚠️ **Windows** : Fonctionne complètement avec Greaseweazle v1.23b qui supporte `gw align`
+   - ⚠️ **Les deux modes** (automatique et manuel) utilisent `gw align` et nécessitent donc Greaseweazle v1.23b (disponible uniquement sur Windows)
 
 ### 🎯 **Recommandation : PRIORITÉ ACTUELLE**
 
@@ -565,7 +565,7 @@ Dans l'interface, ajouter un **toggle "Mode Simple"** qui :
   - ✅ Classe CustomStaticFiles pour forcer les types MIME corrects (application/javascript pour .js/.mjs)
   - ✅ Documentation des limitations de compatibilité Greaseweazle (Linux/macOS limités à v1.22 sans `gw align`)
   - ✅ Interface fonctionnelle sur toutes plateformes, modes d'alignement uniquement sur Windows (v1.23+)
-  - ⚠️ Les deux modes (automatique et manuel) nécessitent `gw align` et donc Greaseweazle v1.23+ (disponible uniquement sur Windows)
+  - ⚠️ Les deux modes (automatique et manuel) nécessitent `gw align` et donc Greaseweazle v1.23b (disponible uniquement sur Windows)
 **Session précédente :** Améliorations de la gestion du chemin gw.exe et build standalone :
   - ✅ Refonte complète de la gestion du chemin gw.exe avec détection automatique améliorée
   - ✅ Endpoint `/api/settings/gw-path/detect` pour détection automatique et sauvegarde du chemin
